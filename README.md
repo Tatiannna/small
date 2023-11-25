@@ -1,6 +1,6 @@
-# x-small
+# small
 
-Extra-Small is a Medium clone. Medium is recognized for hosting high quality, insightful publications covering a wide range of topics inlcuding Mathematics, Religion, Fitness and Self Improvement. Users can save, create and interact with publications.
+Small is a Medium clone. Medium is recognized for hosting high quality, insightful publications covering a wide range of topics inlcuding Mathematics, Religion, Fitness and Self Improvement. Users can save, create and interact with publications.
 
 ## Feature List
 
@@ -11,145 +11,150 @@ Extra-Small is a Medium clone. Medium is recognized for hosting high quality, in
    - Some features require login
 
 3. Topics
-    - Comes pre-made. Users cannot add to or delete topics
+    - Topics organize and categoriize Stories
+    - Not a CRUD feature. Users cannot create/delete topics
 
 4. Stories
-    - Created by a logged-in user
-    - Must be associated with at least 1 topic
+    - Created by a logged-in User
+    - Must be associated with a Topic
 
 5. Claps
-    - test
+    - Users "applaud" Stories with Claps
 
 6. Responses
-    - test
+    - Responses can be made to Stories
+    - Responses can be replied to in another Response
 
 7. Followers
-    - test
+    - Users can follow other Users
+    - Users can follow Topics
 
 ## Schema
 
 ### `users`
-| column name | data type | details |
-| ----------- | ----------- |-----------|
-| `id`        |             |          |
-| `username`      | Title       |           |
-| `email`   | Text        |           |
-| `password_digest`  | Text        |           |
-| `session_token`   | Text        |           |
-| `created_at`  | Text        |           |
-| `updated_at`  | Text        |           |
+| column name | data type | 
+| ----------- | ----------- |
+| `id`        |    bigint         |          
+| `username`      | string       |           
+| `email`   | string        |           
+| `password_digest`  | string        |           
+| `session_token`   | string        |           
+| `created_at`  | datetime        |           
+| `updated_at`  | datetime        |           
 
 - index on username, email, session_token
 - unique: true on username, email, session_token
 - has_many :stories, :claps, :responses
 
 ### `topics`
-| column name | data type | details |
-| ----------- | ----------- |-----------|
-| `id`    | bigint       |           |
-| `name`     | string       |           |
-| `created_at`   | Text        |           |
-| `updated_at`   | Text        |           |
+| column name | data type |
+| ----------- | ----------- |
+| `id`    | bigint       |           
+| `name`     | string       |           
+| `created_at`   | datetime        |           
+| `updated_at`   | datetime        |           
 
 - index and uniqueness on name
 - has_many :stories, :followers
 
 
 ### `stories`
-| column name | data type | details |
-| ----------- | ----------- |-----------|
-| `id`      | Title       |
-| `title`      | Title       |           |
-| `author_id`   | Text        |           |
-|  `body`  | Text        |           |
-| `topic_id`  | Text        |           |
-|`created_at`  | Text        |           |
-| `updated_at`  | Text        |           |
+| column name | data type |
+| ----------- | ----------- |
+| `id`      | bigint       |
+| `title`      | string       |           
+| `author_id`   | bigint        |           
+|  `body`  | string        |          
+| `topic_id`  | bigint        |           
+|`created_at`  | datetime        |           
+| `updated_at`  | datetime        |           
 
-- belongs to :user, :topic
-- has many :claps, :responses
+- belongs_to :user, :topic
+- has_many :claps, :responses
 
 
 ### `follows`
-| Syntax      | Description |
+| column name      | data type |
 | ----------- | ----------- |
-| `id`      | Title       |
-| `user_id`     | Title       |
-|  `followed_id`   | Text        |
-|  `followed_type`   | Text        |
-|`created_at`  | Text        |           |
-| `updated_at`  | Text        |           |
+| `id`      | bigint       |
+| `user_id`     | bigint       |
+|  `followed_id`   | bigint        |
+|  `followed_type`   | string        |
+|`created_at`  | datetime        |           
+| `updated_at`  | datetime        |          
 
+- belongs_to :follower
+- belongs_to :followed
 
 ### `claps`
-| Syntax      | Description |
+| column name      | data type |
 | ----------- | ----------- |
-| `id`      | Title       |
-| `user_id`     | Title       |
-|  `story_id`   | Text        |
-|`created_at`  | Text        |           |
-| `updated_at`  | Text        |           |
-
-- belongs to :user, :story
-
-### `responses`
-| Syntax      | Description |
-| ----------- | ----------- |
-| `id`      | Title       |
-| `story_id`   | Text        |
-| `user_id`   | Text        |
-| `parent_id`   | Text        |
-| `body`   | Text        |
-| `created_at`   | Text        |           |
-| `updated_at`   | Text        |           |
-
-
-### `saves`
-| column name | data type | details |
-| ----------- | ----------- |-----------|
-| `id`      | Title       |
-| `user_id`      | bigint       |           |
-| `story_id`   | Text        |           |
-| `created_at`   | Text        |           |
-| `updated_at`   | Text        |           |
+| `id`      | bigint       |
+| `user_id`     | bigint       |
+|  `story_id`   | bigint        |
+|`created_at`  | datetime        |           
+| `updated_at`  | datetime        |           
 
 - belongs_to :user, :story
 
+### `responses`
+| column name      | date type |
+| ----------- | ----------- |
+| `id`      | bigint       |
+| `story_id`   | bigint        |
+| `user_id`   | bigint        |
+| `parent_id`   | bigint        |
+| `body`   | string        |
+| `created_at`   | datetime        |           
+| `updated_at`   | datetime        |           
 
-- 
+- belongs_to :story_id, :user, :parent_response
+
+### `saves`
+| column name | data type |
+| ----------- | ----------- |
+| `id`      | bigint       |
+| `user_id`      | bigint       |           
+| `story_id`   | bigint        |           
+| `created_at`   | datetime        |           
+| `updated_at`   | datetime        |           
+
+- belongs_to :user, :story
+
 ## Backend Routes
 
 `users`
-- `GET /api/users` - returns user information and Stories
+- `GET /api/users` - displays User information and any created Stories
 - `POST /api/users` - sign up
 
 `session`
-- `GET /api/session` - restore session
+- `GET /api/session` - show login form
 - `POST /api/session` - log in
 - `DELETE /api/session` - log out
 
 `topics`
-- `GET /api/topics` - topics index
-- `GET /api/topic/:id` - shows stories with this topic
+- `GET /api/topics` - Topics index
+- `GET /api/topic/:id` - shows list of Stories with this topic_id
 
 `stories`
-- `GET /api/username/story-title` - shows the story authored by this user
-- `POST /api/username` - creates a Story
-- `PATCH /api/username/story-title` - edits a Story
+- `GET /api/user_id/:story_id` - shows the Story authored by this User
+- `POST /api/user_id` - creates a Story
+- `PATCH /api/user_id/:story_id` - edits a Story
+- `DELETE /api/user_id/:story_id/` - deletes a Story 
 
 `claps`
-- `POST /api/claps` - applaud a Story
-- `DELETE /api/claps/:id` - Remove applause from a Story
+- `POST /api/claps` - "applaud" a Story
+- `DELETE /api/claps/:id` - Remove Clap from a Story
 
 `responses`
 - `GET /api/story/responses`
-- `POST /api/story/`
-- `DELETE /api/story/:response`
-- `PATCH /api/story/:response`
+- `POST /api/story/` - creates a Response to a Story
+- `DELETE /api/:story_id/:id` - deletes a response to a Story
+- `PATCH /api/:story_id/:id` - edit a story
 
 `saves`
-- `GET /api/:user_id/saves` 
--  `POST /api/:user_id/saves` 
--  `DELETE /api/:user_id/saves` 
+- `GET /api/:user_id/saves` - shows Stories that a User saved
+- `POST /api/:user_id/saves` - Saves a story for a logged in User
+- `DELETE /api/:user_id/saves`  - removes a saves Story from a user's list of Saved Stories
 
 
