@@ -1,6 +1,6 @@
-# small
+# Small
 
-Small is a Medium clone. Medium is recognized for hosting high quality, insightful publications covering a wide range of topics inlcuding Mathematics, Religion, Fitness and Self Improvement. Users can save, create and interact with publications.
+Small is a Medium clone. Medium is recognized for hosting high quality, insightful publications covering a wide range of interesting topics. Users can read, save, create, and interact with publications.
 
 ## Feature List
 
@@ -124,8 +124,9 @@ Small is a Medium clone. Medium is recognized for hosting high quality, insightf
 ## Backend Routes
 
 `users`
-- `GET /api/users` - displays User information and any created Stories
+- `GET /api/users/:id` - displays User profile information
 - `POST /api/users` - sign up
+- `DELETE /api/users` - delete account 
 
 `session`
 - `GET /api/session` - show login form
@@ -137,24 +138,25 @@ Small is a Medium clone. Medium is recognized for hosting high quality, insightf
 - `GET /api/topic/:id` - shows list of Stories with this topic_id
 
 `stories`
-- `GET /api/user_id/:story_id` - shows the Story authored by this User
-- `POST /api/user_id` - creates a Story
-- `PATCH /api/user_id/:story_id` - edits a Story
-- `DELETE /api/user_id/:story_id/` - deletes a Story 
+- `GET /api/:user_id/stories` - shows all Stories authored by this user
+- `GET /api/:user_id/:story_id` - shows the Story authored by this User
+- `POST /api/:user_id/stories` - creates a Story
+- `PATCH /api/:user_id/:story_id` - edits a Story
+- `DELETE /api/:user_id/:story_id` - deletes a Story 
 
 `claps`
 - `POST /api/claps` - "applaud" a Story
 - `DELETE /api/claps/:id` - Remove Clap from a Story
 
 `responses`
-- `GET /api/story/responses`
-- `POST /api/story/` - creates a Response to a Story
+- `GET /api/:story_id/responses` - see all Responses to this Story
+- `POST /api/:story_id/responses` - creates a Response to a Story
 - `DELETE /api/:story_id/:id` - deletes a response to a Story
-- `PATCH /api/:story_id/:id` - edit a story
+- `PATCH /api/:story_id/:id` - edit a Response to a Story
 
 `saves`
 - `GET /api/:user_id/saves` - shows Stories that a User saved
 - `POST /api/:user_id/saves` - Saves a story for a logged in User
-- `DELETE /api/:user_id/saves`  - removes a saves Story from a user's list of Saved Stories
+- `DELETE /api/:user_id/saves`  - removes a saved Story from a user's list of saved Stories
 
 
