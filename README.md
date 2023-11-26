@@ -146,8 +146,8 @@ Small is a Medium clone. Medium is recognized for hosting high quality, insightf
 - `DELETE /api/:username/:story_id` - deletes a Story 
 
 `claps`
-- `POST /api/claps` - "applaud" a Story
-- `DELETE /api/claps/:id` - Remove Clap from a Story
+- `POST /api/:username/:story_id/claps` - "applaud" a Story
+- `DELETE /api/:username/:story_id/claps` - Remove Clap from a Story
 
 `responses`
 - `GET /api/:story_id/responses` - see all Responses to this Story
