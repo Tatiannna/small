@@ -127,7 +127,7 @@ Small is a Medium clone. Medium is recognized for hosting high quality, insightf
 `users`
 - `GET /api/:username` - displays User profile information, including publications list
 - `POST /api/users` - sign up
-- `DELETE /api/users` - delete account 
+- `DELETE /api/users/:username` - delete account 
 
 `session`
 - `GET /api/session` - show login form
@@ -147,17 +147,17 @@ Small is a Medium clone. Medium is recognized for hosting high quality, insightf
 
 `claps`
 - `POST /api/:username/:story_id/claps` - "applaud" a Story
-- `DELETE /api/:username/:story_id/claps` - Remove Clap from a Story
+- `DELETE /api/:username/:story_id/claps/:clap_id` - Remove Clap from a Story
 
 `responses`
-- `GET /api/:story_id/responses` - see all Responses to this Story
-- `POST /api/:story_id/responses` - creates a Response to a Story
-- `DELETE /api/:story_id/:id` - deletes a response to a Story
-- `PATCH /api/:story_id/:id` - edit a Response to a Story
+- `GET /api/:username/:story_id/responses` - see all Responses to this Story
+- `POST /api/:username/:story_id/responses` - creates a Response to a Story
+- `DELETE /api/:username/:story_id/responses/:id` - deletes a response to a Story
+- `PATCH /api/:username/:story_id/responses/:id` - edit a Response to a Story
 
 `saves`
 - `GET /api/:username/saves` - shows Stories that a User saved
 - `POST /api/:username/saves` - Saves a story for a logged in User
-- `DELETE /api/:username/saves`  - removes a saved Story from a user's list of saved Stories
+- `DELETE /api/:username/:save_id`  - removes a saved Story from a user's list of saved Stories
 
 
