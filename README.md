@@ -36,7 +36,8 @@ Small is a Medium clone. Medium is recognized for hosting high quality, insightf
 | ----------- | ----------- |
 | `id`        |    bigint         |          
 | `username`      | string       |           
-| `email`   | string        |           
+| `email`   | string        |     
+| `about`   |  text     |   
 | `password_digest`  | string        |           
 | `session_token`   | string        |           
 | `created_at`  | datetime        |           
@@ -64,7 +65,7 @@ Small is a Medium clone. Medium is recognized for hosting high quality, insightf
 | `id`      | bigint       |
 | `title`      | string       |           
 | `author_id`   | bigint        |           
-|  `body`  | string        |          
+|  `body`  | text        |          
 | `topic_id`  | bigint        |           
 |`created_at`  | datetime        |           
 | `updated_at`  | datetime        |           
@@ -104,7 +105,7 @@ Small is a Medium clone. Medium is recognized for hosting high quality, insightf
 | `story_id`   | bigint        |
 | `user_id`   | bigint        |
 | `parent_id`   | bigint        |
-| `body`   | string        |
+| `body`   | text        |
 | `created_at`   | datetime        |           
 | `updated_at`   | datetime        |           
 
@@ -124,7 +125,7 @@ Small is a Medium clone. Medium is recognized for hosting high quality, insightf
 ## Backend Routes
 
 `users`
-- `GET /api/users/:id` - displays User profile information
+- `GET /api/:username` - displays User profile information, including publications list
 - `POST /api/users` - sign up
 - `DELETE /api/users` - delete account 
 
@@ -138,11 +139,11 @@ Small is a Medium clone. Medium is recognized for hosting high quality, insightf
 - `GET /api/topic/:id` - shows list of Stories with this topic_id
 
 `stories`
-- `GET /api/:user_id/stories` - shows all Stories authored by this user
-- `GET /api/:user_id/:story_id` - shows the Story authored by this User
-- `POST /api/:user_id/stories` - creates a Story
-- `PATCH /api/:user_id/:story_id` - edits a Story
-- `DELETE /api/:user_id/:story_id` - deletes a Story 
+- `GET /api/:username/stories` - shows all Stories authored by this user
+- `GET /api/:username/:story_id` - shows the Story authored by this User
+- `POST /api/:username/stories` - creates a Story
+- `PATCH /api/:username/:story_id` - edits a Story
+- `DELETE /api/:username/:story_id` - deletes a Story 
 
 `claps`
 - `POST /api/claps` - "applaud" a Story
@@ -155,8 +156,8 @@ Small is a Medium clone. Medium is recognized for hosting high quality, insightf
 - `PATCH /api/:story_id/:id` - edit a Response to a Story
 
 `saves`
-- `GET /api/:user_id/saves` - shows Stories that a User saved
-- `POST /api/:user_id/saves` - Saves a story for a logged in User
-- `DELETE /api/:user_id/saves`  - removes a saved Story from a user's list of saved Stories
+- `GET /api/:username/saves` - shows Stories that a User saved
+- `POST /api/:username/saves` - Saves a story for a logged in User
+- `DELETE /api/:username/saves`  - removes a saved Story from a user's list of saved Stories
 
 
