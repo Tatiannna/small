@@ -75,18 +75,20 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
+    annotate (3.2.0)
+      activerecord (>= 3.2, < 8.0)
+      rake (>= 10.4, < 14.0)
     base64 (0.2.0)
+    bcrypt (3.1.20)
     bigdecimal (3.1.4)
     bootsnap (1.17.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    byebug (11.1.3)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
     crass (1.0.6)
     date (3.3.4)
-    debug (1.8.0)
-      irb (>= 1.5.0)
-      reline (>= 0.3.1)
     drb (2.2.0)
       ruby2_keywords
     error_highlight (0.5.1)
@@ -99,6 +101,9 @@ GEM
     irb (1.9.1)
       rdoc
       reline (>= 0.3.8)
+    jbuilder (2.11.5)
+      actionview (>= 5.0.0)
+      activesupport (>= 5.0.0)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -194,9 +199,12 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  annotate
+  bcrypt (~> 3.1.7)
   bootsnap
-  debug
+  byebug
   error_highlight (>= 0.4.0)
+  jbuilder
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.1.2)
