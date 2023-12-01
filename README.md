@@ -4,28 +4,18 @@ Small is a Medium clone. Medium is recognized for hosting high quality, insightf
 
 ## Feature List
 
-1. Hosting
-
-2. User account creation, login
-   - Sign up, Sign In, Sign Out
-   - Some features require login
-
-3. Topics
-    - Topics organize and categoriize Stories
-    - Not a CRUD feature. Users cannot create/delete topics
-
-4. Stories
+1. Stories
     - Created by a logged-in User
-    - Must be associated with a Topic
+    - Must be associated with a Topic 
 
-5. Claps
-    - Users "applaud" Stories with Claps
-
-6. Responses
+2. Responses
     - Responses can be made to Stories
     - Responses can be replied to in another Response
 
-7. Followers
+3. Claps
+    - Users can "applaud" Stories and Story Responses with Claps
+
+4. Followers
     - Users can follow other Users
     - Users can follow Topics
 
@@ -47,18 +37,6 @@ Small is a Medium clone. Medium is recognized for hosting high quality, insightf
 - unique: true on username, email, session_token
 - has_many :stories, :claps, :responses
 
-### `topics`
-| column name | data type |
-| ----------- | ----------- |
-| `id`    | bigint       |           
-| `name`     | string       |           
-| `created_at`   | datetime        |           
-| `updated_at`   | datetime        |           
-
-- index and uniqueness on name
-- has_many :stories, :followers
-
-
 ### `stories`
 | column name | data type |
 | ----------- | ----------- |
@@ -78,7 +56,7 @@ Small is a Medium clone. Medium is recognized for hosting high quality, insightf
 | column name      | data type |
 | ----------- | ----------- |
 | `id`      | bigint       |
-| `user_id`     | bigint       |
+| `follower_id`     | bigint       |
 |  `followed_id`   | bigint        |
 |  `followed_type`   | string        |
 |`created_at`  | datetime        |           
@@ -91,8 +69,9 @@ Small is a Medium clone. Medium is recognized for hosting high quality, insightf
 | column name      | data type |
 | ----------- | ----------- |
 | `id`      | bigint       |
-| `user_id`     | bigint       |
-|  `story_id`   | bigint        |
+| `clapper_id`     | bigint       |
+|  `receiver_id`   | bigint        |
+|  `receiver_type`   | string        |
 |`created_at`  | datetime        |           
 | `updated_at`  | datetime        |           
 
@@ -109,56 +88,54 @@ Small is a Medium clone. Medium is recognized for hosting high quality, insightf
 | `created_at`   | datetime        |           
 | `updated_at`   | datetime        |           
 
-- belongs_to :story_id, :user, :parent_response
 
-### `saves`
+### `topics`
 | column name | data type |
 | ----------- | ----------- |
-| `id`      | bigint       |
-| `user_id`      | bigint       |           
-| `story_id`   | bigint        |           
+| `id`    | bigint       |           
+| `name`     | string       |           
 | `created_at`   | datetime        |           
 | `updated_at`   | datetime        |           
 
-- belongs_to :user, :story
+- index and uniqueness on name
+- has_many :stories, :followers
+- belongs_to :story_id, :user, :parent_response
 
 ## Backend Routes
 
 `users`
-- `GET /api/user/:user_name` - displays User profile information, including publications list
+- `GET /api/users/:user_name` - displays User profile information, including publications list
 - `POST /api/users` - sign up
 - `DELETE /api/users/:username` - delete account
+- `GET /api/users/:id/saves` - shows Stories that a User saved
+- `POST /api/users/:id/saves` - Saves a story for a logged in User
+- `DELETE /api/users/:user_id/save/:id`  - removes a saved Story from a user's list of saved Stories
 
 `session`
 - `GET /api/session` - show login form
 - `POST /api/session` - log in
 - `DELETE /api/session` - log out
 
-`topics`
-- `GET /api/topics` - Topics index
-- `GET /api/topic/:id` - shows list of Stories with this topic_id
-
 `stories`
-- `GET /api/user/:user_id/story/stories` - shows all Stories authored by this user
-- `GET /api/user/:user_id/story/:story_id` - shows the Story authored by this User
-- `POST /api/user/:user_id/story/stories` - creates a Story
-- `PATCH /api/user/:user_id/story/:story_id` - edits a Story
-- `DELETE /api/user/:user_id/story/:story_id` - deletes a Story
-
-`claps`
-- `POST /api/user/:user_id/story/:story_id/claps` - "applaud" a Story
-- `DELETE /api/user/:user_id/story/:story_id/claps/:clap_id` - Remove Clap from a Story
+- `GET /api/stories` - shows all Stories authored by this user
+- `GET /api/stories/:id` - shows story details
+- `POST /api/stories/:id` - creates a Story
+- `PATCH /api/stories/:id` - edits a Story
+- `DELETE /api/stories/:id` - deletes a Story
+- `GET /api/stories/topics` - topics index
+- `GET /api/stories/topics/:id` - all stories with this topic
 
 `responses`
-- `GET /api/user/:user_id/:story_id/story/responses` - see all Responses to this Story
-- `POST /api/user/:user_id/:story_id/story/responses` - creates a Response to a Story
-- `DELETE /api/user/:user_id/:story_id/story/responses/:id` - deletes a response to a Story
-- `PATCH /api/user/:user_id/:story_id/story/responses/:id` - edit a Response to a Story
+- `GET /api/stories/:id/responses` - see all Responses to this Story
+- `POST /api/stories/:story_id/responses` - creates a Response to a Story
+- `DELETE /api/stories/:story_id/responses/:id` - deletes a response to a Story
+- `PATCH /api/stories/:story_id/responses/:id` - edit a Response to a Story
 
-`saves`
-- `GET /api/user/:user_id/saves` - shows Stories that a User saved
-- `POST /api/user/:user_id/saves` - Saves a story for a logged in User
-- `DELETE /api/user/:user_id/save/:save_id`  - removes a saved Story from a user's list of saved Stories
+`claps`
+- `POST /api/stories/:story_id/claps` - "applaud" a Story
+- `DELETE /api/stories/:story_id/claps/:id` - Remove Clap from a Story
+- `POST /api/stories/:story_id/responses/:id/claps` - "applaud" a Response
+- `DELETE /api/stories/:story_id/responses/:resonse_id/claps/:id` - Remove Clap from a Story
 
 
 ## Frontend Routes
@@ -166,9 +143,8 @@ Small is a Medium clone. Medium is recognized for hosting high quality, insightf
 - `/`
 Home
 Header
-- `/login`
-SessionForm
-- `/signup`
+- `/login`, `/signup` 
+( `/` modals)
 SessionForm
 - `/:username`
 UserDetail
@@ -181,14 +157,8 @@ PreviewStoriesWithTopic
 ShowStory
 - `/:username/:story_title/responses`
 StoryResponses
-- `/:username/saves`
-SavedStories
 - `/new-story`
 StoryForm
-
-
-
-
 
 ## Top Level State Shape
 
@@ -249,14 +219,6 @@ StoryForm
         
       }
     },
-
-    saves: {
-      1: {
-        id: 1,
-        user_id: 4,
-        story_id: 5
-      }
-    }
   }
   session: {
 		currentUser: 1
