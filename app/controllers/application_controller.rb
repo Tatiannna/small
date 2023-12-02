@@ -10,6 +10,10 @@ class ApplicationController < ActionController::API
         session[:session_token] = current_user.reset_session_token!
         # reset `user`'s `session_token` and store in `session` cookie
       end
+
+      def logged_in?
+        !!current_user
+      end
       
       def logout!
         current_user.reset_session_token!
