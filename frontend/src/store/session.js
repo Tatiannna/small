@@ -6,26 +6,25 @@ const REMOVE_USER = '/session/REMOVE_USER';
 
 
 const setUser = user => {
-    type: SET_USER,
-    user
+    return ({
+        type: SET_USER,
+        user
+    })
 }
 
 const removeUser = () => {
-    type: REMOVE_USER
+    return ({type: REMOVE_USER})
 }
 
-
-
-
-export const login = ({credential, password}) => async (dispatch) => {
+export const login = ({email, password}) => async (dispatch) => {
     const res = await csrfFetch('/api/session', {
         method: "POST",
-        body: JSON.stringify({credential, password})
+        body: JSON.stringify({email, password})
     })
 
     if (res.ok){
         let data = await res.json();
-        dispatch(setUser(data.user))
+        dispatch(setUser(data))
     }else{
         throw res;
     }
@@ -37,7 +36,6 @@ export const logout = (userId) => async (dispatch) => {
     })
 
     if (res.ok){
-        // let data = await res.json();
         dispatch(removeUser())
     }else{
         throw res;
