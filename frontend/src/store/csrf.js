@@ -15,7 +15,7 @@ async function csrfFetch(url, options = {}) {
         options.headers['Content-Type'] || 'application/json';
       options.headers['X-CSRF-Token'] = sessionStorage.getItem('X-CSRF-Token');
     }
-  
+    console.log(sessionStorage.getItem('X-CSRF-Token'))
     // call fetch with the url and the updated options hash
     const res = await fetch(url, options);
   
@@ -29,14 +29,19 @@ async function csrfFetch(url, options = {}) {
 }
 
 export async function restoreCSRF(){
-    const response = await csrfFetch('/api/session');
+    const response = await fetch('/api/session');
+    //console.log("RESPONSE:", response, "TOKEN:", response.headers.get("X-CSRF-Token"))
     storeCSRFToken(response);
     return response;
 }
 
-export const storeCSRFToken = (response) => {
-    const token = response.headers.get["X-CSRF-TOKEN"];
-    if (token) sessionStorage.setItem("X-CSRF-Token", token)
+export function storeCSRFToken(response){
+    const token = response.headers.get("X-CSRF-Token");
+    if (token){
+      sessionStorage.setItem("X-CSRF-Token", token)
+    } else {
+      console.log('No token found')
+    }
 }
 
 export default csrfFetch;
