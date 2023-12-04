@@ -1,7 +1,26 @@
-div {
+.header {
     border-bottom: solid 1px black;
+    display: flex;
+    justify-content: space-between;
 }
 
-.red {
-    color:red
+a {
+    text-decoration: 'none';
 }
+
+img {
+    width: 40px;
+    height: 40px;
+}
+
+.header-right {
+    display: flex;
+    width: 50%;
+    justify-content: right;
+}
+
+.header-right-item {
+ margin-left: 20px;
+}
+
+

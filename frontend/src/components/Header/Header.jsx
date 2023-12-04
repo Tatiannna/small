@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { login, logout } from "../../store/session";
 import Modal from '../Modal/Modal';
+import {Link } from 'react-router-dom'
 
 
 const Header = () => {
@@ -15,18 +16,38 @@ const Header = () => {
     const [showModal, setShowModal] = useState(false);
 
     return (
-        <div>
-            { !!currentUser ? (
-                <>
-                    <h4>Hello {currentUser.username}</h4>
-                    <button onClick={() => dispatch(logout())}>Logout</button>
-                </>
-                ) : (
-                <>
-                    {showModal && (<Modal onCloseButtonClick={() => {setShowModal(false);}}/>)}
-                    <p onClick={() => setShowModal(true)}>Login</p>
-                </>
-            )}
+        <div className="header">
+            <div className="header-left">
+                <Link to="/"><img src="https://cdn4.iconfinder.com/data/icons/social-media-circle-7/512/Medium_circle-1024.png"></img></Link> 
+            </div>
+            <div className="header-right">
+                { !!currentUser ? (
+                    <>
+                        <div className='header-right-item'>
+                            <p>Write</p>
+                        </div>
+                        <div className='header-right-item'>
+                            <p>Profile</p>
+                        </div>
+                        <div className='header-right-item'>
+                            <button onClick={() => dispatch(logout())}>Logout</button>
+                        </div>
+                    </>
+                    ) : (
+                    <>
+                        <div className='header-right-item'>
+                            {showModal && (<Modal onCloseButtonClick={() => {setShowModal(false);}}/>)}
+                            <p onClick={() => setShowModal(true)}>Login</p>
+                        </div>
+                        <div className='header-right-item'>
+
+                            <button>Get Started</button>
+                        </div>
+                    </>
+                   
+                )}
+            </div>
+            
         </div>
     );
 }
