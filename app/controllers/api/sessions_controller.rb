@@ -3,7 +3,12 @@ class Api::SessionsController < ApplicationController
 
   def show
     @user = current_user
-    render 'api/users/show'
+    if @user
+      render 'api/users/show'
+    else
+      render json: { user: nil}
+    end
+    
   end
 
   def create
@@ -13,6 +18,7 @@ class Api::SessionsController < ApplicationController
       login!(@user)
       render 'api/users/show'
     else
+      puts "No user found"
       render json: { errors: ['Invalid credentials'] }, 
         status: :unauthorized
     end
