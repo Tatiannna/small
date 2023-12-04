@@ -3,12 +3,13 @@ import './Modal.css'
 import {useDispatch, useSelector} from 'react-redux';
 import { login, logout } from "../../store/session";
 
-function Modal() {
+const Modal = (props) => {
+
   const dispatch = useDispatch();
+  console.log(props.test)
 
   const currentUser = useSelector(state => state.session.user);
   const loggedIn = !!currentUser;
-
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,7 +26,7 @@ function Modal() {
         <div className="modal-overlay">
           <div className="modal">
             {/* <p onClick={() => setShowModal(false)}>X</p> */}
-              <p>Sign in with email</p>
+            { props.formType === "login" ? <p> Welcome back. </p> : <p> Join Small</p>}
               <form onSubmit={handleSubmit}>
                 <div className="container">
                     <input type="text" placeholder="Email" onChange={e => setEmail(e.target.value) } />

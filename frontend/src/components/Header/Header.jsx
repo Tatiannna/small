@@ -14,6 +14,18 @@ const Header = () => {
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user);
     const [showModal, setShowModal] = useState(false);
+    let [formType, setFormType] = useState("login")
+
+
+    const handleClick = e => {
+        e.preventDefault();
+        setShowModal(true);
+        if (e.target.tagName === 'P'){
+            setFormType("login")
+        }else{
+            setFormType("signup")
+        }
+    }
 
     return (
         <div className="header">
@@ -43,13 +55,12 @@ const Header = () => {
                     </>
                     ) : (
                     <>
+                        {showModal && (<Modal formType={formType} onCloseButtonClick={() => {setShowModal(false);}}/>)}
                         <div className='header-right-item'>
-                            {showModal && (<Modal onCloseButtonClick={() => {setShowModal(false);}}/>)}
-                            <p onClick={() => setShowModal(true)}>Login</p>
+                            <p onClick={handleClick}>Login</p>
                         </div>
                         <div className='header-right-item'>
-
-                            <button>Get Started</button>
+                            <button value={"signUp"} onClick={handleClick} >Get Started</button>
                         </div>
                     </>
                    
