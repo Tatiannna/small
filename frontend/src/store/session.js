@@ -30,13 +30,14 @@ export const login = ({email, password}) => async (dispatch) => {
     }
 }
 
-export const logout = (userId) => async (dispatch) => {
+export const logout = () => async (dispatch) => {
     const res = await csrfFetch('/api/session', {
         method: "DELETE"
     })
 
     if (res.ok){
-        dispatch(removeUser())
+        console.log(res);
+        dispatch(removeUser());
     }else{
         throw res;
     }
