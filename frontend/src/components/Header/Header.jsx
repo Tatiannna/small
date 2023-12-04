@@ -17,9 +17,17 @@ const Header = () => {
 
     return (
         <div className="header">
+
             <div className="header-left">
-                <Link to="/"><img src="https://cdn4.iconfinder.com/data/icons/social-media-circle-7/512/Medium_circle-1024.png"></img></Link> 
+                <div className="header-left-item">
+                    <Link to="/"><img src="https://cdn4.iconfinder.com/data/icons/social-media-circle-7/512/Medium_circle-1024.png"></img></Link> 
+                </div>
+                <div className="header-left-item">
+                    <p>Small</p>
+                </div>
             </div>
+
+
             <div className="header-right">
                 { !!currentUser ? (
                     <>

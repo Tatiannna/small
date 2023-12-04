@@ -24,3 +24,17 @@ img {
 }
 
 
+.header-left {
+    display: flex;
+}
+
+.header-left-item {
+    margin-right: 5px;
+}
+
+.header-left-item p {
+    font-size: 22px;
+    margin-top: 10px;
+}
+
+
