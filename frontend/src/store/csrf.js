@@ -11,14 +11,11 @@ async function csrfFetch(url, options = {}) {
     // "application/json" and the "X-CSRF-Token" header to the value of the 
     // "X-CSRF-Token" cookie
     if (options.method.toUpperCase() !== 'GET') {
-      options.headers['Content-Type'] =
-        options.headers['Content-Type'] || 'application/json';
+      options.headers['Content-Type'] = 'application/json';
       options.headers['X-CSRF-Token'] = sessionStorage.getItem('X-CSRF-Token');
     }
-    console.log(sessionStorage.getItem('X-CSRF-Token'))
     // call fetch with the url and the updated options hash
     const res = await fetch(url, options);
-  
     // if the response status code is 400 or above, then throw an error with the
     // error being the response
     if (res.status >= 400) throw res;
@@ -29,19 +26,18 @@ async function csrfFetch(url, options = {}) {
 }
 
 export async function restoreCSRF(){
-    const response = await fetch('/api/session');
-    //console.log("RESPONSE:", response, "TOKEN:", response.headers.get("X-CSRF-Token"))
-    storeCSRFToken(response);
-    return response;
-}
+    let res = await fetch('/api/session');
+    let token = res.headers.get("X-CSRF-Token");
 
-export function storeCSRFToken(response){
-    const token = response.headers.get("X-CSRF-Token");
-    if (token){
+    if (res.ok){
+      let data = await res.json();
+      console.log(token, data.user)
       sessionStorage.setItem("X-CSRF-Token", token)
+      sessionStorage.setItem('currentUser', JSON.stringify(data.user));
     } else {
       console.log('No token found')
     }
+    return res;
 }
 
 export default csrfFetch;
