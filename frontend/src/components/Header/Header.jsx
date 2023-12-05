@@ -29,7 +29,7 @@ const Header = () => {
 
     return (
         <>
-            {showModal && (<Modal toggle={setShowModal} formType={formType} onCloseButtonClick={() => {setShowModal(false);}}/>)}
+            {showModal && (<Modal closeModal={() => setShowModal(false)} formType={formType} />)}
 
             <div className="header">
 

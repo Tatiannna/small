@@ -6,36 +6,33 @@ import {createUser} from "../../store/users"
 
 const Modal = (props) => {
 
-  const dispatch = useDispatch();
-
-  const currentUser = useSelector(state => state.session.user);
-  const loggedIn = !!currentUser;
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
-  // const [showModal, setShowModal] = useState(true);
+  let currentUser = useSelector(state => state.session.user);
+  const dispatch = useDispatch();
+
 
 
   const handleSubmit = (e) => {
 
-      let dispatched = false;
       e.preventDefault();
 
-
       if (props.formType === "signup"){
-        dispatched = dispatch(createUser({email, username, password}))
+        dispatch(createUser({email, username, password}))
       }else {
-        dispatched = dispatch(login({email, password}))
+        dispatch(login({email, password}))
       }
 
-      props.toggle(dispatched);
+      if (currentUser){
+        props.closeModal();
+      }
   }
 
     return (
         <div className="modal-overlay">
           <div className="modal">
-          <p id="x" onClick={() => props.toggle(false)}> &#215; </p>
+          <p id="x" onClick={() => props.closeModal()}> &#215; </p>
             { props.formType === "login" ? <p> Welcome back. </p> : <p> Join Small</p>}
               <form onSubmit={handleSubmit}>
                 <div className="container">
@@ -47,10 +44,10 @@ const Modal = (props) => {
                       />}
                     <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
                     <button>Continue</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+              </form>
           </div>
+        </div>
     );
 }
 
