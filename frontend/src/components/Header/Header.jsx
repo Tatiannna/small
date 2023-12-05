@@ -28,7 +28,10 @@ const Header = () => {
     }
 
     return (
-        <div className="header">
+        <>
+            {showModal && (<Modal toggle={setShowModal} formType={formType} onCloseButtonClick={() => {setShowModal(false);}}/>)}
+
+            <div className="header">
 
             <div className="header-left">
                 <div className="header-left-item">
@@ -55,7 +58,6 @@ const Header = () => {
                     </>
                     ) : (
                     <>
-                        {showModal && (<Modal formType={formType} onCloseButtonClick={() => {setShowModal(false);}}/>)}
                         <div className='header-right-item'>
                             <p onClick={handleClick}>Login</p>
                         </div>
@@ -68,6 +70,8 @@ const Header = () => {
             </div>
             
         </div>
+        </>
+
     );
 }
 export default Header;
