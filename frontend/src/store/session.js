@@ -1,5 +1,5 @@
 import csrfFetch from "./csrf";
-import {deleteUser} from "./users";
+import {deleteUser, receiveUser} from "./users";
 
 const SET_USER = '/session/SET_USER';
 const REMOVE_USER = '/session/REMOVE_USER';
@@ -26,7 +26,8 @@ export const login = ({email, password}) => async (dispatch) => {
     let data;
     if (res.ok){
         data = await res.json();
-        dispatch(setUser(data))
+        dispatch(setUser(data));
+        dispatch(receiveUser(data));
     }else{
         data = await res.json();
         throw data;
@@ -39,7 +40,6 @@ export const logout = () => async (dispatch) => {
     })
 
     if (res.ok){
-        console.log(res);
         dispatch(removeUser());
         dispatch(deleteUser())
     }else{
@@ -52,9 +52,11 @@ const sessionReducer = (state = {}, action) => {
     let newState = {...state}
     switch(action.type){
         case SET_USER:
-            return {...newState, user: action.user}
+            newState = action.user;
+            return newState;
         case REMOVE_USER:
-            return {...newState, user: null}
+            newState.user = null;
+            return newState;
         default:
             return state;
     }

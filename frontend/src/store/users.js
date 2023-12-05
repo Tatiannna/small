@@ -40,9 +40,11 @@ const userReducer = (state = {}, action) => {
     let newState = {...state}
     switch (action.type){
         case RECEIVE_USER:
-            return {...newState, user: action.user};
+            newState = action.user;
+            return newState;
         case DELETE_USER:
-            return {...newState, user: null}
+            newState.user = null
+            return newState;
         default:
             return state;
     }
