@@ -24,7 +24,6 @@ const Login = () => {
                 <input type="text" onChange={e => setEmail(e.target.value) } />
                 <input type="password" onChange={e => setPassword(e.target.value)} />
                 <input type="submit" />
-                {/* {console.log(email)} */}
             </form>
             <button onClick={() => dispatch(logout())}>Logout</button>
         </>

@@ -36,14 +36,6 @@ export const createUser = ({email, username, password}) => async (dispatch) => {
     }
 }
 
-
-// export const deleteAccount = () => async (dispatch) => {
-//     if (res.ok){
-//         let data = await res.json();
-//         dispatch(removeUser(data));
-//     }
-// }
-
 const userReducer = (state = {}, action) => {
     let newState = {...state}
     switch (action.type){
