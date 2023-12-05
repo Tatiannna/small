@@ -18,9 +18,7 @@ class Api::SessionsController < ApplicationController
       login!(@user)
       render 'api/users/show'
     else
-      puts "No user found"
-      render json: { errors: ['Invalid credentials'] }, 
-        status: :unauthorized
+      render json: { errors: ['Invalid credentials'] }, status: 401
     end
 
   end

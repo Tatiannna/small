@@ -25,14 +25,14 @@ export const createUser = ({email, username, password}) => async (dispatch) => {
         body: JSON.stringify({email, username, password})
     })
 
+    let data;
     if (res.ok){
-        let data = await res.json();
-        console.log("about to dispatch receiveuser")
+        data = await res.json();
         dispatch(receiveUser(data));
         dispatch(login({email, password}))
-        return true;
     }else {
-        return false;
+        data = await res.json();
+        throw data;
     }
 }
 

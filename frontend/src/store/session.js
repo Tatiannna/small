@@ -23,13 +23,13 @@ export const login = ({email, password}) => async (dispatch) => {
         body: JSON.stringify({email, password})
     })
 
+    let data;
     if (res.ok){
-        let data = await res.json();
+        data = await res.json();
         dispatch(setUser(data))
-        return true;
     }else{
-        throw res;
-        return false;
+        data = await res.json();
+        throw data;
     }
 }
 

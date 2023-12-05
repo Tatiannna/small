@@ -6,29 +6,25 @@ import {createUser} from "../../store/users"
 
 const Modal = (props) => {
 
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
-  let currentUser = useSelector(state => state.session.user);
-  const dispatch = useDispatch();
-
+  const [errors, setErrors] = useState({});
 
 
   const handleSubmit = (e) => {
 
       e.preventDefault();
-
       if (props.formType === "signup"){
         dispatch(createUser({email, username, password}))
+          .then(() => props.closeModal()).catch( err => setErrors(err) )
       }else {
         dispatch(login({email, password}))
-      }
-
-      if (currentUser){
-        props.closeModal();
+          .then(() => props.closeModal()).catch( err => setErrors(err) )
       }
   }
-
+  console.log(errors);
     return (
         <div className="modal-overlay">
           <div className="modal">
@@ -43,6 +39,8 @@ const Modal = (props) => {
                         onChange={e => setUsername(e.target.value) } 
                       />}
                     <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+                    
+                    {Object.values(errors).map((err, idx) => ( <p key={idx}>{err}</p> ))}
                     <button>Continue</button>
                 </div>
               </form>
