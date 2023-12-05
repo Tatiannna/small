@@ -1,0 +1,45 @@
+.header {
+    border-bottom: solid 1px black;
+    display: flex;
+    justify-content: space-between;
+}
+
+a {
+    text-decoration: 'none';
+}
+
+img {
+    width: 40px;
+    height: 40px;
+    margin-top: 4px;
+}
+
+.header-right {
+    display: flex;
+    width: 50%;
+    justify-content: right;
+    padding-right: 10px;
+
+}
+
+.header-right-item {
+ margin-left: 20px;
+}
+
+
+.header-left {
+    display: flex;
+    padding-left: 10px;
+
+}
+
+.header-left-item {
+    margin-right: 5px;
+}
+
+.header-left-item p {
+    font-size: 22px;
+    margin-top: 10px;
+}
+
+
