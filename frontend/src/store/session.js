@@ -1,4 +1,5 @@
 import csrfFetch from "./csrf";
+import {deleteUser} from "./users";
 
 const SET_USER = '/session/SET_USER';
 const REMOVE_USER = '/session/REMOVE_USER';
@@ -38,6 +39,7 @@ export const logout = () => async (dispatch) => {
     if (res.ok){
         console.log(res);
         dispatch(removeUser());
+        dispatch(deleteUser())
     }else{
         throw res;
     }
