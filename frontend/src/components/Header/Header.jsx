@@ -64,6 +64,9 @@ const Header = () => {
                         <div className='header-right-item'>
                             <button value={"signUp"} onClick={handleClick} >Get Started</button>
                         </div>
+                        <div className='header-right-item'>
+                            <button onClick={() => dispatch(login({email: "demo@user.io", password: "password"}))}> Demo User Login</button>
+                        </div>
                     </>
                    
                 )}
