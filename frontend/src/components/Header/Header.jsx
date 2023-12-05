@@ -44,7 +44,7 @@ const Header = () => {
 
 
             <div className="header-right">
-                { !!currentUser ? (
+                { currentUser ? (
                     <>
                         <div className='header-right-item'>
                             <p>Write</p>

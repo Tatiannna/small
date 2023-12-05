@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './Modal.css'
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { login } from "../../store/session";
 import {createUser} from "../../store/users"
 
@@ -11,12 +11,6 @@ const Modal = (props) => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [errors, setErrors] = useState({});
-
-
-  const formattedErrors = () => {
-    let errorsArray;
-    //for 
-  }
 
   const handleSubmit = (e) => {
 
@@ -29,7 +23,6 @@ const Modal = (props) => {
           .then(() => props.closeModal()).catch( err => setErrors(err) )
       }
   }
-  console.log(errors);
     return (
         <div className="modal-overlay">
           <div className="modal">

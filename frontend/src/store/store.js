@@ -1,9 +1,7 @@
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import sessionReducer from './session';
-import logger from 'redux-logger';
 import userReducer from './users';
-
 
 
 const rootReducer = combineReducers({
@@ -13,7 +11,7 @@ const rootReducer = combineReducers({
 
 
 const configureStore = (initialState = {}) => {
-    return createStore(rootReducer, initialState, applyMiddleware(thunk, logger));
+    return createStore(rootReducer, initialState, applyMiddleware(thunk));
 };
 
 export default configureStore;
