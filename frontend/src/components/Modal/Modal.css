@@ -74,5 +74,17 @@
   width: 140px;
 }
 
+p.error {
+  color: red;
+  font-size: 12px;
+  margin: 3px;
+  padding: 3px;
+}
+
+.div-errors {
+  margin-bottom: 15px;
+}
+
+
 
 
