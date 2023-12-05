@@ -60,3 +60,12 @@
   border: none;
 }
 
+#x {
+  text-align: right;
+  margin-top: 0px;
+  padding-top: 0px;
+  padding-right: 70px;
+  color: grey;
+  font-size: 23px;
+}
+

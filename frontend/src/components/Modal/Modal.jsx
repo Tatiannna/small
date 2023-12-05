@@ -14,33 +14,37 @@ const Modal = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
+  // const [showModal, setShowModal] = useState(true);
+
 
   const handleSubmit = (e) => {
 
+      let dispatched = false;
       e.preventDefault();
 
-      if (props.formType === "signup"){
-        dispatch(createUser({email, username, password}));
-      }
-      
-      dispatch(login({email, password}));
-  }
 
-  const [showModal, setShowModal] = useState(true);
+      if (props.formType === "signup"){
+        dispatched = dispatch(createUser({email, username, password}))
+      }else {
+        dispatched = dispatch(login({email, password}))
+      }
+
+      props.toggle(dispatched);
+  }
 
     return (
         <div className="modal-overlay">
           <div className="modal">
-            {/* <p onClick={() => setShowModal(false)}>X</p> */}
+          <p id="x" onClick={() => props.toggle(false)}> &#215; </p>
             { props.formType === "login" ? <p> Welcome back. </p> : <p> Join Small</p>}
               <form onSubmit={handleSubmit}>
                 <div className="container">
                     <input type="text" placeholder="Email" onChange={e => setEmail(e.target.value) } />
                     { props.formType === "signup" && 
                       <input type="text" 
-                        placeholder="username" 
+                        placeholder="Username" 
                         onChange={e => setUsername(e.target.value) } 
-                    />}
+                      />}
                     <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
                     <button>Continue</button>
                     </div>
