@@ -30,6 +30,9 @@ export const createUser = ({email, username, password}) => async (dispatch) => {
         console.log("about to dispatch receiveuser")
         dispatch(receiveUser(data));
         dispatch(login({email, password}))
+        return true;
+    }else {
+        return false;
     }
 }
 

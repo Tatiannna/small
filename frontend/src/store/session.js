@@ -26,8 +26,10 @@ export const login = ({email, password}) => async (dispatch) => {
     if (res.ok){
         let data = await res.json();
         dispatch(setUser(data))
+        return true;
     }else{
         throw res;
+        return false;
     }
 }
 
