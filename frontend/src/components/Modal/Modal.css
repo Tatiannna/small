@@ -35,6 +35,7 @@
     height: 35px;
     width: 120px;
     margin: auto;
+    margin-top: 8px;
   }
 
   input {
@@ -68,4 +69,10 @@
   color: grey;
   font-size: 23px;
 }
+
+.demo-button {
+  width: 140px;
+}
+
+
 

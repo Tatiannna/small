@@ -11,12 +11,15 @@ a {
 img {
     width: 40px;
     height: 40px;
+    margin-top: 4px;
 }
 
 .header-right {
     display: flex;
     width: 50%;
     justify-content: right;
+    padding-right: 10px;
+
 }
 
 .header-right-item {
@@ -26,6 +29,8 @@ img {
 
 .header-left {
     display: flex;
+    padding-left: 10px;
+
 }
 
 .header-left-item {
