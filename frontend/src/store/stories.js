@@ -1,9 +1,10 @@
+import csrfFetch from "./csrf";
 
 const RECEIVE_STORIES = "/stories/RECEIVE_STORIES";
 const RECEIVE_STORY = "/stories/RECEIVE_STORY";
 const REMOVE_STORY = "/stories/REMOVE_STORY";
 
-const receiveStories = () => {
+const receiveStories = (stories) => {
     return {
         type: RECEIVE_STORIES,
         stories
@@ -31,7 +32,7 @@ export const getStories = () => async dispatch => {
 
     let data = await res.json();
     if (res.ok){
-        dispatch(receiveStories());
+        dispatch(receiveStories(data));
     }else{
         throw data;
     }
@@ -49,7 +50,7 @@ export const getStory = (story) => async dispatch => {
 }
 
 export const createStory = (story) => async dispatch => {
-    const res =  await csrfFetch(`/api/stories/${id}`, {
+    const res =  await csrfFetch(`/api/stories/${story.id}`, {
         method: "POST",
         body: JSON.stringify(story)
     });
@@ -64,7 +65,7 @@ export const createStory = (story) => async dispatch => {
 }
 
 export const updateStory= (story) => async dispatch => {
-    const res =  await csrfFetch(`/api/stories/${id}`, {
+    const res =  await csrfFetch(`/api/stories/${story.id}`, {
         method: "PATCH",
         body: JSON.stringify(story)
     });
@@ -84,7 +85,7 @@ export const deleteStory = (id) => async dispatch => {
 
     let data = await res.json();
     if(res.ok){
-       dispatch(removeStory(id));
+       dispatch(removeStory(data));
     }else{
         throw data;
     }
@@ -95,9 +96,9 @@ const storyReducer = (state = {}, action) => {
 
     switch (action.type){
         case RECEIVE_STORIES:
-            newState = action.stories;
+            return {...newState, ...action.stories};
         case RECEIVE_STORY:
-            newState[action.story.id] = action.story
+            newState[action.story.id] = action.story;
             return newState;
         case REMOVE_STORY:
             delete newState[action.id]

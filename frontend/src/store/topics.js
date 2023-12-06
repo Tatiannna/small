@@ -5,7 +5,7 @@ const RECEIVE_TOPIC = '/tpoics/RECEIVE_TOPIC';
 const REMOVE_TOPIC = '/tpoics/REMOVE_TOPIC';
 
 
-const receiveTopics = () => {
+const receiveTopics = (topics) => {
     return {
         type: RECEIVE_TOPICS,
         topics
@@ -30,18 +30,18 @@ export const getTopics = () => async dispatch => {
 
     let data = await res.json();
     if(res.ok){
-        dispatch(receiveTopics());
+        dispatch(receiveTopics(data));
     }else{
         throw data;
     }
 }
 
 export const getTopic = (topic) => async dispatch => {
-    const res = await csrfFetch(`/api/stories/topics/${id}`);
+    const res = await csrfFetch(`/api/stories/topics/${topic.id}`);
 
     let data = await res.json();
     if(res.ok){
-        dispatch(receiveTopic(topic));
+        dispatch(receiveTopic(data));
     }else{
         throw data;
     }
