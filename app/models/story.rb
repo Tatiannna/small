@@ -9,6 +9,7 @@
 #  topic_id   :bigint           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  detail     :text
 #
 
 class Story < ApplicationRecord
