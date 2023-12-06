@@ -33,6 +33,66 @@ ApplicationRecord.transaction do
         password: 'password'
       }) 
     end
-  
+    
+    topics = [
+      "Technology Trends",
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Web Development",
+      "Mobile App Development",
+      "Data Science",
+      "Cybersecurity",
+      "Blockchain",
+      "Virtual Reality",
+      "Augmented Reality",
+      "Internet of Things (IoT)",
+      "Cloud Computing",
+      "Programming Languages",
+      "Software Engineering",
+      "UX/UI Design",
+      "Product Management",
+      "Startup Stories",
+      "Entrepreneurship",
+      "Digital Marketing",
+      "Social Media Strategies",
+      "Content Marketing",
+      "E-commerce",
+      "Cryptocurrency",
+      "FinTech",
+      "Health Tech",
+      "Space Exploration",
+      "Science and Innovation",
+      "Environmental Sustainability",
+      "Climate Change Solutions",
+      "Renewable Energy",
+      "Travel Adventures",
+      "Food and Cooking",
+      "Fitness and Wellness",
+      "Mental Health",
+      "Personal Development",
+      "Career Advice",
+      "Book Reviews",
+      "Movie Reviews",
+      "Music Discoveries",
+      "Art and Creativity",
+      "Photography",
+      "Fashion Trends",
+      "Gaming",
+      "Sports and Fitness",
+      "Parenting Tips",
+      "Education and Learning",
+      "History and Culture",
+      "Philosophy",
+      "Self-Help",
+      "Inspirational Stories"
+    ]
+
+    topics.each do |topic|
+      Topic.create!(
+      name: topic, 
+    )
+    end
+
     puts "Done!"
+    
   end
