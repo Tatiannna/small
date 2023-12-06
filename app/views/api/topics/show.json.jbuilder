@@ -1,9 +1,8 @@
-json.extract! @user, :id, :email, :username, :created_at, :updated_at
+json.extract! @topic, :id, :name
 json.stories do
-    @user.stories.each do |story|
+    @topic.stories.each do |story|
         json.set! story.id do
             json.extract! story, :id, :title, :author_id, :topic_id
         end
     end
 end
-

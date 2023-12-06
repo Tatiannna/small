@@ -112,7 +112,6 @@ ApplicationRecord.transaction do
       }
 
       Story.create!(story)
-
     end
     
     puts "Done!"
