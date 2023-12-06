@@ -15,7 +15,8 @@ class Story < ApplicationRecord
 
     validates :author_id, :topic_id, :title, :body, presence: true
 
-    belongs_to :author
+    belongs_to :author,
+    class_name: :User
 
     belongs_to :topic
 
