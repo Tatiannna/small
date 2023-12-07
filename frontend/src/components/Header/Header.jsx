@@ -47,7 +47,7 @@ const Header = () => {
                 { currentUserId ? (
                     <>
                         <div className='header-right-item'>
-                            <p>Write</p>
+                            <Link to='/new-story'><p> Write</p></Link>
                         </div>
                         <div className='header-right-item'>
                             <p>Profile</p>
