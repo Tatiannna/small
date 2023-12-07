@@ -12,7 +12,7 @@ import {Link } from 'react-router-dom'
 const Header = () => {
 
     const dispatch = useDispatch();
-    const currentUser = useSelector(state => state.session.user);
+    const currentUserId = useSelector(state => state.session.currentUserId);
     const [showModal, setShowModal] = useState(false);
     let [formType, setFormType] = useState("login")
 
@@ -44,7 +44,7 @@ const Header = () => {
 
 
             <div className="header-right">
-                { currentUser ? (
+                { currentUserId ? (
                     <>
                         <div className='header-right-item'>
                             <p>Write</p>

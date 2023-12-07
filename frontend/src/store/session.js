@@ -5,7 +5,6 @@ const SET_USER = '/session/SET_USER';
 const REMOVE_USER = '/session/REMOVE_USER';
 
 
-
 const setUser = user => {
     return ({
         type: SET_USER,
@@ -52,10 +51,10 @@ const sessionReducer = (state = {}, action) => {
     let newState = {...state}
     switch(action.type){
         case SET_USER:
-            newState = action.user;
+            newState.currentUserId = action.user.id;
             return newState;
         case REMOVE_USER:
-            newState.user = null;
+            newState.currentUserId = null;
             return newState;
         default:
             return state;
