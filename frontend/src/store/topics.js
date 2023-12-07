@@ -36,8 +36,8 @@ export const getTopics = () => async dispatch => {
     }
 }
 
-export const getTopic = (topic) => async dispatch => {
-    const res = await csrfFetch(`/api/stories/topics/${topic.id}`);
+export const getTopic = (id) => async dispatch => {
+    const res = await csrfFetch(`/api/stories/topics/${id}`);
 
     let data = await res.json();
     if(res.ok){
