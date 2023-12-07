@@ -3,6 +3,7 @@
 
 
 const TopicShow = () => {
+    return (<h1>Topic Show</h1>);
 
 }
 

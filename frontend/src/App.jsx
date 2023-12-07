@@ -18,12 +18,12 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "/@:username",
+    path: "/:username",
     element: <UserShow />
   },
 
   {
-    path: "/@:username/:storyTitle",
+    path: "/:username/:storyTitle",
     element: <StoryShow />
   },
 
