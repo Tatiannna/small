@@ -14,13 +14,12 @@ const initializeApp = () => {
   if (currentUser) {
     initialState = {
       session: {
-        currentUserId: currentUser
+        currentUserId: currentUser.id
       }
     }
   }
 
   const store = configureStore(initialState);
-
 
   ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
