@@ -14,21 +14,23 @@ const initializeApp = () => {
   if (currentUser) {
     initialState = {
       session: {
-        user: currentUser
+        currentUserId: currentUser
       }
     }
   }
-const store = configureStore(initialState);
+
+  const store = configureStore(initialState);
 
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Provider store={store}>
-    <App/>
-    </Provider>
-  </React.StrictMode>
-);
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+      <Provider store={store}>
+      <App/>
+      </Provider>
+    </React.StrictMode>
+  );
 
 }
 
 restoreCSRF().then(initializeApp);
+//initializeApp();
