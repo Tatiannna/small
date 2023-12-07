@@ -1,1 +1,6 @@
 /* TODO: Add sitewide styles */
+
+a {
+    text-decoration: none;
+    color: black;
+}
