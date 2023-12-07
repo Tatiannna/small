@@ -1,7 +1,12 @@
-
+import Header from "../Header/Header";
 
 const TopicIndex = () => {
-    return (<h1>Topic Index</h1>);
+    return (
+        <>
+            <Header/>
+            <h1>Topics Index</h1>
+        </>
+    );
 
 }
 
