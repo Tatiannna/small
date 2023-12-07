@@ -13,9 +13,23 @@ export const receiveUser = (user) => {
     }
 }
 
-export const deleteUser = () => {
+export const deleteUser = (id) => {
     return {
-        type: DELETE_USER
+        type: DELETE_USER,
+        id
+    }
+}
+
+export const getUser = (id) => async (dispatch) => {
+    const res = await csrfFetch(`/api/users/${id}`);
+
+    let data;
+    if (res.ok){
+        data = await res.json();
+        dispatch(receiveUser(data));
+    }else {
+        data = await res.json();
+        throw data;
     }
 }
 
@@ -40,10 +54,9 @@ const userReducer = (state = {}, action) => {
     let newState = {...state}
     switch (action.type){
         case RECEIVE_USER:
-            newState = action.user;
-            return newState;
+            newState[action.user.id] = action.user
         case DELETE_USER:
-            newState.user = null
+            delete newState[action.id];
             return newState;
         default:
             return state;

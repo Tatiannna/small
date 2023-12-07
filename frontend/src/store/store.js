@@ -4,18 +4,19 @@ import sessionReducer from './session';
 import userReducer from './users';
 import storyReducer from './stories';
 import topicReducer from './topics';
+import logger from 'redux-logger';
 
 
 const rootReducer = combineReducers({
     session: sessionReducer,
-    user: userReducer,
+    users: userReducer,
     stories: storyReducer,
     topics: topicReducer
 });
 
 
 const configureStore = (initialState = {}) => {
-    return createStore(rootReducer, initialState, applyMiddleware(thunk));
+    return createStore(rootReducer, initialState, applyMiddleware(thunk, logger));
 };
 
 export default configureStore;

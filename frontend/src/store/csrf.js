@@ -22,7 +22,9 @@ export async function restoreCSRF(){
     if (res.ok){
       let data = await res.json();
       sessionStorage.setItem("X-CSRF-Token", token)
-      sessionStorage.setItem('currentUser', JSON.stringify(data.user));
+      console.log(data);
+      console.log(data.user);
+      sessionStorage.setItem('currentUser', JSON.stringify(data.id));
     } 
     
     return res;
