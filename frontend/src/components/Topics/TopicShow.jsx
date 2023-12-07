@@ -1,9 +1,14 @@
-
+import Header from "../Header/Header";
 
 
 
 const TopicShow = () => {
-    return (<h1>Topic Show</h1>);
+    return (
+        <>
+            <Header/>
+            <h1>Topic Show</h1>
+        </>
+    );
 
 }
 

@@ -27,7 +27,7 @@ const StoryPreview = (props) => {
 
     return (
         <div className="story-preview">
-            <Link to={`/${username}/${storyTitle}`}>
+            <Link params={{story: story}} to={`/${username}/${storyTitle}`}>
                 <h4>{story.title}</h4>
                 <p>{story.detail}</p>
             </Link>
