@@ -50,7 +50,7 @@ export const getStory = (id) => async dispatch => {
 }
 
 export const createStory = (story) => async dispatch => {
-    const res =  await csrfFetch(`/api/stories/${story.id}`, {
+    const res =  await csrfFetch(`/api/stories/`, {
         method: "POST",
         body: JSON.stringify(story)
     });
