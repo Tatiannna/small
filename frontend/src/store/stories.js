@@ -13,7 +13,7 @@ const receiveStories = (stories) => {
 
 const receiveStory = (story) => {
     return {
-        type: RECEIVE_STORIES,
+        type: RECEIVE_STORY,
         story
     }
 }
@@ -38,8 +38,8 @@ export const getStories = () => async dispatch => {
     }
 }
 
-export const getStory = (story) => async dispatch => {
-    const res =  await csrfFetch(`/api/stories/${story.id}`);
+export const getStory = (id) => async dispatch => {
+    const res =  await csrfFetch(`/api/stories/${id}`);
 
     let data = await res.json();
     if(res.ok){
