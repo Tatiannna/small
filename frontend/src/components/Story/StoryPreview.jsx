@@ -19,20 +19,15 @@ const StoryPreview = (props) => {
 
     const author = useSelector( state => state.users[story.authorId]);
     const topic = useSelector(state => state.topics[story.topicId]);
-
-    const username = author?.username;
-    const storyTitle = story?.title;
-    const topicName = topic?.name;
-
-
+    
     return (
         <div className="story-preview">
-            <Link params={{story: story}} to={`/${username}/${storyTitle}`}>
+            <Link to={`/${author?.username}/${story?.title}`}>
                 <h4>{story.title}</h4>
                 <p>{story.detail}</p>
             </Link>
-            <Link to={`/${username}`}><p>{username}</p></Link>
-            <Link to={`/tag/${topicName}`}><p>{topicName}</p></Link>
+            <Link to={`/${author?.username}`}><p>{author?.username}</p></Link>
+            <Link to={`/tag/${topic?.name}`}><p>{topic?.name}</p></Link>
         </div>
     );
 }
