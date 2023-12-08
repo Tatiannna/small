@@ -11,7 +11,6 @@ const StoryPreview = (props) => {
 
     const story = props.story;
     const dispatch = useDispatch();
-    console.log("STORY in Preview.jsx: ", story);
 
     useEffect( () => {
         dispatch(getTopic(story.topicId));
@@ -23,11 +22,11 @@ const StoryPreview = (props) => {
     
     return (
         <div className="story-preview">
+            <Link to={`/${author?.username}`}><p>{author?.username}</p></Link>
             <Link to={`/${author?.username}/${story?.title}`}>
                 <h4>{story.title}</h4>
                 <p>{story.detail}</p>
             </Link>
-            <Link to={`/${author?.username}`}><p>{author?.username}</p></Link>
             <Link to={`/tag/${topic?.name}`}><p>{topic?.name}</p></Link>
         </div>
     );
