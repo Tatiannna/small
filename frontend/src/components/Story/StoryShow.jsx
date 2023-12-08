@@ -24,7 +24,6 @@ const StoryShow = () => {
     return(
         <>
             <Header/>
-            <h1>Story Show</h1>
             <h2>{story?.title}</h2>
             <h4>{story?.detail}</h4>
             <h5>{author?.username}</h5>
