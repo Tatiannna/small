@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getStories } from "../../store/stories";
+import StayCurious from "./StayCurious";
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const Home = () => {
     return(
         <>
             <Header />
+            <StayCurious />
             <Link to='/explore-topics'>Explore topics</Link>
             <StoryList stories={stories} />
         </>
