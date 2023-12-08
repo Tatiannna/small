@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useQuill } from 'react-quilljs';
 import 'quill/dist/quill.snow.css'; 
 import { useEffect } from "react";
-import getTopics from '../../store/topics';
+import {getTopics} from '../../store/topics';
 import './WriteStory.css';
+import {createStory} from '../../store/stories';
 
 
 
@@ -16,15 +17,19 @@ const WriteStory = () => {
     const dispatch = useDispatch();
     
     const topics = useSelector(state => state.topics);
+    const currentUserId = useSelector(state => state.session.currentUserId);
 
-    // useEffect(() => {
-    //     dispatch(getTopics());
-    // }, [dispatch])
+
+    useEffect(() => {
+        dispatch(getTopics());
+    }, [dispatch])
 
     const [title, setTitle] = useState('');
     const [detail, setDetail] = useState('');
     const [body, setBody] = useState('');
     const [topic, setTopic] = useState('');
+    const [topicId, setTopicId] = useState('');
+
 
     // useEffect(() => {
     //     if (quill) {
@@ -45,15 +50,28 @@ const WriteStory = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        const story = {
+            title,
+            detail,
+            body,
+            topic_id: topicId,
+            author_id: currentUserId
+        }
+
+        console.log("new story: ", story)
+
+        dispatch(createStory(story));
+
     }
 
     return (
         <>
             <Header />
-
             <form onSubmit={handleSubmit}>
+                <div>
+                    <button className="publish">Publish</button>
+                </div>
                 <div className='story-form-container'>
-
                     <div>
                     <textarea 
                             className="write-story-title" 
@@ -90,14 +108,18 @@ const WriteStory = () => {
                     <div>
                         <select 
                             className="select-story-topic"
-                            value={topic} 
-                            onChange={e => setTopic(e.target.value)}>
+                            onChange={e => setTopicId(e.target.value)}>
                             <option>Select Topic</option>
-                            {Object.values(topics).map(topic => <option key={topic.id}>{topic.name}</option>)}
+                            {Object.values(topics).map(
+                                mapTopic => 
+                                <option 
+                                    key={mapTopic.id} 
+                                    value={mapTopic.id}>
+                                    {mapTopic.name}
+                                </option>)}
                         </select>
                     </div>
                     
-
                     {/* <div style={{ width: 500, height: 300 }}>
                         <div ref={quillRef} />
                     </div> */}
