@@ -39,13 +39,14 @@ const Modal = (props) => {
             
             <form onSubmit={handleSubmit}>
               <div className="container">
-                  <input type="text" placeholder="Email" onChange={e => setEmail(e.target.value) } />
+                  <input className='modal-input' type="text" placeholder="Email" onChange={e => setEmail(e.target.value) } />
                   { props.formType === "signup" && 
                     <input type="text" 
-                      placeholder="Username" 
+                      placeholder="Username"
+                      className='modal-input'
                       onChange={e => setUsername(e.target.value) } 
                     />}
-                  <input type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
+                  <input className='modal-input' type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
                   <button>Continue</button>
               </div>
             </form>
