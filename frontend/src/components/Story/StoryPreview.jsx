@@ -11,6 +11,7 @@ const StoryPreview = (props) => {
 
     const story = props.story;
     const dispatch = useDispatch();
+    console.log("STORY in Preview.jsx: ", story);
 
     useEffect( () => {
         dispatch(getTopic(story.topicId));
