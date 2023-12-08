@@ -1,8 +1,8 @@
 import csrfFetch from "./csrf";
 
 const RECEIVE_TOPICS = '/topics/RECEIVE_TOPICS';
-const RECEIVE_TOPIC = '/tpoics/RECEIVE_TOPIC';
-const REMOVE_TOPIC = '/tpoics/REMOVE_TOPIC';
+const RECEIVE_TOPIC = '/topics/RECEIVE_TOPIC';
+const REMOVE_TOPIC = '/topics/REMOVE_TOPIC';
 
 
 const receiveTopics = (topics) => {
