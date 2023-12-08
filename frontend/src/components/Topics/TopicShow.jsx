@@ -18,7 +18,6 @@ const TopicShow = () => {
     return (
         <>
             <Header/>
-            <p>Topic Show</p>
             <h1>{topicName}</h1>
             <StoryList stories={topicStories} />
             <Link to="/explore-topics">See all Topics</Link>
