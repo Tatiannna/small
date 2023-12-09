@@ -6,7 +6,6 @@
     border-bottom: 1px solid rgb(228, 228, 228);
     padding-bottom: 20px;
     max-width: 45%;
-    margin-left: 15px;
 }
 
 .story-preview p {
@@ -14,7 +13,7 @@
 }
 
 
-.avatar {
+.preview-avatar {
     font-size: 18px;
 }
 
