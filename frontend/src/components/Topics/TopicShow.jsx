@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import StoryList from "../Story/StoryList";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
+import './TopicShow.css';
 
 const TopicShow = () => {
     const {topicName} = useParams();
@@ -13,17 +13,20 @@ const TopicShow = () => {
 
     const currentTopic = Object.values(topics).find( topic => topic.name === topicName);
     const topicStories = Object.values(stories).filter(story => story.topicId === currentTopic.id);
-    console.log("topicstories: ", topicStories);
 
     return (
         <>
             <Header/>
-            <h1>{topicName}</h1>
+            <h1 className="topic-title">{topicName}</h1>
+            <p className="topic-subtitle">
+                Topic 
+                <span className="dot"> &#x2022; </span>  
+                {topicStories.length} Stories
+            </p>
             <StoryList stories={topicStories} />
-            <Link to="/explore-topics">See all Topics</Link>
+            <Link to="/explore-topics" ><p className="explore-topics">Explore all Topics</p></Link>
         </>
     );
-
 }
 
 export default TopicShow;

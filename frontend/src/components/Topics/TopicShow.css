@@ -1,0 +1,14 @@
+.topic-title {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.topic-subtitle {
+    text-align: center;
+    color: grey;
+}
+
+p.explore-topics {
+    text-align: center;
+    color: grey;
+}
