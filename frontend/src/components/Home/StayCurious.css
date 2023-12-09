@@ -1,0 +1,14 @@
+.stay-curious {
+    background-color: rgb(247, 195, 38);
+    height: 360px;
+    margin: 0px;
+    padding-top: 80px;
+    padding-left: 60px;
+    border-bottom: 1px solid black;
+}
+
+.stay-curious h1 {
+    padding: 0px;
+    margin: 0px;
+    font-size: 86px;
+}

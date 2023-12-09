@@ -1,1 +1,10 @@
 /* TODO: Add sitewide styles */
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+body {
+    margin: 0;
+}

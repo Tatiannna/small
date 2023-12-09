@@ -10,9 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_01_222133) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_06_022213) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "stories", force: :cascade do |t|
+    t.string "title", null: false
+    t.bigint "author_id", null: false
+    t.text "body", null: false
+    t.bigint "topic_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "detail"
+    t.index ["author_id"], name: "index_stories_on_author_id"
+    t.index ["topic_id"], name: "index_stories_on_topic_id"
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_topics_on_name", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username", null: false
@@ -27,4 +46,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_01_222133) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "stories", "topics"
+  add_foreign_key "stories", "users", column: "author_id"
 end
