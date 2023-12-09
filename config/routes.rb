@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get 'stories/topics/:id', to: 'topics#show'
     resources :stories, only: [:index,  :create, :destroy, :update]
     resources :stories, only: [:show] do
-      resources :responses, only: [:show, :create, :update, :destroy]
+      resources :responses, only: [:index, :show, :create, :update, :destroy]
     end
 
   end
