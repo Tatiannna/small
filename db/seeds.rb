@@ -11,9 +11,12 @@
 ApplicationRecord.transaction do 
     puts "Destroying tables..."
     # Unnecessary if using `rails db:seed:replant`
-    User.destroy_all
-    Topic.destroy_all
+
+    Response.destroy_all
     Story.destroy_all
+    Topic.destroy_all
+    User.destroy_all
+
   
     puts "Resetting primary keys..."
     # For easy testing, so that after seeding, the first `User` has `id` of 1
@@ -112,6 +115,19 @@ ApplicationRecord.transaction do
       }
 
       Story.create!(story)
+    end
+
+
+
+    puts "Creating responses..."
+    100.times do
+      response = {
+        user_id: rand(1..100),
+        body: Faker::Lorem.paragraphs(number: rand(2..5)).join(' '),
+        story_id: rand(1..100)      
+      }
+
+      Response.create!(response)
     end
     
     puts "Done!"
