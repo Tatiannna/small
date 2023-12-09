@@ -14,7 +14,10 @@ Rails.application.routes.draw do
     resource :session, only: [:show, :create, :destroy]
     get 'stories/topics', to: 'topics#index'
     get 'stories/topics/:id', to: 'topics#show'
-    resources :stories, only: [:index, :show, :create, :destroy, :update]
+    resources :stories, only: [:index,  :create, :destroy, :update]
+    resources :stories, only: [:show] do
+      resources :responses, only: [:show, :create, :update, :destroy]
+    end
 
   end
 
