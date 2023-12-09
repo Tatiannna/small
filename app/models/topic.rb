@@ -10,5 +10,6 @@
 class Topic < ApplicationRecord
     validates :name, uniqueness: true, presence: true
 
-    has_many :stories
+    has_many :stories,
+    dependent: :destroy
 end

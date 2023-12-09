@@ -18,4 +18,5 @@ class Response < ApplicationRecord
     class_name: :User
 
     belongs_to :story
+    
 end
