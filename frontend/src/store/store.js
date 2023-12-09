@@ -5,13 +5,15 @@ import userReducer from './users';
 import storyReducer from './stories';
 import topicReducer from './topics';
 import logger from 'redux-logger';
+import responseReducer from './responses';
 
 
 const rootReducer = combineReducers({
     session: sessionReducer,
     users: userReducer,
     stories: storyReducer,
-    topics: topicReducer
+    topics: topicReducer,
+    responses: responseReducer
 });
 
 
