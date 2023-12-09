@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Header from "../Header/Header";
 import StoryList from "../Story/StoryList";
+import './UserShow.css'
 
 
 const UserShow = (props) => {
@@ -17,7 +18,12 @@ const UserShow = (props) => {
     return (
         <>
             <Header/>
-            <h1>{username}</h1>
+            <div className="username">
+                <h1>
+                    <span class="user-show-avatar">&#9824; </span>
+                    {username}
+                </h1>
+            </div>
             <StoryList stories={userStories}/>
         </>
     );  
