@@ -22,12 +22,20 @@ const StoryPreview = (props) => {
     
     return (
         <div className="story-preview">
-            <Link to={`/${author?.username}`}><p>{author?.username}</p></Link>
+            <Link to={`/${author?.username}`}><p className="preview-author"><span class="avatar">&#9824; </span>{author?.username}</p></Link>
             <Link to={`/${author?.username}/${story?.title}`}>
-                <h4>{story.title}</h4>
-                <p>{story.detail}</p>
+                <p className="preview-title">{story.title}</p>
+                <p className="preview-detail">{story.detail}</p>
             </Link>
-            <Link to={`/tag/${topic?.name}`}><p>{topic?.name}</p></Link>
+            <Link to={`/tag/${topic?.name}`}>
+                <p>
+                    <span className="preview-date">Dec 4</span>
+                    <span className="dot"> &#x2022; </span> 
+                    <span className="preview-time">5 min read </span>
+                    <span className="dot">&#x2022; </span> 
+                    <span className="preview-topic"> {topic?.name}</span>
+                </p>
+            </Link>
         </div>
     );
 }
