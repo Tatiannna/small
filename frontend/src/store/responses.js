@@ -2,7 +2,7 @@ import csrfFetch from "./csrf";
 
 const RECEIVE_RESPONSES = "/responses/RECEIVE_RESPONSES";
 const RECEIVE_RESPONSE = "/responses/RECEIVE_RESPONSE";
-
+const CLEAR_RESPONSES = "/responses/CLEAR_RESPONSES";
 
 const receiveResponses = (responses) => {
     return {
@@ -17,6 +17,14 @@ const receiveResponse = (response) => {
         response
     }
 }
+
+export const clearResponses = () => {
+    return {
+        type: CLEAR_RESPONSES
+    }
+}
+
+
 
 export const getResponses = (storyId) => async (dispatch) => {
     const res = await csrfFetch(`/api/stories/${storyId}/responses`)
@@ -50,6 +58,9 @@ const responseReducer = (state = {}, action) => {
             return {...newState, ...action.responses}
         case RECEIVE_RESPONSE:
             return {...newState, ...action.response}
+        case CLEAR_RESPONSES:
+            newState = {};
+            return newState;
         default:
             return state;
     }
