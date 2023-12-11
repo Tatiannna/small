@@ -20,8 +20,21 @@ const Home = () => {
         <>
             <Header />
             <StayCurious />
-            <Link to='/explore-topics'>Explore topics</Link>
-            <StoryList stories={stories} />
+            <div className="home-container">
+                <div className="home-container-left">
+                    <StoryList stories={stories} />
+                </div>
+                <div className="home-container-right">
+                    <h4>Recommended Topics</h4>
+                    <button className='topic-button'>Photography</button>
+                    <button className='topic-button'>Self Help</button>
+                    <button className='topic-button'>Data Science</button>
+                    <button className='topic-button'>BlockChain</button>
+                    <button className='topic-button'>Movie Reviews</button>
+                    <button className='topic-button'>Cryptocurrency</button>
+                    <Link to="/explore-topics"><p className="see-more-topics">See More Topics</p></Link>
+                </div>
+            </div>
         </>
     )
 }
