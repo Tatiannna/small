@@ -1,6 +1,8 @@
 import csrfFetch from "./csrf";
 
-const RECEIVE_RESPONSES = "/responses/RECEIVE_RESPONSES"
+const RECEIVE_RESPONSES = "/responses/RECEIVE_RESPONSES";
+const RECEIVE_RESPONSE = "/responses/RECEIVE_RESPONSE";
+
 
 const receiveResponses = (responses) => {
     return {
@@ -9,12 +11,35 @@ const receiveResponses = (responses) => {
     }
 }
 
-const getResponses = (storyId) => async (dispatch) => {
-    const res = await csrfFetch(`/api/stories/${storyId}/responses`)
+const receiveResponse = (response) => {
+    return {
+        type: RECEIVE_RESPONSE,
+        response
+    }
+}
 
+export const getResponses = (storyId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/stories/${storyId}/responses`)
+    
     let data = await res.json();
     if (res.ok){
         dispatch(receiveResponses(data));
+    }else {
+        throw(data);
+    }
+}
+
+export const createResponse = (response) => async (dispatch) => {
+    const res = await csrfFetch(`/api/stories/${response.storyId}/responses`, {
+        method: "POST",
+        body: JSON.stringify(response)
+    })
+    
+    let data = await res.json();
+    if (res.ok){
+        dispatch(receiveResponse(data));
+    }else {
+        throw(data);
     }
 }
 
@@ -23,6 +48,8 @@ const responseReducer = (state = {}, action) => {
     switch(action.type){
         case RECEIVE_RESPONSES:
             return {...newState, ...action.responses}
+        case RECEIVE_RESPONSE:
+            return {...newState, ...action.response}
         default:
             return state;
     }
