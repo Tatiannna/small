@@ -1,0 +1,17 @@
+.response-container {
+    /* border-top: 1px solid rgb(215, 215, 215); */
+    border-bottom: 1px solid rgb(226, 226, 226);
+}
+
+
+.response-author{
+    margin-bottom: 0px;
+}
+
+.response-date{
+    margin-top: 0px;
+    color: grey;
+}
+
+.response-body{
+}
