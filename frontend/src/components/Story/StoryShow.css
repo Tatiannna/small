@@ -2,6 +2,12 @@
     margin-left: 40px;
     margin-right: 40px;
     margin-top: 35px;
+    display:flex;
+    justify-content: center;
+}
+
+.story-inner-container{
+    width: 60%
 }
 
 .story-show-title {
