@@ -24,10 +24,11 @@
 }
 
 .write-response-container {
-  padding: 14px;
+  padding: 14px 14px 0px 14px;
   border-bottom: 1px solid rgb(219, 219, 219);
   box-shadow: 0 0 10px rgb(187, 187, 187);
   border-radius: 7px;
+  height: 200px;
 
 }
 
@@ -73,7 +74,7 @@
   height: 35px;
   width: 120px;
   /* margin: auto; */
-  /* margin-top: 8px; */
+  margin-top: 22px;
   float: right;
 }
 

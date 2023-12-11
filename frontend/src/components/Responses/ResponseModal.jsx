@@ -42,7 +42,7 @@ const ResponseModal = (props) => {
                     <form onSubmit={handleSubmit}>
                         <textarea 
                             cols="39" 
-                            rows="10"
+                            rows="5"
                             placeholder="What are your thoughts?"
                             value={responseBody}
                             onChange={e => setResponseBody(e.target.value)}>
