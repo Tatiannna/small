@@ -27,6 +27,7 @@ const ResponseModal = (props) => {
         console.log("response: ", response);
 
         dispatch(createResponse(response));
+        setResponseBody('');
     }
 
     return(
@@ -38,7 +39,7 @@ const ResponseModal = (props) => {
                 </h3>
                 
                 <div className="write-response-container">
-                    <p><span className="write-response-avatar">&#9824; </span>{currentUser?.username}</p>
+                    <p><span className="write-response-avatar">&#9824; </span> {currentUser?.username}</p>
                     <form onSubmit={handleSubmit}>
                         <textarea 
                             cols="39" 

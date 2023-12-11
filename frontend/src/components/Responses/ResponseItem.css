@@ -15,3 +15,9 @@
 
 .response-body{
 }
+
+.response-menu {
+    font-weight: bold;
+    float: right;
+    font-size: 20px;
+}
