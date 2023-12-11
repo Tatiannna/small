@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getStories } from "../../store/stories";
 import StayCurious from "./StayCurious";
+import RecommendedTopics from "./RecommededTopics";
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -25,14 +26,7 @@ const Home = () => {
                     <StoryList stories={stories} />
                 </div>
                 <div className="home-container-right">
-                    <h4>Recommended Topics</h4>
-                    <button className='topic-button'>Photography</button>
-                    <button className='topic-button'>Self Help</button>
-                    <button className='topic-button'>Data Science</button>
-                    <button className='topic-button'>BlockChain</button>
-                    <button className='topic-button'>Movie Reviews</button>
-                    <button className='topic-button'>Cryptocurrency</button>
-                    <Link to="/explore-topics"><p className="see-more-topics">See More Topics</p></Link>
+                    <RecommendedTopics />
                 </div>
             </div>
         </>
