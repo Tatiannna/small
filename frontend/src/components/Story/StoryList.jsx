@@ -4,11 +4,10 @@ const StoryList = ({stories}) => {
 
     return(
         <>
-             <ul>
+             <div className="story-list-container">
                 {Object.values(stories).map(story => <StoryPreview key={story.id} story={story}/>)}
-            </ul>
+            </div>
         </>
-        
     );
 }
 

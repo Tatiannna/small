@@ -2,16 +2,14 @@
     /* border: 1px solid black; */
     margin-bottom: 35px;
     padding-left: 7px;
-    /* width: 70%; */
     border-bottom: 1px solid rgb(228, 228, 228);
     padding-bottom: 20px;
-    max-width: 45%;
+    width: 550px;
 }
 
 .story-preview p {
     margin: 2px;
 }
-
 
 .preview-avatar {
     font-size: 18px;
