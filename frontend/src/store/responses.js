@@ -3,6 +3,8 @@ import csrfFetch from "./csrf";
 const RECEIVE_RESPONSES = "/responses/RECEIVE_RESPONSES";
 const RECEIVE_RESPONSE = "/responses/RECEIVE_RESPONSE";
 const CLEAR_RESPONSES = "/responses/CLEAR_RESPONSES";
+const REMOVE_RESPONSE = "/responses/REMOVE_RESPONSE";
+
 
 const receiveResponses = (responses) => {
     return {
@@ -21,6 +23,13 @@ const receiveResponse = (response) => {
 export const clearResponses = () => {
     return {
         type: CLEAR_RESPONSES
+    }
+}
+
+const removeResponse = (id) => {
+    return {
+        type: REMOVE_RESPONSE,
+        id
     }
 }
 
@@ -51,6 +60,20 @@ export const createResponse = (response) => async (dispatch) => {
     }
 }
 
+export const deleteResponse = (resp) => async (dispatch) => {
+    const res = await csrfFetch(`/api/stories/${resp.storyId}/responses/${resp.id}`, {
+        method: "DELETE",
+    })
+    
+    if (res.ok){
+        dispatch(removeResponse(resp.id));
+    }else {
+        throw(data);
+    }
+}
+
+
+
 const responseReducer = (state = {}, action) => {
     let newState = {...state}
     switch(action.type){
@@ -60,6 +83,9 @@ const responseReducer = (state = {}, action) => {
             return {...newState, ...action.response}
         case CLEAR_RESPONSES:
             newState = {};
+            return newState;
+        case REMOVE_RESPONSE:
+            delete newState[action.id]
             return newState;
         default:
             return state;
