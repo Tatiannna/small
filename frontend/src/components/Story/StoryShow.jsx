@@ -34,23 +34,25 @@ const StoryShow = () => {
         <>
             <Header/>
             <div className="story-container">
-                <p className="story-show-title">{story?.title}</p>
-                <p className="story-show-detail">{story?.detail}</p>
-                <div className="story-show-info-container">
-                    <div className="story-show-info-container-left">
-                        <span className="story-show-avatar">&#9824; </span>
+                <div className='story-inner-container'>
+                    <p className="story-show-title">{story?.title}</p>
+                    <p className="story-show-detail">{story?.detail}</p>
+                    <div className="story-show-info-container">
+                        <div className="story-show-info-container-left">
+                            <span className="story-show-avatar">&#9824; </span>
+                        </div>
+                        <div className="story-show-info-container-right">
+                            <Link to=''> <p className="story-show-username">{author?.username}</p></Link>
+                            <p className="story-show-info">5 min read <span className="dot">&#x2022; </span>Nov 14</p>
+                        </div>
                     </div>
-                    <div className="story-show-info-container-right">
-                        <Link to=''> <p className="story-show-username">{author?.username}</p></Link>
-                        <p className="story-show-info">5 min read <span className="dot">&#x2022; </span>Nov 14</p>
+                    <div className="divider">
+                        {showResponseModal && < ResponseModal story={story} closeModal={() => setShowResponseModal(false)} />}
+                        <span className="responses" onClick={()=> setShowResponseModal(!showResponseModal)}>Responses</span>
                     </div>
+                    <p className="story-show-body">{story?.body}</p>
+                    <Link to=''><span className="story-show-topic">{topic?.name}</span></Link>
                 </div>
-                <div className="divider">
-                    {showResponseModal && < ResponseModal story={story} closeModal={() => setShowResponseModal(false)} />}
-                    <span className="Comments" onClick={()=> setShowResponseModal(!showResponseModal)}>Comments</span>
-                </div>
-                <p className="story-show-body">{story?.body}</p>
-                <Link to=''><span className="story-show-topic">{topic?.name}</span></Link>
             </div>
         </>
     )
