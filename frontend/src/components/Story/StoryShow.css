@@ -22,6 +22,7 @@
     font-size: 16px;
     margin: 0px;
     margin-bottom: 2px;
+    
 }
 
 .story-show-avatar {
@@ -46,8 +47,10 @@
 
 .divider {
     border-top: 1px solid rgb(221, 221, 221);
+    border-bottom: 1px solid rgb(221, 221, 221);
+
     /* border-bottom: 1px solid rgb(220, 220, 220); */
-    /* height: 45px; */
+    height: 45px;
     margin: 25px 0px;
 }
 
