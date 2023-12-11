@@ -1,20 +1,24 @@
 button.topic-button {
-    border-radius: 20px;
-    border: none;
-    background-color: rgb(238, 238, 238);
-    color: black; 
-    height: 35px;
-    width: fit-content;
-    padding: 0px 10px;
-    margin: 5px 5px;
+  border-radius: 20px;
+  border: none;
+  background-color: rgb(238, 238, 238);
+  color: black; 
+  height: 35px;
+  width: fit-content;
+  padding: 0px 10px;
+  margin: 5px 5px;
 
-    /* display: inline-block; */
-    /* width: 120px; */
-    /* margin: auto; */
-    /* margin-top: 8px; */
-    /* float: right; */
-  }
+  /* display: inline-block; */
+  /* width: 120px; */
+  /* margin: auto; */
+  /* margin-top: 8px; */
+  /* float: right; */
+}
 
-  .see-more-topics {
-    color:green;
-  }
+.see-more-topics {
+  color:green;
+}
+
+.recommended-topics-container {
+  
+}
