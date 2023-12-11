@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import './StoryShow.css';
 import { Link } from 'react-router-dom';
-import { getResponses } from '../../store/responses';
+import { clearResponses, getResponses } from '../../store/responses';
 import ResponseModal from '../Responses/ResponseModal';
 import { useState } from 'react';
 
@@ -23,6 +23,7 @@ const StoryShow = () => {
 
     useEffect(() => {
         dispatch(getStory(story.id));
+        dispatch(clearResponses());
         dispatch(getResponses(story.id));
 
     }, [dispatch, story.id]);
