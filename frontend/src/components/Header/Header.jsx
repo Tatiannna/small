@@ -13,8 +13,9 @@ const Header = () => {
 
     const dispatch = useDispatch();
     const currentUserId = useSelector(state => state.session.currentUserId);
+    const username = useSelector(state => state.users[currentUserId]?.username);
     const [showModal, setShowModal] = useState(false);
-    let [formType, setFormType] = useState("login")
+    let [formType, setFormType] = useState("login");
 
 
     const handleClick = e => {
@@ -50,7 +51,7 @@ const Header = () => {
                             <Link to='/new-story'><p> Write</p></Link>
                         </div>
                         <div className='header-right-item'>
-                            <p>Profile</p>
+                            <Link to={`/${username}`}><p>Profile</p></Link>
                         </div>
                         <div className='header-right-item'>
                             <button onClick={() => dispatch(logout())}>Logout</button>
