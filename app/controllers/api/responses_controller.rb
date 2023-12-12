@@ -12,17 +12,32 @@ class Api::ResponsesController < ApplicationController
         @response = Response.new(response_params)
 
         if @response.save!
-            @responses = [@response]
-            render :index
+            render :show
         else
             render json: @response.errors.full_messages, status: 422
         end
     end
 
     def update
+        @response = Response.find_by(id: params[:id])
+
+        if @response && @response.update(response_params)
+            render :show
+        else
+            render json: ['Something went wrong'], status: 422
+ 
+        end
+
     end
 
     def destroy
+        @response = Response.find_by(id: params[:id])
+
+        if @response && @response.destroy
+            head :no_content
+        else
+            render json: ['Something went wrong'], status: 422
+        end
     end
 
     private
