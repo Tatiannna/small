@@ -7,17 +7,18 @@ import { useEffect } from "react";
 import {getTopics} from '../../store/topics';
 import './WriteStory.css';
 import {createStory} from '../../store/stories';
+import { useNavigate } from "react-router-dom";
 
 
 
 const WriteStory = () => {
 
-    const { quill, quillRef } = useQuill();
-
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     
     const topics = useSelector(state => state.topics);
     const currentUserId = useSelector(state => state.session.currentUserId);
+    const username = useSelector(state => state.users[currentUserId].username);
 
 
     useEffect(() => {
@@ -27,25 +28,9 @@ const WriteStory = () => {
     const [title, setTitle] = useState('');
     const [detail, setDetail] = useState('');
     const [body, setBody] = useState('');
-    const [topic, setTopic] = useState('');
+    const [topic, setTopic] = useState(null);
     const [topicId, setTopicId] = useState('');
 
-
-    // useEffect(() => {
-    //     if (quill) {
-    //       quill.clipboard.dangerouslyPasteHTML('<p>Write Your Story</p>');
-    //       quill.on('text-change', (delta, oldDelta, source) => {
-    //         console.log('Text change!');
-    //         console.log(quill.getText()); // Get text only
-    //         // console.log(quill.getContents()); // Get delta contents
-    //         // console.log(quill.root.innerHTML); // Get innerHTML using quill
-    //         // console.log(quillRef.current.firstChild.innerHTML); // Get innerHTML using quillRef
-    //         //setBody(quill.getText);
-    //       });
-    //     }
-    // }, [quill]);
-
-    console.log("hello test");
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -57,11 +42,8 @@ const WriteStory = () => {
             topic_id: topicId,
             author_id: currentUserId
         }
-
-        console.log("new story: ", story)
-
         dispatch(createStory(story));
-
+        navigate(`/${username}/${title}`)
     }
 
     return (
