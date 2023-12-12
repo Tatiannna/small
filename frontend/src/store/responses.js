@@ -4,6 +4,7 @@ const RECEIVE_RESPONSES = "/responses/RECEIVE_RESPONSES";
 const RECEIVE_RESPONSE = "/responses/RECEIVE_RESPONSE";
 const CLEAR_RESPONSES = "/responses/CLEAR_RESPONSES";
 const REMOVE_RESPONSE = "/responses/REMOVE_RESPONSE";
+// const EDIT_RESPONSE = "/responses/EDIT_RESPONSE";
 
 
 const receiveResponses = (responses) => {
@@ -20,11 +21,19 @@ const receiveResponse = (response) => {
     }
 }
 
+// const editResponse = (response) => {
+//     return {
+//         type: RECEIVE_RESPONSE,
+//         response
+//     }
+// }
+
 export const clearResponses = () => {
     return {
         type: CLEAR_RESPONSES
     }
 }
+
 
 const removeResponse = (id) => {
     return {
@@ -72,7 +81,19 @@ export const deleteResponse = (resp) => async (dispatch) => {
     }
 }
 
+export const updateResponse = (response) => async dispatch => {
+    const res = await csrfFetch(`/api/stories/${response.storyId}/responses/${response.id}`, {
+        method: "PATCH",
+        body: JSON.stringify(response)
+    })
 
+    let data = await res.json()
+    if (res.ok){
+        dispatch(receiveResponse(data))
+    }else{
+        throw data;
+    }
+}
 
 const responseReducer = (state = {}, action) => {
     let newState = {...state}
@@ -80,7 +101,8 @@ const responseReducer = (state = {}, action) => {
         case RECEIVE_RESPONSES:
             return {...newState, ...action.responses}
         case RECEIVE_RESPONSE:
-            return {...newState, ...action.response}
+            newState[action.response.id] = action.response;
+            return newState;
         case CLEAR_RESPONSES:
             newState = {};
             return newState;
