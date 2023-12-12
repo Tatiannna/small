@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Header from "../Header/Header";
 import StoryList from "../Story/StoryList";
@@ -12,9 +12,14 @@ const UserShow = (props) => {
     const stories = useSelector(state => state.stories);
     const user = Object.values(users).find(user => user.username === username);
 
-    const userStories = [];
-    user.stories.forEach(storyId => userStories.push(stories[storyId]));
 
+    const userStories = [];
+    if (user.stories && user.stories.length > 0){
+        user.stories.forEach(storyId => {
+            userStories.push(stories[storyId])
+        });
+    }
+   
     return (
         <>
             <Header/>
@@ -24,7 +29,7 @@ const UserShow = (props) => {
                     {username}
                 </h1>
             </div>
-            <StoryList stories={userStories}/>
+            { userStories.length > 0 && <StoryList stories={userStories}/>}
         </>
     );  
 }
