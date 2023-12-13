@@ -2,12 +2,12 @@ import "./ResponseModal.css";
 import { useState } from "react";
 import ResponseItem from "./ResponseItem";
 import { useDispatch, useSelector } from "react-redux";
-import { createResponse } from "../../store/responses";
+import { createResponse, getResponses } from "../../store/responses";
+import { useEffect } from "react";
 
 
 const ResponseModal = (props) => {
 
-    // const [showResponseModal, setShowResponseModal] = useState(true);
     const dispatch = useDispatch();
     const [responseBody, setResponseBody] = useState('');
 
@@ -24,9 +24,8 @@ const ResponseModal = (props) => {
             story_id: props.story.id
         }
 
-        console.log("response: ", response);
-
         dispatch(createResponse(response));
+        response = responses[response.id]
         setResponseBody('');
     }
 
