@@ -12,6 +12,8 @@ import StoryMenu from './StoryMenu';
 const StoryPreview = (props) => {
 
     const story = props.story;
+    const storyTitle = story.title;
+
     const dispatch = useDispatch();
 
     useEffect( () => {
@@ -21,7 +23,10 @@ const StoryPreview = (props) => {
 
     const author = useSelector( state => state.users[story?.authorId]);
     const topic = useSelector(state => state.topics[story?.topicId]);
+    const currentUserId = useSelector(state => state.session.currentUserId);
     const [showPreviewMenu, setShowPreviewMenu] = useState(false);
+    const isCurrentUsersStory = (currentUserId == story.authorId);
+    console.log('currentuserid: ', currentUserId, ' storyauthorid: ', story.authorId);
     
     return (
         <div className="story-preview">
@@ -44,7 +49,20 @@ const StoryPreview = (props) => {
                     <span className="preview-topic">{topic?.name}</span>
                 </Link>
                 <span className="preview-menu" onClick={() => setShowPreviewMenu(!showPreviewMenu)}>...</span>
-                {showPreviewMenu && <StoryMenu story={story}/>}
+
+                {/* {showPreviewMenu && isCurrentUsersStory && <StoryMenu story={story}/>} */}
+
+                {showPreviewMenu && isCurrentUsersStory &&
+                    <div className="story-menu-modal">
+                        <Link to={`/story/${storyTitle}/edit`} state={story}><p className="story-menu-edit">Edit</p></Link>
+                        <p className='story-menu-delete' onClick={() => dispatch(deleteStory(props.story.id))}>Delete</p>
+                    </div>}
+
+                {showPreviewMenu && !isCurrentUsersStory && 
+                    <div className="story-menu-modal">
+                        <p>Report</p>
+                    </div>
+                }
             </p>
         </div>
     );
