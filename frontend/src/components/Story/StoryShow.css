@@ -58,6 +58,11 @@
     /* border-bottom: 1px solid rgb(220, 220, 220); */
     height: 45px;
     margin: 25px 0px;
+    padding-left: 10px;
+}
+
+.responses {
+    color: rgb(144, 144, 144);
 }
 
 .story-show-body {
