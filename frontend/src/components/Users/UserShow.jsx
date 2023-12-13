@@ -29,7 +29,10 @@ const UserShow = (props) => {
                     {username}
                 </h1>
             </div>
-            { userStories.length > 0 && <StoryList stories={userStories}/>}
+            <div className='user-show-body'>
+                <h3 className='stories-heading'>Stories</h3>
+                { userStories.length > 0 && <StoryList stories={userStories}/>}
+            </div>
         </>
     );  
 }
