@@ -22,14 +22,14 @@ const StoryShow = () => {
     const [showResponseModal, setShowResponseModal] = useState(false);
 
     useEffect(() => {
-        dispatch(getStory(story.id));
+        dispatch(getStory(story?.id));
         dispatch(clearResponses());
-        dispatch(getResponses(story.id));
+        dispatch(getResponses(story?.id));
 
-    }, [dispatch, story.id]);
+    }, [dispatch, story?.id]);
 
-    const topic = useSelector(state => state.topics[story.topicId]);
-    const author = useSelector(state => state.users[story.authorId]);
+    const topic = useSelector(state => state.topics[story?.topicId]);
+    const author = useSelector(state => state.users[story?.authorId]);
     
     return(
         <>
