@@ -48,7 +48,7 @@ const ResponseItem = (props) => {
                     <p className="response-author">
                         <span className="write-response-avatar">&#9824; </span>
                         {responseAuthor?.username} 
-                        <span className="response-menu" onClick={() => setShowResponseMenu(!showResponseMenu)}>...</span>
+                        {currentUserId && <span className="response-menu" onClick={() => setShowResponseMenu(!showResponseMenu)}>...</span>}
                     </p>
                     <p className="response-date">{response?.createdAt.split('T')[0]}</p>
                     <p className="response-body">{response?.body}</p>

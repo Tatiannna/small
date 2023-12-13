@@ -47,7 +47,7 @@ const StoryPreview = (props) => {
                 <Link to={`/tag/${topic?.name}`}>
                     <span className="preview-topic">{topic?.name}</span>
                 </Link>
-                <span className="preview-menu" onClick={() => setShowPreviewMenu(!showPreviewMenu)}>...</span>
+                {currentUserId && <span className="story-show-menu" onClick={() => setShowPreviewMenu(!showPreviewMenu)}>...</span>}
 
                 {/* {showPreviewMenu && isCurrentUsersStory && <StoryMenu story={story}/>} */}
 
