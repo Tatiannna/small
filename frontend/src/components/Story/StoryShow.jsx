@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 import { clearResponses, getResponses } from '../../store/responses';
 import ResponseModal from '../Responses/ResponseModal';
 import { useState } from 'react';
+import { FaRegMessage } from "react-icons/fa6";
+
 
 const StoryShow = () => {
     
@@ -30,6 +32,7 @@ const StoryShow = () => {
 
     const topic = useSelector(state => state.topics[story?.topicId]);
     const author = useSelector(state => state.users[story?.authorId]);
+    const numResponses = Object.values(responses).length;
     
     return(
         <>
@@ -49,7 +52,13 @@ const StoryShow = () => {
                     </div>
                     <div className="divider">
                         {showResponseModal && < ResponseModal story={story} closeModal={() => setShowResponseModal(false)} />}
-                        <span className="responses" onClick={()=> setShowResponseModal(!showResponseModal)}>Responses</span>
+                        <p>
+                            <span 
+                                className="responses" 
+                                onClick={()=> setShowResponseModal(!showResponseModal)}>
+                                <FaRegMessage /> {numResponses > 0 && numResponses}
+                            </span>
+                        </p>
                     </div>
                     <p className="story-show-body">{story?.body}</p>
                     <Link to={`/tag/${topic.name}`}><span className="story-show-topic">{topic?.name}</span></Link>
