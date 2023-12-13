@@ -59,6 +59,7 @@
     height: 45px;
     margin: 25px 0px;
     padding-left: 10px;
+    padding-right: 15px;
 }
 
 .responses {
@@ -77,6 +78,15 @@ span.story-show-topic {
     background-color: rgb(240, 240, 240);
     border-radius: 10px;
     padding: 2px 6px;
+}
+
+
+.story-show-menu{
+    font-weight: bold;
+    float: right;
+    font-size: 18px;
+    color: rgb(159, 159, 159);
+
 }
 
 
