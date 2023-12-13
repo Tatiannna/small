@@ -8,6 +8,7 @@
   background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: right;
+  overflow: hidden;
   /* align-items: center; */
 }
   
@@ -18,9 +19,14 @@
   padding: 12px 28px;
   height: 100%;
   width: 375px;
-
+  overflow-y: auto;
+  padding-bottom: 40px;
+  margin-bottom: 20px;
   /* padding-top: 350px; */
   /* margin-left: 200px; */
+}
+.response-bottom{
+  height: 75px;
 }
 
 .write-response-container {
@@ -95,7 +101,9 @@
   color: rgb(204, 203, 203); */
 }
 
+.response-bottom {
 
+}
 
 #x {
 text-align: right;

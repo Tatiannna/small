@@ -53,6 +53,7 @@ const ResponseModal = (props) => {
                 <div className="all-responses-container">
                     {Object.values(responses).map(response => <ResponseItem key={responses.id} response={response}/>)}
                 </div>
+                <div className='response-bottom'></div>
             </div>
         </div>
     )
