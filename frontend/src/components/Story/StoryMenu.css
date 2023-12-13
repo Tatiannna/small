@@ -1,0 +1,31 @@
+/* .response-menu-overlay {
+    position: absolute;
+    z-index: 9;
+    top:0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: right;
+    align-items: center; 
+} */
+
+.story-menu-modal{
+    /* background-color: #ffffff; */
+    /* border: 1px solid #bebebe; */
+    /* border-radius: 2px; */
+    /* width: 100px; */
+    /* border: 1px solid rgb(226, 226, 226); */
+    /* display: flex; */
+    text-align: right;
+    /* width: 100px; */
+}
+
+.story-menu-edit{
+
+}
+
+.story-menu-delete{
+    color: red;
+}
