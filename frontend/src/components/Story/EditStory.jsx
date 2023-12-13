@@ -60,12 +60,24 @@ const EditStory = (props) => {
         <>
             <Header />
             <form onSubmit={handleSubmit}>
-                <div>
-                    <button className="publish">Publish</button>
-                </div>
                 <div className='story-form-container'>
+                    <button className="publish">Publish</button>
                     <div>
-                    <textarea 
+                        <select 
+                            className="select-story-topic"
+                            onChange={e => setTopicId(e.target.value)}>
+                            <option>Select Topic</option>
+                            {Object.values(topics).map(
+                                mapTopic => 
+                                <option 
+                                    key={mapTopic.id} 
+                                    value={mapTopic.id}>
+                                    {mapTopic.name}
+                                </option>)}
+                        </select>
+                    </div>
+                    <div>
+                        <textarea 
                             className="write-story-title" 
                             value={title}
                             cols="15"
@@ -95,21 +107,6 @@ const EditStory = (props) => {
                             placeholder="Tell your Story..."
                             onChange={e => setBody(e.target.value)}>
                         </textarea>
-                    </div>
-
-                    <div>
-                        <select 
-                            className="select-story-topic"
-                            onChange={e => setTopicId(e.target.value)}>
-                            <option>Select Topic</option>
-                            {Object.values(topics).map(
-                                mapTopic => 
-                                <option 
-                                    key={mapTopic.id} 
-                                    value={mapTopic.id}>
-                                    {mapTopic.name}
-                                </option>)}
-                        </select>
                     </div>
                 </div>
             </form>
