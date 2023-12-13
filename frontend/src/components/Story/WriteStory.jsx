@@ -50,46 +50,10 @@ const WriteStory = () => {
         <>
             <Header />
             <form onSubmit={handleSubmit}>
-                <div>
-                    <button className="publish">Publish</button>
-                </div>
                 <div className='story-form-container'>
-                    <div>
-                    <textarea 
-                            className="write-story-title" 
-                            value={title}
-                            cols="15"
-                            rows="1"
-                            placeholder="Title..."
-                            onChange={e => setTitle(e.target.value)}>
-                        </textarea>
-                    </div>
-                    
-                    <div>
-                        <textarea 
-                            className="write-story-subtitle" 
-                            value={detail}
-                            cols="50"
-                            rows="4"
-                            placeholder="Subtitle..."
-                            onChange={e => setDetail(e.target.value)}>
-                        </textarea>
-                    </div>
-                    
-                    <div>
-                        <textarea 
-                            className="write-story-body" 
-                            value={body}
-                            cols="75"
-                            rows="25"
-                            placeholder="Tell your Story..."
-                            onChange={e => setBody(e.target.value)}>
-                        </textarea>
-                    </div>
-
-                    <div>
-                        <select 
-                            className="select-story-topic"
+                    <button className="publish">Publish</button>
+                    <div className="select-story-topic">
+                        <select
                             onChange={e => setTopicId(e.target.value)}>
                             <option>Select Topic</option>
                             {Object.values(topics).map(
@@ -100,6 +64,35 @@ const WriteStory = () => {
                                     {mapTopic.name}
                                 </option>)}
                         </select>
+                    </div>
+                    <div className="write-story-title">
+                        <textarea
+                            value={title}
+                            cols="50"
+                            rows="2"
+                            placeholder="Title..."
+                            onChange={e => setTitle(e.target.value)}>
+                        </textarea>
+                    </div>
+                    
+                    <div className="write-story-subtitle">
+                        <textarea 
+                            value={detail}
+                            cols="50"
+                            rows="3"
+                            placeholder="Subtitle..."
+                            onChange={e => setDetail(e.target.value)}>
+                        </textarea>
+                    </div>
+                    
+                    <div className="write-story-body">
+                        <textarea 
+                            value={body}
+                            cols="50"
+                            rows="25"
+                            placeholder="Tell your Story..."
+                            onChange={e => setBody(e.target.value)}>
+                        </textarea>
                     </div>
                     
                     {/* <div style={{ width: 500, height: 300 }}>
