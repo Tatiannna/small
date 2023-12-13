@@ -7,19 +7,50 @@ import './TopicIndex.css';
 
 const TopicIndex = () => {
 
-    const topics = useSelector(state => state.topics);
+    const topicObjects = useSelector(state => state.topics);
+    const topics = Object.values(topicObjects);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(getTopics);
     }, []);
 
+    const col1 = [];
+    const col2 = [];
+    const col3 = [];
+
+    const createTopicColumns = () => {
+        const topicColumnMax = Math.floor(Object.values(topics).length / 3);
+
+        for(let i = 0; i < topicColumnMax; i++){
+            col1.push(topics[i])
+        }
+
+        for(let i = topicColumnMax; i < 2*topicColumnMax; i++){
+            col2.push(topics[i])
+        }
+
+        for(let i = 2*topicColumnMax; i < topics.length; i++){
+            col3.push(topics[i])
+        }
+    }
+
+    createTopicColumns();
+
     return (
         <>
             <Header/>
             <h1 className='explore-topics'>Explore Topics</h1>
             <div className="topics-container">
-                {Object.values(topics).map(topic => <Link to={`/tag/${topic.name}`}>{topic.name}</Link>)}
+                <div className='topic-col-1'>
+                    {col1.map(topic => <Link to={`/tag/${topic.name}`}><p>{topic.name}</p></Link>)}
+                </div>
+                <div className='topic-col-3'>
+                    {col2.map(topic => <Link to={`/tag/${topic.name}`}><p>{topic.name}</p></Link>)}
+                </div>
+                <div className='topic-col-3'>
+                    {col3.map(topic => <Link to={`/tag/${topic.name}`}><p>{topic.name}</p></Link>)}
+                </div>
             </div>
         </>
     );
