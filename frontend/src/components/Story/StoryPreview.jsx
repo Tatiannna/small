@@ -6,7 +6,6 @@ import { getTopic } from '../../store/topics';
 import { useEffect } from 'react';
 import { getUser } from '../../store/users';
 import { useState } from 'react';
-import StoryMenu from './StoryMenu';
 
 
 const StoryPreview = (props) => {
