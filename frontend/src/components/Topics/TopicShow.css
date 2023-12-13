@@ -12,3 +12,8 @@ p.explore-topics {
     text-align: center;
     color: grey;
 }
+
+.topic-show-container{
+    padding-left: 55px;
+    margin-top: 40px;
+}
