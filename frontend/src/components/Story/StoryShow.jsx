@@ -63,7 +63,7 @@ const StoryShow = () => {
                                 onClick={()=> setShowResponseModal(!showResponseModal)}>
                                 <FaRegMessage /> {numResponses > 0 && numResponses}
                             </span>
-                            <span className="story-show-menu" onClick={() => setShowPreviewMenu(!showPreviewMenu)}>...</span>
+                            {currentUserId && <span className="preview-menu" onClick={() => setShowPreviewMenu(!showPreviewMenu)}>...</span>}
 
                         </p>
 
