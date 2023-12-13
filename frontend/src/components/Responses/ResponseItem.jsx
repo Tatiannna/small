@@ -73,8 +73,8 @@ const ResponseItem = (props) => {
             {/* {showResponseMenu && < ResponseMenu response={response}/>} */}
             {showResponseMenu && 
                 <div className="response-menu-modal">
-                    <p onClick={() => setShowEditForm(true)}>Edit</p>
-                    <p onClick={() => dispatch(deleteResponse(response))}>Delete</p>
+                    <p className="response-menu-edit"onClick={() => setShowEditForm(true)}>Edit</p>
+                    <p className="response-menu-delete"onClick={() => dispatch(deleteResponse(response))}>Delete</p>
                 </div>
             }
         </div>
