@@ -20,8 +20,13 @@ const StoryShow = () => {
     const stories = useSelector(state => state.stories);
     const responses = useSelector(state => state.responses);
     const story = Object.values(stories).find( story => story.title === storyTitle);
+    const [showPreviewMenu, setShowPreviewMenu] = useState(false);
+    const currentUserId = useSelector(state => state.session.currentUserId)
+
 
     const [showResponseModal, setShowResponseModal] = useState(false);
+    const isCurrentUsersStory = (currentUserId == story.authorId);
+
 
     useEffect(() => {
         dispatch(getStory(story?.id));
@@ -58,7 +63,21 @@ const StoryShow = () => {
                                 onClick={()=> setShowResponseModal(!showResponseModal)}>
                                 <FaRegMessage /> {numResponses > 0 && numResponses}
                             </span>
+                            <span className="story-show-menu" onClick={() => setShowPreviewMenu(!showPreviewMenu)}>...</span>
+
                         </p>
+
+                        {showPreviewMenu && isCurrentUsersStory &&
+                            <div className="story-menu-modal">
+                                <Link to={`/story/${storyTitle}/edit`} state={story}><p className="story-menu-edit">Edit</p></Link>
+                                <p className='story-menu-delete' onClick={() => dispatch(deleteStory(props.story.id))}>Delete</p>
+                            </div>
+                        }
+                        {showPreviewMenu && !isCurrentUsersStory && 
+                            <div className="story-menu-modal">
+                                <p>Report</p>
+                            </div>
+                        }
                     </div>
                     <p className="story-show-body">{story?.body}</p>
                     <Link to={`/tag/${topic?.name}`}><span className="story-show-topic">{topic?.name}</span></Link>
