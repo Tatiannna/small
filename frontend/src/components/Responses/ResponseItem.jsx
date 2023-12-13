@@ -64,7 +64,8 @@ const ResponseItem = (props) => {
                             value={responseBody}
                             onChange={e => setResponseBody(e.target.value)}>
                         </textarea>
-                        <button className="submit-response-button">Update</button>
+                            <button className="edit-response-button">Update</button>
+                            <button onClick={() => setShowEditForm(false)} type="button" className="cancel-edit-button">Cancel</button>
                     </form>
                 </div>
             }

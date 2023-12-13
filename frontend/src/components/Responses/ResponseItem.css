@@ -21,3 +21,28 @@
     float: right;
     font-size: 20px;
 }
+
+.edit-response-button{
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(9, 104, 26);
+    color: white;
+    height: 35px;
+    width: 120px;
+    /* margin: auto; */
+    margin-top: 50px;
+    float: right;
+  }
+
+.cancel-edit-button{
+
+    border: none;
+    background-color: rgb(255, 255, 255); 
+    color: rgb(62, 62, 62);
+    height: 35px;
+    width: 90px;
+    /* margin: auto; */
+    margin-top: 50px;
+    float: right;
+    padding: 0px;
+  }
