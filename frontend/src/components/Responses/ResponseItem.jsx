@@ -23,8 +23,8 @@ const ResponseItem = (props) => {
         dispatch(getUser(response.userId));
     },[dispatch, response.userId])
 
-    const commentAuthor = users[response.userId];
-
+    const responseAuthor = users[response.userId];
+    const isUsersResponse = (currentUserId == response.userId);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -47,7 +47,7 @@ const ResponseItem = (props) => {
                 <div>
                     <p className="response-author">
                         <span className="write-response-avatar">&#9824; </span>
-                        {commentAuthor?.username} 
+                        {responseAuthor?.username} 
                         <span className="response-menu" onClick={() => setShowResponseMenu(!showResponseMenu)}>...</span>
                     </p>
                     <p className="response-date">{response?.createdAt.split('T')[0]}</p>
@@ -70,11 +70,16 @@ const ResponseItem = (props) => {
                 </div>
             }
 
-            {/* {showResponseMenu && < ResponseMenu response={response}/>} */}
-            {showResponseMenu && 
+            {showResponseMenu && isUsersResponse &&
                 <div className="response-menu-modal">
                     <p className="response-menu-edit"onClick={() => setShowEditForm(true)}>Edit</p>
                     <p className="response-menu-delete"onClick={() => dispatch(deleteResponse(response))}>Delete</p>
+                </div>
+            }
+
+            {showResponseMenu && !isUsersResponse &&
+                <div className="response-menu-modal">
+                    <p className="response-menu-report">Report</p>               
                 </div>
             }
         </div>
