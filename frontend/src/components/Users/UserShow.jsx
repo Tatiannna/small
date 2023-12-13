@@ -25,7 +25,7 @@ const UserShow = (props) => {
             <Header/>
             <div className="username">
                 <h1>
-                    <span class="user-show-avatar">&#9824; </span>
+                    <span className="user-show-avatar">&#9824; </span>
                     {username}
                 </h1>
             </div>
