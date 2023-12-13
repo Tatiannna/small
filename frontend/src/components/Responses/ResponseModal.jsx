@@ -4,6 +4,7 @@ import ResponseItem from "./ResponseItem";
 import { useDispatch, useSelector } from "react-redux";
 import { createResponse, getResponses } from "../../store/responses";
 import { useEffect } from "react";
+import Modal from '../Modal/Modal';
 
 
 const ResponseModal = (props) => {
@@ -14,6 +15,8 @@ const ResponseModal = (props) => {
     const responses = useSelector(state => state.responses);
     const currentUserId = useSelector(state => state.session.currentUserId);
     const currentUser = useSelector(state => state.users[currentUserId]);
+    const [showModal, setShowModal] = useState(false);
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -32,13 +35,14 @@ const ResponseModal = (props) => {
 
     return(
         <div className="response-modal-overlay">
+            {showModal && (<Modal closeModal={() => setShowModal(false)} formType={'login'} />)}
             <div className="response-modal">
                 <h3>Responses({Object.values(responses).length})
                     <span id="x" onClick={() => props.closeModal()}> &#215; 
                     </span>
                 </h3>
                 
-                <div className="write-response-container">
+                <div className="write-response-container" onClick={() => setShowModal(!currentUserId)}>
                     <p><span className="write-response-avatar">&#9824; </span> {currentUser?.username}</p>
                     <form onSubmit={handleSubmit}>
                         <textarea 
