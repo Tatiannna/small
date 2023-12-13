@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getStories } from "../../store/stories";
 import StayCurious from "./StayCurious";
-import RecommendedTopics from "./RecommededTopics";
+import RecommendedTopics from "./RecommendedTopics";
 
 const Home = () => {
     const dispatch = useDispatch();
