@@ -24,9 +24,10 @@ const ResponseModal = (props) => {
             story_id: props.story.id
         }
 
-        dispatch(createResponse(response));
+        dispatch(createResponse(response))
+            .then(setResponseBody(''))
+            
         response = responses[response.id]
-        setResponseBody('');
     }
 
     return(
