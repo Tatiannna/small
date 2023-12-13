@@ -43,7 +43,7 @@ const StoryShow = () => {
                             <span className="story-show-avatar">&#9824; </span>
                         </div>
                         <div className="story-show-info-container-right">
-                            <Link to=''> <p className="story-show-username">{author?.username}</p></Link>
+                            <Link to={`/${author.username}`}> <p className="story-show-username">{author?.username}</p></Link>
                             <p className="story-show-info">5 min read <span className="dot">&#x2022; </span>Nov 14</p>
                         </div>
                     </div>
@@ -52,7 +52,7 @@ const StoryShow = () => {
                         <span className="responses" onClick={()=> setShowResponseModal(!showResponseModal)}>Responses</span>
                     </div>
                     <p className="story-show-body">{story?.body}</p>
-                    <Link to=''><span className="story-show-topic">{topic?.name}</span></Link>
+                    <Link to={`/tag/${topic.name}`}><span className="story-show-topic">{topic?.name}</span></Link>
                 </div>
             </div>
         </>
