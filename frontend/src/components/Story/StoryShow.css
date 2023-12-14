@@ -66,6 +66,12 @@
     color: rgb(144, 144, 144);
 }
 
+.claps {
+    margin-left: 30px;
+    color: rgb(144, 144, 144);
+    font-size: 18px;
+}
+
 .story-show-body {
     font-size: 19px;
     margin: 0px;
@@ -88,6 +94,8 @@ span.story-show-topic {
     color: rgb(159, 159, 159);
 
 }
+
+
 
 
 
