@@ -27,6 +27,22 @@ const StoryPreview = (props) => {
     const [showPreviewMenu, setShowPreviewMenu] = useState(false);
     const isCurrentUsersStory = (currentUserId == story?.authorId);
     
+    const date = (createdDateTime) => {
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        let createdDate = createdDateTime.split('T')[0]
+        let month = createdDate.split('-')[1];
+        console.log("month: ",month);
+        let day = createdDate.split('-')[2];
+
+        if(day < 10){
+            day = day.split('')[1];
+        }
+
+        return `${monthNames[month-1]} ${day}`;
+    }
+
     return (
         <div className="story-preview">
             <Link to={`/user/${author?.username}`}>
@@ -40,10 +56,10 @@ const StoryPreview = (props) => {
                 <p className="preview-detail">{story?.detail}</p>
             </Link>
             <p>
-                <span className="preview-date">Dec 4</span>
+                <span className="preview-date">{date(story?.createdAt)}</span>
                 <span className="dot"> &#x2022; </span> 
-                <span className="preview-time">5 min read </span>
-                <span className="dot">&#x2022; </span> 
+                <span className="preview-time">5 min read</span>
+                <span className="dot"> &#x2022; </span> 
                 <Link to={`/tag/${topic?.name}`}>
                     <span className="preview-topic">{topic?.name}</span>
                 </Link>

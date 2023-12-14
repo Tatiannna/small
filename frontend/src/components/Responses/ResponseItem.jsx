@@ -40,6 +40,23 @@ const ResponseItem = (props) => {
         console.log(response);
     }
 
+    const date = (createdDateTime) => {
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        let createdDate = createdDateTime.split('T')[0]
+        let month = createdDate.split('-')[1];
+        console.log("month: ",month);
+        let day = createdDate.split('-')[2];
+
+        if(day < 10){
+            day = day.split('')[1];
+        }
+
+        return `${monthNames[month-1]} ${day}`;
+    }
+
+
     return (
         <div className="response-container">
             
@@ -50,7 +67,7 @@ const ResponseItem = (props) => {
                         {responseAuthor?.username} 
                         {currentUserId && <span className="response-menu" onClick={() => setShowResponseMenu(!showResponseMenu)}>...</span>}
                     </p>
-                    <p className="response-date">{response?.createdAt.split('T')[0]}</p>
+                    <p className="response-date">{date(response?.createdAt)}</p>
                     <p className="response-body">{response?.body}</p>
                 </div>
             }
