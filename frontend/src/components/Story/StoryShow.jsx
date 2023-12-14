@@ -26,9 +26,6 @@ const StoryShow = () => {
     const topic = useSelector(state => state.topics[story?.topicId]);
     const author = useSelector(state => state.users[story?.authorId]);
 
-    const responses = useSelector(state => state.responses);
-    const numResponses = Object.values(responses).length;
-
     const users = useSelector(state => state.users);
     const currentUserId = useSelector(state => state.session.currentUserId);
     const currentUser = users[currentUserId];
@@ -56,6 +53,8 @@ const StoryShow = () => {
         dispatch(getClaps(story.id));
     }, [dispatch, numClaps])
 
+    const responses = useSelector(state => state.responses);
+    const numResponses = Object.values(responses).length;
 
     const currentUserHasClapped = () => {
         if(currentUserId){
