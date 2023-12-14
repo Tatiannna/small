@@ -14,6 +14,7 @@ import { PiHandsClapping } from "react-icons/pi";
 import { deleteStory } from '../../store/stories';
 import { createClap, getClaps, removeClaps } from '../../store/claps';
 import { PiHandsClappingFill } from "react-icons/pi";
+import Modal from '../Modal/Modal';
 
 const StoryShow = () => {
     
@@ -35,6 +36,8 @@ const StoryShow = () => {
 
     const [showPreviewMenu, setShowPreviewMenu] = useState(false);
     const [showResponseModal, setShowResponseModal] = useState(false);
+    const [showLoginModal, setShowLoginModal] = useState(false);
+
 
     const claps = useSelector(state => state.claps);
     const [numClaps, incrementNumClaps] = useState(Object.values(claps).length);
@@ -55,12 +58,16 @@ const StoryShow = () => {
 
 
     const currentUserHasClapped = () => {
-        const hasClapped = currentUser.clappedStories.includes(story.id);
-        if(hasClapped){
-            setIconClassName('clapped-true');
-            return true;
-        }
-        return false;
+        if(currentUserId){
+            const hasClapped = currentUser.clappedStories.includes(story.id);
+            if(hasClapped){
+                setIconClassName('clapped-true');
+                return true;
+            }
+            return false;
+        }else{
+            return false;
+        }  
     }
 
     useEffect( () => {
@@ -68,18 +75,22 @@ const StoryShow = () => {
     }, [])
 
     const clap = (e) => {
-        if (iconClassName === 'clapped-false'){
-            setIconClassName('clapped-true');
+        
+        if(!currentUserId){
+            setShowLoginModal('true');
         }
+        else{
+            if (iconClassName === 'clapped-false'){
+                setIconClassName('clapped-true');
+            }
 
-        const clap = {
-            user_id: currentUserId,
-            story_id: story.id
+            const clap = {
+                user_id: currentUserId,
+                story_id: story.id
+            }
+            dispatch(createClap(clap));
+            incrementNumClaps((prevValue) => prevValue + 1);
         }
-        dispatch(createClap(clap));
-        incrementNumClaps((prevValue) => prevValue + 1);
-
-        // dispatch(getClaps(story?.id));
     }
     
     return(
@@ -100,6 +111,8 @@ const StoryShow = () => {
                     </div>
                     <div className="divider">
                         {showResponseModal && < ResponseModal story={story} closeModal={() => setShowResponseModal(false)} />}
+                        {showLoginModal && < Modal formType={'login'} closeModal={() => setShowLoginModal(false)}/>}
+
                         <p>
                             <span 
                                 className="responses" 
