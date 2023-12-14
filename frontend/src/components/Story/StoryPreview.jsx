@@ -6,12 +6,13 @@ import { getTopic } from '../../store/topics';
 import { useEffect } from 'react';
 import { getUser } from '../../store/users';
 import { useState } from 'react';
+import { deleteStory } from '../../store/stories';
 
 
 const StoryPreview = (props) => {
 
     const story = props.story;
-    const storyTitle = story.title;
+    const storyTitle = story?.title;
 
     const dispatch = useDispatch();
 
@@ -24,8 +25,7 @@ const StoryPreview = (props) => {
     const topic = useSelector(state => state.topics[story?.topicId]);
     const currentUserId = useSelector(state => state.session.currentUserId);
     const [showPreviewMenu, setShowPreviewMenu] = useState(false);
-    const isCurrentUsersStory = (currentUserId == story.authorId);
-    console.log('currentuserid: ', currentUserId, ' storyauthorid: ', story.authorId);
+    const isCurrentUsersStory = (currentUserId == story?.authorId);
     
     return (
         <div className="story-preview">

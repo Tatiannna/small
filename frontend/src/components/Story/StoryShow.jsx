@@ -25,7 +25,7 @@ const StoryShow = () => {
 
 
     const [showResponseModal, setShowResponseModal] = useState(false);
-    const isCurrentUsersStory = (currentUserId == story.authorId);
+    const isCurrentUsersStory = (currentUserId == story?.authorId);
 
 
     useEffect(() => {
