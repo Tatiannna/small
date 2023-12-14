@@ -136,7 +136,7 @@ ApplicationRecord.transaction do
         user_id: rand(1..100),
         story_id: rand(1..100)      
       }
-      Clap.create!(clap)
+      Clap.find_or_create_by(clap)
     end
     
 
