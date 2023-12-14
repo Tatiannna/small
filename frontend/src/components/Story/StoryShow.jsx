@@ -10,7 +10,10 @@ import { clearResponses, getResponses } from '../../store/responses';
 import ResponseModal from '../Responses/ResponseModal';
 import { useState } from 'react';
 import { FaRegMessage } from "react-icons/fa6";
+import { PiHandsClapping } from "react-icons/pi";
 import { deleteStory } from '../../store/stories';
+import { getClaps, removeClaps } from '../../store/claps';
+
 
 
 const StoryShow = () => {
@@ -20,6 +23,7 @@ const StoryShow = () => {
 
     const stories = useSelector(state => state.stories);
     const responses = useSelector(state => state.responses);
+    const claps = useSelector(state => state.claps);
     const story = Object.values(stories).find( story => story.title === storyTitle);
     const [showPreviewMenu, setShowPreviewMenu] = useState(false);
     const currentUserId = useSelector(state => state.session.currentUserId)
@@ -32,6 +36,8 @@ const StoryShow = () => {
     useEffect(() => {
         dispatch(getStory(story?.id));
         dispatch(clearResponses());
+        dispatch(removeClaps());
+        dispatch(getClaps(story?.id));
         dispatch(getResponses(story?.id));
 
     }, [dispatch, story?.id]);
@@ -39,6 +45,8 @@ const StoryShow = () => {
     const topic = useSelector(state => state.topics[story?.topicId]);
     const author = useSelector(state => state.users[story?.authorId]);
     const numResponses = Object.values(responses).length;
+    const numClaps = Object.values(claps).length;
+
     
     return(
         <>
@@ -63,6 +71,11 @@ const StoryShow = () => {
                                 className="responses" 
                                 onClick={()=> setShowResponseModal(!showResponseModal)}>
                                 <FaRegMessage /> {numResponses > 0 && numResponses}
+                            </span>
+                            <span 
+                                className="claps" 
+                                onClick=''>
+                                <PiHandsClapping />{numClaps > 0 && numClaps}
                             </span>
                             {currentUserId && <span className="preview-menu" onClick={() => setShowPreviewMenu(!showPreviewMenu)}>...</span>}
 
