@@ -1,7 +1,11 @@
 class Api::StoriesController < ApplicationController
 
     def index 
-        @stories = Story.all
+        if params[:username]
+            @stories = Story.select{|story| User.all[story.author_id].username == params[:username]}
+        else
+            @stories = Story.all
+        end
     end
 
     def show
