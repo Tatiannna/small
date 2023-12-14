@@ -29,7 +29,7 @@ const StoryPreview = (props) => {
     
     return (
         <div className="story-preview">
-            <Link to={`/${author?.username}`}>
+            <Link to={`/user/${author?.username}`}>
                 <p className="preview-author">
                     <span className="preview-avatar">&#9824; </span>
                     {author?.username}
