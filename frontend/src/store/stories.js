@@ -26,8 +26,13 @@ const removeStory = (id) => {
 }
 
 
-export const getStories = () => async dispatch => {
-    const res = await csrfFetch('/api/stories');
+export const getStories = (username = '') => async dispatch => {
+    let res;
+    if (username){
+        res = await csrfFetch(`/api/stories?username=${username}`)
+    }else{
+        res = await csrfFetch(`/api/stories`)
+    }
 
     let data = await res.json();
     if (res.ok){
@@ -36,6 +41,17 @@ export const getStories = () => async dispatch => {
         throw data;
     }
 }
+
+// export const getUserStories = () => async dispatch => {
+//     const res = await csrfFetch('/api/stories');
+
+//     let data = await res.json();
+//     if (res.ok){
+//         dispatch(receiveStories(data));
+//     }else{
+//         throw data;
+//     }
+// }
 
 export const getStory = (id) => async dispatch => {
     const res =  await csrfFetch(`/api/stories/${id}`);
