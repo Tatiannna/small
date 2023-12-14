@@ -129,7 +129,17 @@ ApplicationRecord.transaction do
 
       Response.create!(response)
     end
+
+    puts "Creating claps..."
+    2000.times do
+      clap = {
+        user_id: rand(1..100),
+        story_id: rand(1..100)      
+      }
+      Clap.create!(clap)
+    end
     
+
     puts "Done!"
     
   end

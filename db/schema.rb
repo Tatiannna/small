@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_12_050022) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_14_171602) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "claps", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "story_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["story_id"], name: "index_claps_on_story_id"
+    t.index ["user_id", "story_id"], name: "index_claps_on_user_id_and_story_id", unique: true
+    t.index ["user_id"], name: "index_claps_on_user_id"
+  end
 
   create_table "responses", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -58,6 +68,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_12_050022) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "claps", "stories"
+  add_foreign_key "claps", "users"
   add_foreign_key "responses", "responses", column: "parent_response_id"
   add_foreign_key "responses", "stories"
   add_foreign_key "responses", "users"
