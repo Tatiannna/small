@@ -14,17 +14,18 @@ const UserShow = () => {
 
     const currentUserId = useSelector(state => state.session.currentUserId);
     const stories = useSelector(state => state.stories);
+    const users = useSelector(state => state.users);
     const [userStories, setUserStories] = useState({});
 
     
     useEffect(() => {
         let temp = {};
         Object.values(stories).forEach( story => {
-            if (currentUserId === story.authorId) temp[story.id] = story;
+            if (username === users[story.authorId]?.username) temp[story.id] = story;
         });
         setUserStories(temp);
 
-    },[stories, currentUserId])
+    },[stories, currentUserId, username, users])
 
     useEffect( () => {
         dispatch(getStories(username));
