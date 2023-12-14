@@ -25,6 +25,12 @@ class Story < ApplicationRecord
     dependent: :destroy
 
     has_many :claps,
+    foreign_key: :story_id,
+    class_name: :Clap,
     dependent: :destroy
+
+    has_many :clappers,
+    through: :claps,
+    source: :clapper
 
 end

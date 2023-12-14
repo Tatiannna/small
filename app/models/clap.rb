@@ -12,7 +12,9 @@ class Clap < ApplicationRecord
 
     validates :user_id, :story_id, presence: true
 
-    belongs_to :user
+    belongs_to :clapper,
+    foreign_key: :user_id,
+    class_name: :User
 
     belongs_to :story
 end
