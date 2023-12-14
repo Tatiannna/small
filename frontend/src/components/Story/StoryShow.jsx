@@ -12,9 +12,8 @@ import { useState } from 'react';
 import { FaRegMessage } from "react-icons/fa6";
 import { PiHandsClapping } from "react-icons/pi";
 import { deleteStory } from '../../store/stories';
-import { getClaps, removeClaps } from '../../store/claps';
-
-
+import { createClap, getClaps, removeClaps } from '../../store/claps';
+import { PiHandsClappingFill } from "react-icons/pi";
 
 const StoryShow = () => {
     
@@ -22,17 +21,25 @@ const StoryShow = () => {
     const dispatch = useDispatch();
 
     const stories = useSelector(state => state.stories);
-    const responses = useSelector(state => state.responses);
-    const claps = useSelector(state => state.claps);
     const story = Object.values(stories).find( story => story.title === storyTitle);
-    const [showPreviewMenu, setShowPreviewMenu] = useState(false);
-    const currentUserId = useSelector(state => state.session.currentUserId)
+    const topic = useSelector(state => state.topics[story?.topicId]);
+    const author = useSelector(state => state.users[story?.authorId]);
 
+    const responses = useSelector(state => state.responses);
+    const numResponses = Object.values(responses).length;
 
-    const [showResponseModal, setShowResponseModal] = useState(false);
+    const users = useSelector(state => state.users);
+    const currentUserId = useSelector(state => state.session.currentUserId);
+    const currentUser = users[currentUserId];
     const isCurrentUsersStory = (currentUserId == story?.authorId);
 
+    const [showPreviewMenu, setShowPreviewMenu] = useState(false);
+    const [showResponseModal, setShowResponseModal] = useState(false);
 
+    const claps = useSelector(state => state.claps);
+    const [numClaps, incrementNumClaps] = useState(Object.values(claps).length);
+    const [iconClassName, setIconClassName] = useState('clapped-false');
+    
     useEffect(() => {
         dispatch(getStory(story?.id));
         dispatch(clearResponses());
@@ -42,11 +49,38 @@ const StoryShow = () => {
 
     }, [dispatch, story?.id]);
 
-    const topic = useSelector(state => state.topics[story?.topicId]);
-    const author = useSelector(state => state.users[story?.authorId]);
-    const numResponses = Object.values(responses).length;
-    const numClaps = Object.values(claps).length;
+    useEffect(() => {
+        dispatch(getClaps(story.id));
+    }, [dispatch, numClaps])
 
+
+    const currentUserHasClapped = () => {
+        const hasClapped = currentUser.clappedStories.includes(story.id);
+        if(hasClapped){
+            setIconClassName('clapped-true');
+            return true;
+        }
+        return false;
+    }
+
+    useEffect( () => {
+        currentUserHasClapped();
+    }, [])
+
+    const clap = (e) => {
+        if (iconClassName === 'clapped-false'){
+            setIconClassName('clapped-true');
+        }
+
+        const clap = {
+            user_id: currentUserId,
+            story_id: story.id
+        }
+        dispatch(createClap(clap));
+        incrementNumClaps((prevValue) => prevValue + 1);
+
+        // dispatch(getClaps(story?.id));
+    }
     
     return(
         <>
@@ -72,13 +106,15 @@ const StoryShow = () => {
                                 onClick={()=> setShowResponseModal(!showResponseModal)}>
                                 <FaRegMessage /> {numResponses > 0 && numResponses}
                             </span>
-                            <span 
-                                className="claps" 
-                                onClick=''>
-                                <PiHandsClapping />{numClaps > 0 && numClaps}
+                            <span
+                                className={iconClassName}
+                                onClick={clap}>
+                                {<PiHandsClappingFill />}
+                            </span>
+                            <span>
+                                {numClaps > 0 && numClaps}
                             </span>
                             {currentUserId && <span className="preview-menu" onClick={() => setShowPreviewMenu(!showPreviewMenu)}>...</span>}
-
                         </p>
 
                         {showPreviewMenu && isCurrentUsersStory &&
