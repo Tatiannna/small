@@ -1,7 +1,7 @@
 class Api::ClapsController < ApplicationController
 
     def index
-        @claps = Clap.find_by(story_id: params[:story_id])
+        @claps = Clap.select{|clap| clap.story_id == Integer(params[:story_id])}
     end
 
     def create
