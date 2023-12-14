@@ -9,9 +9,7 @@ import './EditStory.css';
 import {updateStory} from '../../store/stories';
 import { getStory } from "../../store/stories";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Navigate } from "react-router-dom";
-
-
+import Modal from "../Modal/Modal";
 
 
 const EditStory = (props) => {
@@ -26,19 +24,25 @@ const EditStory = (props) => {
     const topics = useSelector(state => state.topics);
     const currentUserId = useSelector(state => state.session.currentUserId);
     // const story = useSelector(state => state.stories[props.story.id])
-    const username = useSelector(state => state.users[currentUserId].username);
+    const username = useSelector(state => state.users[currentUserId]?.username);
 
+    if (currentUserId !== story?.authorId){
+        navigate('/');
+    }
+    // console.log();
 
     useEffect(() => {
-        dispatch(getStory(story.id))
+        dispatch(getStory(story?.id))
         dispatch(getTopics());
     }, [dispatch, story?.id])
 
-    const [title, setTitle] = useState(story.title);
-    const [detail, setDetail] = useState(story.detail);
-    const [body, setBody] = useState(story.body);
+    const [title, setTitle] = useState(story?.title);
+    const [detail, setDetail] = useState(story?.detail);
+    const [body, setBody] = useState(story?.body);
     const [topic, setTopic] = useState('');
-    const [topicId, setTopicId] = useState(story.TopicId);
+    const [topicId, setTopicId] = useState(story?.TopicId);
+    const [showModal, setShowModal] = useState(!currentUserId);
+
 
 
     const handleSubmit = (e) => {
@@ -59,8 +63,9 @@ const EditStory = (props) => {
     return (
         <>
             <Header />
+            {showModal && (<Modal closeModal={() => setShowModal(false)} formType={'signup'} />)}
             <form onSubmit={handleSubmit}>
-                <div className='story-form-container'>
+                <div className='story-form-container' onClick={()=> setShowModal(!currentUserId)}>
                     <button className="publish">Publish</button>
                     <div>
                         <select 
