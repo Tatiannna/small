@@ -51,7 +51,7 @@ const StoryShow = () => {
                             <span className="story-show-avatar">&#9824; </span>
                         </div>
                         <div className="story-show-info-container-right">
-                            <Link to={`/${author?.username}`}> <p className="story-show-username">{author?.username}</p></Link>
+                            <Link to={`/user/${author?.username}`}> <p className="story-show-username">{author?.username}</p></Link>
                             <p className="story-show-info">5 min read <span className="dot">&#x2022; </span>Nov 14</p>
                         </div>
                     </div>
