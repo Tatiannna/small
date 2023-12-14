@@ -68,6 +68,7 @@
   padding-right: 70px;
   color: grey;
   font-size: 23px;
+  cursor: default;
 }
 
 .demo-button {

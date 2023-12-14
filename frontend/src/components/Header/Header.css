@@ -51,4 +51,12 @@ img {
     margin-top: 10px;
 }
 
+.login {
+    cursor: default;
+}
+
+.small{
+    cursor: default;
+}
+
 

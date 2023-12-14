@@ -36,7 +36,7 @@ const Header = () => {
                             <Link to="/"><img src="https://cdn4.iconfinder.com/data/icons/social-media-circle-7/512/Medium_circle-1024.png"></img></Link> 
                         </div>
                         <div className="header-left-item">
-                            <p>Small</p>
+                            <p className='small'>Small</p>
                         </div>
                     </div>
 
@@ -57,7 +57,7 @@ const Header = () => {
                             ) : (
                             <>
                                 <div className='header-right-item'>
-                                    <p onClick={handleClick}>Login</p>
+                                    <p className='login' onClick={handleClick}>Login</p>
                                 </div>
                                 <div className='header-right-item'>
                                     <button value={"signUp"} onClick={handleClick} >Get Started</button>
