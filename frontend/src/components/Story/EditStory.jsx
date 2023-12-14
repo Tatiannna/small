@@ -1,8 +1,6 @@
 import { useState } from "react";
 import Header from "../Header/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { useQuill } from 'react-quilljs';
-import 'quill/dist/quill.snow.css'; 
 import { useEffect } from "react";
 import {getTopics} from '../../store/topics';
 import './EditStory.css';
@@ -12,24 +10,21 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Modal from "../Modal/Modal";
 
 
-const EditStory = (props) => {
+const EditStory = () => {
 
     const {state} = useLocation();
     const story = state;
-    console.log(story);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
     const topics = useSelector(state => state.topics);
     const currentUserId = useSelector(state => state.session.currentUserId);
-    // const story = useSelector(state => state.stories[props.story.id])
     const username = useSelector(state => state.users[currentUserId]?.username);
 
     if (currentUserId !== story?.authorId){
         navigate('/');
     }
-    // console.log();
 
     useEffect(() => {
         dispatch(getStory(story?.id))
@@ -39,7 +34,6 @@ const EditStory = (props) => {
     const [title, setTitle] = useState(story?.title);
     const [detail, setDetail] = useState(story?.detail);
     const [body, setBody] = useState(story?.body);
-    const [topic, setTopic] = useState('');
     const [topicId, setTopicId] = useState(story?.TopicId);
     const [showModal, setShowModal] = useState(!currentUserId);
 

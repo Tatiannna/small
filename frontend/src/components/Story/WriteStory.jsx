@@ -1,8 +1,6 @@
 import { useState } from "react";
 import Header from "../Header/Header";
 import { useDispatch, useSelector } from "react-redux";
-import { useQuill } from 'react-quilljs';
-import 'quill/dist/quill.snow.css'; 
 import { useEffect } from "react";
 import {getTopics} from '../../store/topics';
 import './WriteStory.css';
@@ -30,7 +28,6 @@ const WriteStory = () => {
     const [title, setTitle] = useState('');
     const [detail, setDetail] = useState('');
     const [body, setBody] = useState('');
-    const [topic, setTopic] = useState(null);
     const [topicId, setTopicId] = useState('');
 
 
@@ -73,7 +70,7 @@ const WriteStory = () => {
                             value={title}
                             cols="50"
                             rows="2"
-                            placeholder="Title..."
+                            placeholder="Title"
                             onChange={e => setTitle(e.target.value)}>
                         </textarea>
                     </div>
@@ -83,7 +80,7 @@ const WriteStory = () => {
                             value={detail}
                             cols="50"
                             rows="3"
-                            placeholder="Subtitle..."
+                            placeholder="Subtitle"
                             onChange={e => setDetail(e.target.value)}>
                         </textarea>
                     </div>

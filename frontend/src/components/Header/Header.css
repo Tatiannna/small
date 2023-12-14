@@ -8,6 +8,9 @@
     height: 70px;
     padding-top: 15px;
     padding-left: 50px;
+    /* position: fixed; */
+    /* width: 96%; */
+    /* top: 0; */
 }
 
 .header-left-item p{

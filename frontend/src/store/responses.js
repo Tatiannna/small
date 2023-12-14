@@ -77,7 +77,7 @@ export const deleteResponse = (resp) => async (dispatch) => {
     if (res.ok){
         dispatch(removeResponse(resp.id));
     }else {
-        throw(data);
+        throw(res);
     }
 }
 
