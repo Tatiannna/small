@@ -15,12 +15,12 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "*",
+    path: "/*",
     element: < Navigate to="/" />
   },
 
   {
-    path: "/:username",
+    path: "/user/:username",
     element: <UserShow />
   },
 

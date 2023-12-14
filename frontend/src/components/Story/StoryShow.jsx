@@ -10,11 +10,12 @@ import { clearResponses, getResponses } from '../../store/responses';
 import ResponseModal from '../Responses/ResponseModal';
 import { useState } from 'react';
 import { FaRegMessage } from "react-icons/fa6";
+import { deleteStory } from '../../store/stories';
 
 
 const StoryShow = () => {
     
-    const {username, storyTitle} = useParams();
+    const {storyTitle} = useParams();
     const dispatch = useDispatch();
 
     const stories = useSelector(state => state.stories);
@@ -70,7 +71,7 @@ const StoryShow = () => {
                         {showPreviewMenu && isCurrentUsersStory &&
                             <div className="story-menu-modal">
                                 <Link to={`/story/${storyTitle}/edit`} state={story}><p className="story-menu-edit">Edit</p></Link>
-                                <p className='story-menu-delete' onClick={() => dispatch(deleteStory(props.story.id))}>Delete</p>
+                                <p className='story-menu-delete' onClick={() => dispatch(deleteStory(story?.id))}>Delete</p>
                             </div>
                         }
                         {showPreviewMenu && !isCurrentUsersStory && 

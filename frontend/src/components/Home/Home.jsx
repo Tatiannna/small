@@ -1,7 +1,6 @@
 import Header from "../Header/Header";
 import StoryList from "../Story/StoryList";
 import './Home.css'
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";

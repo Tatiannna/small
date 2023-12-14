@@ -18,12 +18,12 @@ const receiveTopic = (topic) => {
     }
 }
 
-const removeTopic = (id) => {
-    return {
-        type: REMOVE_TOPIC,
-        id
-    }
-}
+// const removeTopic = (id) => {
+//     return {
+//         type: REMOVE_TOPIC,
+//         id
+//     }
+// }
 
 export const getTopics = () => async dispatch => {
     const res = await csrfFetch('/api/stories/topics');

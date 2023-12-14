@@ -36,8 +36,6 @@ const ResponseItem = (props) => {
         dispatch(updateResponse(response));
         setShowEditForm(false);
         setShowResponseMenu(false);
-
-        console.log(response);
     }
 
     const date = (createdDateTime) => {
@@ -46,7 +44,6 @@ const ResponseItem = (props) => {
 
         let createdDate = createdDateTime.split('T')[0]
         let month = createdDate.split('-')[1];
-        console.log("month: ",month);
         let day = createdDate.split('-')[2];
 
         if(day < 10){

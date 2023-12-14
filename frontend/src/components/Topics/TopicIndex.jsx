@@ -13,7 +13,7 @@ const TopicIndex = () => {
 
     useEffect(() => {
         dispatch(getTopics);
-    }, []);
+    }, [dispatch]);
 
     const col1 = [];
     const col2 = [];
@@ -43,13 +43,13 @@ const TopicIndex = () => {
             <h1 className='explore-topics'>Explore Topics</h1>
             <div className="topics-container">
                 <div className='topic-col-1'>
-                    {col1.map(topic => <Link to={`/tag/${topic.name}`}><p>{topic.name}</p></Link>)}
+                    {col1.map(topic => <Link to={`/tag/${topic.name}`} key={`topic.id`}><p>{topic.name}</p></Link>)}
                 </div>
                 <div className='topic-col-3'>
-                    {col2.map(topic => <Link to={`/tag/${topic.name}`}><p>{topic.name}</p></Link>)}
+                    {col2.map(topic => <Link to={`/tag/${topic.name}`} key={`topic.id`}><p>{topic.name}</p></Link>)}
                 </div>
                 <div className='topic-col-3'>
-                    {col3.map(topic => <Link to={`/tag/${topic.name}`}><p>{topic.name}</p></Link>)}
+                    {col3.map(topic => <Link to={`/tag/${topic.name}`} key={`topic.id`}><p>{topic.name}</p></Link>)}
                 </div>
             </div>
         </>

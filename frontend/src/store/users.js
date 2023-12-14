@@ -55,6 +55,7 @@ const userReducer = (state = {}, action) => {
     switch (action.type){
         case RECEIVE_USER:
             newState[action.user.id] = action.user
+            return newState;
         case DELETE_USER:
             delete newState[action.id];
             return newState;

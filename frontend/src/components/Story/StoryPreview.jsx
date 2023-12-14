@@ -19,7 +19,7 @@ const StoryPreview = (props) => {
     useEffect( () => {
         dispatch(getTopic(story?.topicId));
         dispatch(getUser(story?.authorId))
-    }, [dispatch, story?.topicId])
+    }, [dispatch, story?.topicId, story?.authorId])
 
     const author = useSelector( state => state.users[story?.authorId]);
     const topic = useSelector(state => state.topics[story?.topicId]);
@@ -33,7 +33,6 @@ const StoryPreview = (props) => {
 
         let createdDate = createdDateTime.split('T')[0]
         let month = createdDate.split('-')[1];
-        console.log("month: ",month);
         let day = createdDate.split('-')[2];
 
         if(day < 10){

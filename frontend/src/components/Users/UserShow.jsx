@@ -8,14 +8,12 @@ import { getStories } from "../../store/stories";
 import { useState } from "react";
 
 
-const UserShow = (props) => {
+const UserShow = () => {
     const {username} = useParams();
     const dispatch = useDispatch();
 
     const currentUserId = useSelector(state => state.session.currentUserId);
-    const users = useSelector(state => state.users);
     const stories = useSelector(state => state.stories);
-    const user = Object.values(users).find(user => user.username === username);
     const [userStories, setUserStories] = useState({});
 
     
@@ -26,11 +24,11 @@ const UserShow = (props) => {
         });
         setUserStories(temp);
 
-    },[stories])
+    },[stories, currentUserId])
 
     useEffect( () => {
         dispatch(getStories(username));
-    }, [dispatch])
+    }, [dispatch, username])
    
     return (
         <>

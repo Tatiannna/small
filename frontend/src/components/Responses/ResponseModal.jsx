@@ -2,8 +2,7 @@ import "./ResponseModal.css";
 import { useState } from "react";
 import ResponseItem from "./ResponseItem";
 import { useDispatch, useSelector } from "react-redux";
-import { createResponse, getResponses } from "../../store/responses";
-import { useEffect } from "react";
+import { createResponse } from "../../store/responses";
 import Modal from '../Modal/Modal';
 
 
@@ -21,7 +20,7 @@ const ResponseModal = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const response = {
+        let response = {
             body: responseBody,
             user_id: currentUserId,
             story_id: props.story.id
