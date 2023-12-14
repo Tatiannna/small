@@ -18,7 +18,6 @@ const receiveStory = (story) => {
     }
 }
 
-
 const removeStory = (id) => {
     return {
         type: REMOVE_STORY,
@@ -27,8 +26,13 @@ const removeStory = (id) => {
 }
 
 
-export const getStories = () => async dispatch => {
-    const res = await csrfFetch('/api/stories');
+export const getStories = (username = '') => async dispatch => {
+    let res;
+    if (username){
+        res = await csrfFetch(`/api/stories?username=${username}`)
+    }else{
+        res = await csrfFetch(`/api/stories`)
+    }
 
     let data = await res.json();
     if (res.ok){
@@ -37,6 +41,17 @@ export const getStories = () => async dispatch => {
         throw data;
     }
 }
+
+// export const getUserStories = () => async dispatch => {
+//     const res = await csrfFetch('/api/stories');
+
+//     let data = await res.json();
+//     if (res.ok){
+//         dispatch(receiveStories(data));
+//     }else{
+//         throw data;
+//     }
+// }
 
 export const getStory = (id) => async dispatch => {
     const res =  await csrfFetch(`/api/stories/${id}`);
@@ -64,7 +79,7 @@ export const createStory = (story) => async dispatch => {
 
 }
 
-export const updateStory= (story) => async dispatch => {
+export const updateStory = (story) => async dispatch => {
     const res =  await csrfFetch(`/api/stories/${story.id}`, {
         method: "PATCH",
         body: JSON.stringify(story)
@@ -72,7 +87,7 @@ export const updateStory= (story) => async dispatch => {
 
     let data = await res.json();
     if(res.ok){
-       dispatch(receiveStory(story));
+       dispatch(receiveStory(data));
     }else{
         throw data;
     }
@@ -83,11 +98,10 @@ export const deleteStory = (id) => async dispatch => {
         method: "DELETE",
     });
 
-    let data = await res.json();
     if(res.ok){
-       dispatch(removeStory(data));
+       dispatch(removeStory(id));
     }else{
-        throw data;
+        throw id;
     }
 }
 

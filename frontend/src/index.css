@@ -8,3 +8,7 @@ a {
 body {
     margin: 0;
 }
+
+textarea {
+    resize: none;
+}

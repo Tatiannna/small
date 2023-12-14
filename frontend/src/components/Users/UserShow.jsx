@@ -1,30 +1,48 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Header from "../Header/Header";
 import StoryList from "../Story/StoryList";
-import './UserShow.css'
+import './UserShow.css';
+import { useEffect } from "react";
+import { getStories } from "../../store/stories";
+import { useState } from "react";
 
 
-const UserShow = (props) => {
+const UserShow = () => {
     const {username} = useParams();
+    const dispatch = useDispatch();
 
-    const users = useSelector(state => state.users);
+    const currentUserId = useSelector(state => state.session.currentUserId);
     const stories = useSelector(state => state.stories);
-    const user = Object.values(users).find(user => user.username === username);
+    const [userStories, setUserStories] = useState({});
 
-    const userStories = [];
-    user.stories.forEach(storyId => userStories.push(stories[storyId]));
+    
+    useEffect(() => {
+        let temp = {};
+        Object.values(stories).forEach( story => {
+            if (currentUserId === story.authorId) temp[story.id] = story;
+        });
+        setUserStories(temp);
 
+    },[stories, currentUserId])
+
+    useEffect( () => {
+        dispatch(getStories(username));
+    }, [dispatch, username])
+   
     return (
         <>
             <Header/>
             <div className="username">
                 <h1>
-                    <span class="user-show-avatar">&#9824; </span>
+                    <span className="user-show-avatar">&#9824; </span>
                     {username}
                 </h1>
             </div>
-            <StoryList stories={userStories}/>
+            <div className='user-show-body'>
+                <h3 className='stories-heading'>Stories</h3>
+                {<StoryList stories={userStories}/>}
+            </div>
         </>
     );  
 }

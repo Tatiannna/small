@@ -17,14 +17,18 @@ const TopicShow = () => {
     return (
         <>
             <Header/>
+            
             <h1 className="topic-title">{topicName}</h1>
             <p className="topic-subtitle">
                 Topic 
                 <span className="dot"> &#x2022; </span>  
                 {topicStories.length} Stories
             </p>
-            <StoryList stories={topicStories} />
-            <Link to="/explore-topics" ><p className="explore-topics">Explore all Topics</p></Link>
+            <div className='topic-show-container'>
+                <StoryList stories={topicStories} />
+                <Link to="/explore-topics" ><p className="explore-topics">Explore all Topics</p></Link>
+            </div>
+           
         </>
     );
 }

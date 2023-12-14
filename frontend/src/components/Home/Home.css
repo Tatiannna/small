@@ -1,3 +1,18 @@
-/* div {
-    border: none;
-} */
+.home-container{
+    display: flex;
+}
+
+.home-container-left{
+    border-right: 1px solid rgb(242, 242, 242);
+    /* min-width: 60%; */
+    padding-left: 55px;
+    padding-top: 40px;
+    padding-right: 80px;
+
+}
+
+.home-container-right{
+    /* text-align: center; */
+    padding-left: 30px;
+    /* max-width: 20%; */
+}

@@ -5,42 +5,79 @@ import { useSelector } from 'react-redux';
 import { getTopic } from '../../store/topics';
 import { useEffect } from 'react';
 import { getUser } from '../../store/users';
+import { useState } from 'react';
+import { deleteStory } from '../../store/stories';
 
 
 const StoryPreview = (props) => {
 
     const story = props.story;
+    const storyTitle = story?.title;
+
     const dispatch = useDispatch();
 
     useEffect( () => {
-        dispatch(getTopic(story.topicId));
-        dispatch(getUser(story.authorId))
-    }, [dispatch, story.topicId])
+        dispatch(getTopic(story?.topicId));
+        dispatch(getUser(story?.authorId))
+    }, [dispatch, story?.topicId, story?.authorId])
 
-    const author = useSelector( state => state.users[story.authorId]);
-    const topic = useSelector(state => state.topics[story.topicId]);
+    const author = useSelector( state => state.users[story?.authorId]);
+    const topic = useSelector(state => state.topics[story?.topicId]);
+    const currentUserId = useSelector(state => state.session.currentUserId);
+    const [showPreviewMenu, setShowPreviewMenu] = useState(false);
+    const isCurrentUsersStory = (currentUserId == story?.authorId);
     
+    const date = (createdDateTime) => {
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        let createdDate = createdDateTime.split('T')[0]
+        let month = createdDate.split('-')[1];
+        let day = createdDate.split('-')[2];
+
+        if(day < 10){
+            day = day.split('')[1];
+        }
+
+        return `${monthNames[month-1]} ${day}`;
+    }
+
     return (
         <div className="story-preview">
-            <Link to={`/${author?.username}`}>
+            <Link to={`/user/${author?.username}`}>
                 <p className="preview-author">
-                    <span class="preview-avatar">&#9824; </span>
+                    <span className="preview-avatar">&#9824; </span>
                     {author?.username}
                 </p>
             </Link>
             <Link to={`/${author?.username}/${story?.title}`}>
-                <p className="preview-title">{story.title}</p>
-                <p className="preview-detail">{story.detail}</p>
+                <p className="preview-title">{story?.title}</p>
+                <p className="preview-detail">{story?.detail}</p>
             </Link>
-            <Link to={`/tag/${topic?.name}`}>
-                <p>
-                    <span className="preview-date">Dec 4</span>
-                    <span className="dot"> &#x2022; </span> 
-                    <span className="preview-time">5 min read </span>
-                    <span className="dot">&#x2022; </span> 
-                    <span className="preview-topic"> {topic?.name}</span>
-                </p>
-            </Link>
+            <p>
+                <span className="preview-date">{date(story?.createdAt)}</span>
+                <span className="dot"> &#x2022; </span> 
+                <span className="preview-time">5 min read</span>
+                <span className="dot"> &#x2022; </span> 
+                <Link to={`/tag/${topic?.name}`}>
+                    <span className="preview-topic">{topic?.name}</span>
+                </Link>
+                {currentUserId && <span className="story-show-menu" onClick={() => setShowPreviewMenu(!showPreviewMenu)}>...</span>}
+
+                {/* {showPreviewMenu && isCurrentUsersStory && <StoryMenu story={story}/>} */}
+
+                {showPreviewMenu && isCurrentUsersStory &&
+                    <div className="story-menu-modal">
+                        <Link to={`/story/${storyTitle}/edit`} state={story}><p className="story-menu-edit">Edit</p></Link>
+                        <p className='story-menu-delete' onClick={() => dispatch(deleteStory(props.story.id))}>Delete</p>
+                    </div>}
+
+                {showPreviewMenu && !isCurrentUsersStory && 
+                    <div className="story-menu-modal">
+                        <p>Report</p>
+                    </div>
+                }
+            </p>
         </div>
     );
 }

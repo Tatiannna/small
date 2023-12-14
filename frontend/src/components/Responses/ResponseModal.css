@@ -1,0 +1,134 @@
+.response-modal-overlay {
+  position: absolute;
+  z-index: 9;
+  top:0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: right;
+  overflow: hidden;
+  /* align-items: center; */
+}
+  
+.response-modal {
+  background-color: #ffffff;
+  border: 1px solid #bebebe;
+  border-radius: 2px;
+  padding: 12px 28px;
+  height: 100%;
+  width: 375px;
+  overflow-y: auto;
+  padding-bottom: 40px;
+  margin-bottom: 20px;
+  /* padding-top: 350px; */
+  /* margin-left: 200px; */
+}
+.response-bottom{
+  height: 75px;
+}
+
+.write-response-container {
+  padding: 14px 14px 0px 14px;
+  border-bottom: 1px solid rgb(219, 219, 219);
+  box-shadow: 0 0 10px rgb(187, 187, 187);
+  border-radius: 7px;
+  height: 200px;
+
+}
+
+.write-response-container p{
+  margin:0px;
+  margin-bottom: 10px;
+
+  /* border: 1px solid rgb(219, 219, 219); */
+}
+
+.write-response-container form{
+  padding: 0px;
+  margin:0px;
+}
+
+.write-response-container textarea{
+  margin-right: 10px;
+  margin-top: 0px;
+  border:none;
+  outline: none;
+  resize: none;
+}
+
+.write-response-container ::placeholder{
+  color: rgb(199, 198, 198);
+}
+
+.all-responses-container {
+  margin-top: 50px;
+  border-top:1px solid rgb(222, 222, 222)
+}
+
+.write-response-avatar {
+  font-size: 24px;
+  color: rgb(104, 104, 104);
+}
+
+.submit-response-button{
+  border-radius: 20px;
+  border: none;
+  background-color: rgb(9, 104, 26);
+  color: white;
+  height: 35px;
+  width: 120px;
+  /* margin: auto; */
+  margin-top: 22px;
+  float: right;
+}
+
+.modal input {
+  /* border: none;
+  border-bottom: 1px solid black;
+  display: block;
+  margin-bottom: 45px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 275px;
+  outline: none;
+  text-align: center; */
+}
+
+::placeholder .modal{
+  /* text-align: center; 
+  color: rgb(204, 203, 203); */
+}
+
+.response-bottom {
+
+}
+
+#x {
+text-align: right;
+margin-top: 0px;
+padding-top: 0px;
+padding-right: 3px;
+color: grey;
+font-size: 23px;
+margin-bottom:0px;
+float: right;
+}
+
+
+
+p.error {
+/* color: red;
+font-size: 13px;
+margin: 3px;
+padding: 3px; */
+}
+
+.div-errors {
+/* margin-bottom: 15px; */
+}
+
+
+
+

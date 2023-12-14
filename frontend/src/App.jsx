@@ -5,6 +5,7 @@ import TopicIndex from './components/Topics/TopicIndex';
 import TopicShow from './components/Topics/TopicShow';
 import UserShow from './components/Users/UserShow';
 import WriteStory from './components/Story/WriteStory';
+import EditStory from './components/Story/EditStory';
 
 const router = createBrowserRouter([
 
@@ -14,12 +15,12 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "*",
+    path: "/*",
     element: < Navigate to="/" />
   },
 
   {
-    path: "/:username",
+    path: "/user/:username",
     element: <UserShow />
   },
 
@@ -41,6 +42,11 @@ const router = createBrowserRouter([
   {
     path: "/new-story",
     element: <WriteStory/>
+  },
+
+  {
+    path: "/story/:storyTitle/edit",
+    element: <EditStory />
   }
 ])
 

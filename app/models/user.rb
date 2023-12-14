@@ -24,7 +24,13 @@ class User < ApplicationRecord
 
     has_many :stories,
     foreign_key: :author_id,
-    class_name: :Story
+    class_name: :Story,
+    dependent: :destroy
+
+    has_many :responses,
+    foreign_key: :user_id,
+    class_name: :Response,
+    dependent: :destroy
 
     def self.find_by_credentials(email, password)
         @user = User.find_by(email: email)

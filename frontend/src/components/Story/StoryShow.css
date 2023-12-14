@@ -2,6 +2,12 @@
     margin-left: 40px;
     margin-right: 40px;
     margin-top: 35px;
+    display:flex;
+    justify-content: center;
+}
+
+.story-inner-container{
+    width: 60%
 }
 
 .story-show-title {
@@ -22,6 +28,7 @@
     font-size: 16px;
     margin: 0px;
     margin-bottom: 2px;
+    
 }
 
 .story-show-avatar {
@@ -46,9 +53,17 @@
 
 .divider {
     border-top: 1px solid rgb(221, 221, 221);
+    border-bottom: 1px solid rgb(221, 221, 221);
+
     /* border-bottom: 1px solid rgb(220, 220, 220); */
-    /* height: 45px; */
+    height: 45px;
     margin: 25px 0px;
+    padding-left: 10px;
+    padding-right: 15px;
+}
+
+.responses {
+    color: rgb(144, 144, 144);
 }
 
 .story-show-body {
@@ -63,6 +78,15 @@ span.story-show-topic {
     background-color: rgb(240, 240, 240);
     border-radius: 10px;
     padding: 2px 6px;
+}
+
+
+.story-show-menu{
+    font-weight: bold;
+    float: right;
+    font-size: 18px;
+    color: rgb(159, 159, 159);
+
 }
 
 
