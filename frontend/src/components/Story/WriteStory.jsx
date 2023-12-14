@@ -8,6 +8,7 @@ import {getTopics} from '../../store/topics';
 import './WriteStory.css';
 import {createStory} from '../../store/stories';
 import { useNavigate } from "react-router-dom";
+import Modal from "../Modal/Modal";
 
 
 
@@ -18,7 +19,8 @@ const WriteStory = () => {
     
     const topics = useSelector(state => state.topics);
     const currentUserId = useSelector(state => state.session.currentUserId);
-    const username = useSelector(state => state.users[currentUserId].username);
+    const username = useSelector(state => state.users[currentUserId]?.username);
+    const [showModal, setShowModal] = useState(!currentUserId);
 
 
     useEffect(() => {
@@ -49,8 +51,9 @@ const WriteStory = () => {
     return (
         <>
             <Header />
+            {showModal && (<Modal closeModal={() => setShowModal(false)} formType={'signup'} />)}
             <form onSubmit={handleSubmit}>
-                <div className='story-form-container'>
+                <div className='story-form-container' onClick={()=> setShowModal(!currentUserId)}>
                     <button className="publish">Publish</button>
                     <div className="select-story-topic">
                         <select
