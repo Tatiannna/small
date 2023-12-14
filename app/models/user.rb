@@ -32,7 +32,7 @@ class User < ApplicationRecord
     class_name: :Response,
     dependent: :destroy
 
-    has_many claps,
+    has_many :claps,
     foreign_key: :user_id,
     class_name: :Clap,
     dependent: :destroy
