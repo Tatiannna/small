@@ -2,23 +2,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Header from "../Header/Header";
 import StoryList from "../Story/StoryList";
-import './UserShow.css'
+import './UserShow.css';
+import { useEffect } from "react";
+import { getStories } from "../../store/stories";
+import { useState } from "react";
 
 
 const UserShow = (props) => {
     const {username} = useParams();
+    const dispatch = useDispatch();
 
+    const currentUserId = useSelector(state => state.session.currentUserId);
     const users = useSelector(state => state.users);
     const stories = useSelector(state => state.stories);
     const user = Object.values(users).find(user => user.username === username);
+    const [userStories, setUserStories] = useState({});
 
-
-    const userStories = [];
-    if (user.stories && user.stories.length > 0){
-        user.stories.forEach(storyId => {
-            userStories.push(stories[storyId])
+    
+    useEffect(() => {
+        let temp = {};
+        Object.values(stories).forEach( story => {
+            if (currentUserId === story.authorId) temp[story.id] = story;
         });
-    }
+        setUserStories(temp);
+
+    },[stories])
+
+    useEffect( () => {
+        dispatch(getStories(username));
+    }, [dispatch])
    
     return (
         <>
@@ -31,7 +43,7 @@ const UserShow = (props) => {
             </div>
             <div className='user-show-body'>
                 <h3 className='stories-heading'>Stories</h3>
-                { userStories.length > 0 && <StoryList stories={userStories}/>}
+                {<StoryList stories={userStories}/>}
             </div>
         </>
     );  
