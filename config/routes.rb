@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :stories, only: [:index,  :create, :destroy, :update]
     resources :stories, only: [:show] do
       resources :responses, only: [:index, :show, :create, :update, :destroy]
+      resources :claps, only: [:index, :create, :destroy]
     end
 
   end

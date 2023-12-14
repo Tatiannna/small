@@ -24,4 +24,7 @@ class Story < ApplicationRecord
     has_many :responses,
     dependent: :destroy
 
+    has_many :claps,
+    dependent: :destroy
+
 end
