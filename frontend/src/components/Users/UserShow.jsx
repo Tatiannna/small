@@ -21,14 +21,14 @@ const UserShow = () => {
     useEffect(() => {
         let temp = {};
         Object.values(stories).forEach( story => {
-            if (username === users[story.authorId]?.username) temp[story.id] = story;
+            if (username === story.username) temp[story.id] = story;
         });
         setUserStories(temp);
 
     },[stories, currentUserId, username, users])
 
     useEffect( () => {
-        dispatch(getStories(username));
+        dispatch(getStories({username: username}));
     }, [dispatch, username])
    
     return (

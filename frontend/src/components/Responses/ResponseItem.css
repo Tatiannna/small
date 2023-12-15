@@ -6,20 +6,31 @@
 
 .response-author{
     margin-bottom: 0px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+
+
 }
 
 .response-date{
-    margin-top: 0px;
+
+    margin-top: 2px;
     color: grey;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+
 }
 
 .response-body{
+    font-family: Arial, sans-serif;
+    font-size: 15px;
 }
 
 .response-menu {
     font-weight: bold;
     float: right;
     font-size: 20px;
+    font-family: Arial, sans-serif;
 }
 
 .edit-response-button{

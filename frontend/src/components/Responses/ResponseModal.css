@@ -25,6 +25,10 @@
   /* padding-top: 350px; */
   /* margin-left: 200px; */
 }
+.responses-title{
+  font-family: Arial, sans-serif;
+}
+
 .response-bottom{
   height: 75px;
 }
@@ -35,7 +39,8 @@
   box-shadow: 0 0 10px rgb(187, 187, 187);
   border-radius: 7px;
   height: 200px;
-
+  font-family: Arial, sans-serif;
+  font-size: 14px;
 }
 
 .write-response-container p{

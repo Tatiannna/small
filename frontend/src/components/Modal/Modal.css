@@ -18,9 +18,14 @@
     padding: 12px 16px;
     height: 100%;
     width: 575px;
-    padding-top: 350px;
+    padding-top: 275px;
   }
 
+  .x-container{
+    margin-bottom: 50px;
+    padding-bottom: 50px;
+    margin-right: 70px;
+  }
   .modal p {
     font-size: 28px;
     text-align: center;
@@ -65,7 +70,7 @@
   text-align: right;
   margin-top: 0px;
   padding-top: 0px;
-  padding-right: 70px;
+  /* padding-right: 200px; */
   color: grey;
   font-size: 23px;
   cursor: default;
@@ -84,6 +89,20 @@ p.error {
 
 .div-errors {
   margin-bottom: 15px;
+}
+
+
+.switchforms{
+  margin-top: 90px;
+}
+
+p.login-form-subtitle{
+  font-size: 18px;
+}
+
+.login-form-subtitle span{
+  color: green;
+  font-weight: bold;
 }
 
 

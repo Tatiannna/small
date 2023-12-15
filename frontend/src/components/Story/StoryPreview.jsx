@@ -54,7 +54,7 @@ const StoryPreview = (props) => {
                 <p className="preview-title">{story?.title}</p>
                 <p className="preview-detail">{story?.detail}</p>
             </Link>
-            <p>
+            <p className='preview-details'>
                 <span className="preview-date">{date(story?.createdAt)}</span>
                 <span className="dot"> &#x2022; </span> 
                 <span className="preview-time">5 min read</span>
