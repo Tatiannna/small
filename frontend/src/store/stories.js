@@ -26,11 +26,16 @@ const removeStory = (id) => {
 }
 
 
-export const getStories = (username = '') => async dispatch => {
+export const getStories = (filter = {}) => async dispatch => {
     let res;
-    if (username){
-        res = await csrfFetch(`/api/stories?username=${username}`)
-    }else{
+    if (filter.username){
+        res = await csrfFetch(`/api/stories?username=${filter.username}`)
+    }else if(filter.topicName){
+        res = await csrfFetch(`/api/stories?topicName=${filter.topicName}`)
+    }else if(filter.title){
+        res = await csrfFetch(`/api/stories?title=${filter.title}`)
+    }
+    else{
         res = await csrfFetch(`/api/stories`)
     }
 
@@ -110,7 +115,7 @@ const storyReducer = (state = {}, action) => {
 
     switch (action.type){
         case RECEIVE_STORIES:
-            return {...newState, ...action.stories};
+            return action.stories;
         case RECEIVE_STORY:
             newState[action.story.id] = action.story;
             return newState;

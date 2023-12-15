@@ -66,6 +66,18 @@
     color: rgb(144, 144, 144);
 }
 
+.clapped-false {
+    margin-left: 30px;
+    color: rgb(144, 144, 144);
+    font-size: 20px;
+}
+
+.clapped-true {
+    margin-left: 30px;
+    color: black;
+    font-size: 20px;
+}
+
 .story-show-body {
     font-size: 19px;
     margin: 0px;
@@ -88,6 +100,8 @@ span.story-show-topic {
     color: rgb(159, 159, 159);
 
 }
+
+
 
 
 

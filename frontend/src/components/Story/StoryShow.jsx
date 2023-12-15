@@ -1,7 +1,7 @@
 import Header from '../Header/Header';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getStory } from '../../store/stories';
+import { getStories } from '../../store/stories';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import './StoryShow.css';
@@ -11,34 +11,93 @@ import ResponseModal from '../Responses/ResponseModal';
 import { useState } from 'react';
 import { FaRegMessage } from "react-icons/fa6";
 import { deleteStory } from '../../store/stories';
-
+import { createClap, getClaps, removeClaps } from '../../store/claps';
+import { PiHandsClappingFill } from "react-icons/pi";
+import Modal from '../Modal/Modal';
 
 const StoryShow = () => {
     
     const {storyTitle} = useParams();
     const dispatch = useDispatch();
 
+    const [story, setStory] = useState(null);
     const stories = useSelector(state => state.stories);
-    const responses = useSelector(state => state.responses);
-    const story = Object.values(stories).find( story => story.title === storyTitle);
-    const [showPreviewMenu, setShowPreviewMenu] = useState(false);
-    const currentUserId = useSelector(state => state.session.currentUserId)
-
-
-    const [showResponseModal, setShowResponseModal] = useState(false);
-    const isCurrentUsersStory = (currentUserId == story?.authorId);
-
-
-    useEffect(() => {
-        dispatch(getStory(story?.id));
-        dispatch(clearResponses());
-        dispatch(getResponses(story?.id));
-
-    }, [dispatch, story?.id]);
-
     const topic = useSelector(state => state.topics[story?.topicId]);
     const author = useSelector(state => state.users[story?.authorId]);
+
+    const users = useSelector(state => state.users);
+    const currentUserId = useSelector(state => state.session.currentUserId);
+    const currentUser = users[currentUserId];
+    const isCurrentUsersStory = (currentUserId == story?.authorId);
+
+    const [showPreviewMenu, setShowPreviewMenu] = useState(false);
+    const [showResponseModal, setShowResponseModal] = useState(false);
+    const [showLoginModal, setShowLoginModal] = useState(false);
+
+
+    const claps = useSelector(state => state.claps);
+    const [numClaps, incrementNumClaps] = useState(Object.values(claps).length);
+    const [iconClassName, setIconClassName] = useState('clapped-false');
+    
+    useEffect(() => {
+        if(!story){
+            dispatch(getStories({title: storyTitle}))
+        }else{
+            dispatch(clearResponses());
+            dispatch(removeClaps());
+            dispatch(getClaps(story?.id));
+            dispatch(getResponses(story?.id));
+        }
+    }, [dispatch, story, storyTitle]);
+
+    useEffect(() => {
+        if (story){
+            dispatch(getClaps(story.id));
+        }
+    }, [dispatch, numClaps, story])
+
+    useEffect(() => {
+        setStory(Object.values(stories).find( story => story.title === storyTitle));
+    }, [dispatch, stories, storyTitle])
+
+    const responses = useSelector(state => state.responses);
     const numResponses = Object.values(responses).length;
+
+    const currentUserHasClapped = () => {
+        if(currentUserId){
+            const hasClapped = currentUser.clappedStories.includes(story?.id);
+            if(hasClapped){
+                setIconClassName('clapped-true');
+                return true;
+            }
+            return false;
+        }else{
+            return false;
+        }  
+    }
+
+    useEffect( () => {
+        currentUserHasClapped();
+    }, [currentUserHasClapped])
+
+    const clap = () => {
+        
+        if(!currentUserId){
+            setShowLoginModal('true');
+        }
+        else{
+            if (iconClassName === 'clapped-false'){
+                setIconClassName('clapped-true');
+            }
+
+            const clap = {
+                user_id: currentUserId,
+                story_id: story.id
+            }
+            dispatch(createClap(clap));
+            incrementNumClaps((prevValue) => prevValue + 1);
+        }
+    }
     
     return(
         <>
@@ -58,14 +117,23 @@ const StoryShow = () => {
                     </div>
                     <div className="divider">
                         {showResponseModal && < ResponseModal story={story} closeModal={() => setShowResponseModal(false)} />}
+                        {showLoginModal && < Modal formType={'login'} closeModal={() => setShowLoginModal(false)}/>}
+
                         <p>
                             <span 
                                 className="responses" 
                                 onClick={()=> setShowResponseModal(!showResponseModal)}>
                                 <FaRegMessage /> {numResponses > 0 && numResponses}
                             </span>
+                            <span
+                                className={iconClassName}
+                                onClick={clap}>
+                                {<PiHandsClappingFill />}
+                            </span>
+                            <span>
+                                {numClaps > 0 && numClaps}
+                            </span>
                             {currentUserId && <span className="preview-menu" onClick={() => setShowPreviewMenu(!showPreviewMenu)}>...</span>}
-
                         </p>
 
                         {showPreviewMenu && isCurrentUsersStory &&

@@ -7,14 +7,18 @@ import { useEffect } from "react";
 import { getStories } from "../../store/stories";
 import StayCurious from "./StayCurious";
 import RecommendedTopics from "./RecommendedTopics";
+import { getTopics } from "../../store/topics";
 
 const Home = () => {
     const dispatch = useDispatch();
-    const stories = useSelector(state => state.stories)
+    const topic = 'Software Engineering';
+
+    const stories = useSelector(state => state.stories);
 
     useEffect( () => {
-        dispatch(getStories());
-    }, [dispatch])
+        dispatch(getStories({topicName: topic}));
+        dispatch(getTopics({topicName: topic}));
+    }, [dispatch, topic])
 
     return(
         <>

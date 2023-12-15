@@ -3,7 +3,7 @@ import Header from "../Header/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import {getTopics} from '../../store/topics';
-import './EditStory.css';
+import './WriteStory.css';
 import {updateStory} from '../../store/stories';
 import { getStory } from "../../store/stories";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -34,9 +34,13 @@ const EditStory = () => {
     const [title, setTitle] = useState(story?.title);
     const [detail, setDetail] = useState(story?.detail);
     const [body, setBody] = useState(story?.body);
-    const [topicId, setTopicId] = useState(story?.TopicId);
+    const [topicId, setTopicId] = useState(story?.topicId);
     const [showModal, setShowModal] = useState(!currentUserId);
+    const [disabled, setDisabled] = useState(true);
 
+    useEffect( () => {
+        setDisabled(topicId && body && title)
+    },[topicId, body, title]);
 
 
     const handleSubmit = (e) => {
@@ -60,12 +64,17 @@ const EditStory = () => {
             {showModal && (<Modal closeModal={() => setShowModal(false)} formType={'signup'} />)}
             <form onSubmit={handleSubmit}>
                 <div className='story-form-container' onClick={()=> setShowModal(!currentUserId)}>
-                    <button className="publish">Publish</button>
-                    <div>
-                        <select 
-                            className="select-story-topic"
+                    {!disabled && <button className="publish" disabled>Publish</button>}
+                    {disabled && <button className="publish">Publish</button>}
+
+                    <div className="select-story-topic">
+                        <select
+                            className='select'
                             onChange={e => setTopicId(e.target.value)}>
-                            <option>Select Topic</option>
+                            <option
+                                key={topicId} 
+                                value={topicId}>
+                            {topics[topicId]?.name}</option>
                             {Object.values(topics).map(
                                 mapTopic => 
                                 <option 
@@ -75,38 +84,39 @@ const EditStory = () => {
                                 </option>)}
                         </select>
                     </div>
-                    <div>
-                        <textarea 
-                            className="write-story-title" 
+                    <div className="write-story-title">
+                        <textarea
                             value={title}
-                            cols="15"
-                            rows="1"
-                            placeholder="Title..."
+                            cols="50"
+                            rows="2"
+                            placeholder="Title"
                             onChange={e => setTitle(e.target.value)}>
                         </textarea>
                     </div>
                     
-                    <div>
+                    <div className="write-story-subtitle">
                         <textarea 
-                            className="write-story-subtitle" 
                             value={detail}
                             cols="50"
-                            rows="4"
-                            placeholder="Subtitle..."
+                            rows="3"
+                            placeholder="Subtitle"
                             onChange={e => setDetail(e.target.value)}>
                         </textarea>
                     </div>
                     
-                    <div>
+                    <div className="write-story-body">
                         <textarea 
-                            className="write-story-body" 
                             value={body}
-                            cols="75"
+                            cols="50"
                             rows="25"
                             placeholder="Tell your Story..."
                             onChange={e => setBody(e.target.value)}>
                         </textarea>
                     </div>
+                    
+                    {/* <div style={{ width: 500, height: 300 }}>
+                        <div ref={quillRef} />
+                    </div> */}
                 </div>
             </form>
         </>

@@ -12,7 +12,7 @@ const TopicIndex = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getTopics);
+        dispatch(getTopics());
     }, [dispatch]);
 
     const col1 = [];
