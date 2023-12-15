@@ -14,7 +14,6 @@ const Home = () => {
     const topic = 'Software Engineering';
 
     const stories = useSelector(state => state.stories);
-    const topics = useSelector(state => state.topics);
 
     useEffect( () => {
         dispatch(getStories({topicName: topic}));

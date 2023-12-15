@@ -16,16 +16,13 @@ const TopicShow = () => {
 
     useEffect(() => {
         dispatch(getTopics({topicName: topicName}));
-    }, [dispatch])
+    }, [dispatch, topicName])
 
     useEffect(() => {
         dispatch(getStories({topicName: topicName}));
-    }, [dispatch])
+    }, [dispatch, topicName])
 
-    const topics = useSelector(state => state.topics);
-    console.log(topics);
     const stories = useSelector(state => state.stories);
-    console.log(stories);
 
     return (
         <>
