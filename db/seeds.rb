@@ -12,6 +12,7 @@ ApplicationRecord.transaction do
     puts "Destroying tables..."
     # Unnecessary if using `rails db:seed:replant`
 
+    Clap.destroy_all
     Response.destroy_all
     Story.destroy_all
     Topic.destroy_all
@@ -23,12 +24,15 @@ ApplicationRecord.transaction do
     ApplicationRecord.connection.reset_pk_sequence!('users')
     ApplicationRecord.connection.reset_pk_sequence!('topics')
     ApplicationRecord.connection.reset_pk_sequence!('stories')
+    ApplicationRecord.connection.reset_pk_sequence!('responses')
+    ApplicationRecord.connection.reset_pk_sequence!('claps')
+
 
   
     puts "Creating users..."
     # Create one user with an easy to remember username, email, and password:
     User.create!(
-      username: 'Demo-lition', 
+      username: 'DemoUser', 
       email: 'demo@user.io', 
       password: 'password'
     )
@@ -96,6 +100,7 @@ ApplicationRecord.transaction do
       "Inspirational Stories"
     ]
 
+
     puts "Creating topics..."
 
     topics.each do |topic|
@@ -105,11 +110,11 @@ ApplicationRecord.transaction do
     end
 
     puts "Creating stories..."
-    100.times do
+    138.times do
       story = {
-        title: Faker::Lorem.sentence,
+        title: Faker::Lorem.sentence.chop,
         author_id: rand(1..100),
-        body: Faker::Lorem.paragraphs(number: rand(2..5)).join(' '),
+        body: Faker::Lorem.paragraphs(number: rand(5..10)).join(' '),
         topic_id: rand(1..50),
         detail: Faker::Lorem.sentence
       }
@@ -117,14 +122,26 @@ ApplicationRecord.transaction do
       Story.create!(story)
     end
 
+    puts "Creating Software Engineering stories..."
+    12.times do
+      story = {
+        title: Faker::Lorem.sentence.chop,
+        author_id: rand(1..100),
+        body: Faker::Lorem.paragraphs(number: rand(10..20)).join(' '),
+        topic_id: 14,
+        detail: Faker::Lorem.sentence
+      }
+
+      Story.create!(story)
+    end
 
 
     puts "Creating responses..."
-    100.times do
+    200.times do
       response = {
         user_id: rand(1..100),
-        body: Faker::Lorem.paragraphs(number: rand(2..5)).join(' '),
-        story_id: rand(1..100)      
+        body: Faker::Lorem.paragraphs(number: rand(2..4)).join(' '),
+        story_id: rand(1..150)      
       }
 
       Response.create!(response)
@@ -134,7 +151,7 @@ ApplicationRecord.transaction do
     2000.times do
       clap = {
         user_id: rand(1..100),
-        story_id: rand(1..100)      
+        story_id: rand(1..150)      
       }
       Clap.create!(clap)
     end

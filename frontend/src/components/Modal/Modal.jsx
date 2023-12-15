@@ -11,11 +11,14 @@ const Modal = (props) => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [errors, setErrors] = useState({});
+  const [formType, setFormType] = useState(props.formType);
+
+
 
   const handleSubmit = (e) => {
 
       e.preventDefault();
-      if (props.formType === "signup"){
+      if (formType === "signup"){
         dispatch(createUser({email, username, password}))
           .then(() => props.closeModal()).catch( err => setErrors(err) )
       }else {
@@ -26,9 +29,11 @@ const Modal = (props) => {
     return (
         <div className="modal-overlay">
           <div className="modal">
-            <p id="x" onClick={() => props.closeModal()}> &#215; </p>
+            <div className='x-container'>
+              <p id="x" onClick={() => props.closeModal()}> &#215; </p>
+            </div>
 
-            { props.formType === "login" ? <p> Welcome back. </p> : <p> Join Small</p>}
+            { formType === "login" ? <p> Welcome back. </p> : <p> Join Small</p>}
 
             <div className="div-errors">
               {errors['email'] && <p className="error" > {`email ${errors['email']}`}</p>}
@@ -40,7 +45,7 @@ const Modal = (props) => {
             <form onSubmit={handleSubmit}>
               <div className="container">
                   <input className='modal-input' type="text" placeholder="Email" onChange={e => setEmail(e.target.value) } />
-                  { props.formType === "signup" && 
+                  { formType === "signup" && 
                     <input type="text" 
                       placeholder="Username"
                       className='modal-input'
@@ -50,6 +55,21 @@ const Modal = (props) => {
                   <button>Continue</button>
               </div>
             </form>
+            <div className='switchforms'>
+
+              {formType === "signup" && 
+              <p className='login-form-subtitle'>
+                Already have an account? 
+                <span onClick={() => setFormType("login")}> Sign in</span>
+              </p> }
+
+              {formType === "login" && 
+              <p className='login-form-subtitle'>
+                No account? 
+                <span onClick={() =>setFormType('signup')}> Create One</span>
+              </p> }
+
+            </div>
           </div>
         </div>
     );

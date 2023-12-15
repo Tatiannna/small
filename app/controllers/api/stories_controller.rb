@@ -2,24 +2,31 @@ class Api::StoriesController < ApplicationController
 
     def index 
         if params[:username]
-            @stories = Story.select{|story| User.all[story.author_id].username == params[:username]}
+            @stories = User.find_by(username: params[:username]).stories
+        elsif params[:topicName]
+            @stories = Topic.find_by(name: params[:topicName]).stories
+        elsif params[:title]
+            @stories = [Story.find_by(title: params[:title])]
         else
-            @stories = Story.all
+            @stories = Story.all.includes(:author)
         end
     end
+
 
     def show
         @story = Story.find_by(id: params[:id])
     end
 
+
     def create
         @story = Story.new(story_params)
-        if @story.save!
+        if @story.save
             render :show
         else
             render json: @story.errors.full_messages, status: 422
         end
     end
+
 
     def destroy
         @story = Story.find_by(id: params[:id])

@@ -29,7 +29,12 @@ const WriteStory = () => {
     const [detail, setDetail] = useState('');
     const [body, setBody] = useState('');
     const [topicId, setTopicId] = useState('');
+    const [disabled, setDisabled] = useState(true);
 
+
+    useEffect( () => {
+        setDisabled(topicId && body && title)
+    },[topicId, body, title]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -51,9 +56,12 @@ const WriteStory = () => {
             {showModal && (<Modal closeModal={() => setShowModal(false)} formType={'signup'} />)}
             <form onSubmit={handleSubmit}>
                 <div className='story-form-container' onClick={()=> setShowModal(!currentUserId)}>
-                    <button className="publish">Publish</button>
+                    {!disabled && <button className="publish" disabled>Publish</button>}
+                    {disabled && <button className="publish">Publish</button>}
+
                     <div className="select-story-topic">
                         <select
+                            className='select'
                             onChange={e => setTopicId(e.target.value)}>
                             <option>Select Topic</option>
                             {Object.values(topics).map(

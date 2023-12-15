@@ -25,8 +25,14 @@ const receiveTopic = (topic) => {
 //     }
 // }
 
-export const getTopics = () => async dispatch => {
-    const res = await csrfFetch('/api/stories/topics');
+export const getTopics = (filter= {}) => async dispatch => {
+    let res;
+
+    if(filter.topicName){
+        res = await csrfFetch(`/api/stories/topics?topicName=${filter.topicName}`);
+    }else{
+        res = await csrfFetch('/api/stories/topics');
+    }
 
     let data = await res.json();
     if(res.ok){
@@ -37,7 +43,8 @@ export const getTopics = () => async dispatch => {
 }
 
 export const getTopic = (id) => async dispatch => {
-    const res = await csrfFetch(`/api/stories/topics/${id}`);
+    let res = await csrfFetch(`/api/stories/topics/${id}`);
+
 
     let data = await res.json();
     if(res.ok){
@@ -49,10 +56,9 @@ export const getTopic = (id) => async dispatch => {
 
 const topicReducer  = (state = {}, action) => {
     let newState = {...state};
-
     switch (action.type){
         case RECEIVE_TOPICS:
-            return {...newState, ...action.topics};
+            return action.topics;
         case RECEIVE_TOPIC:
             newState[action.topic.id] = action.topic
             return newState;

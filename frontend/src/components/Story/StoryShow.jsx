@@ -1,7 +1,7 @@
 import Header from '../Header/Header';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { getStory } from '../../store/stories';
+import { getStories } from '../../store/stories';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import './StoryShow.css';
@@ -21,8 +21,8 @@ const StoryShow = () => {
     const {storyTitle} = useParams();
     const dispatch = useDispatch();
 
+    const [story, setStory] = useState(null);
     const stories = useSelector(state => state.stories);
-    const story = Object.values(stories).find( story => story.title === storyTitle);
     const topic = useSelector(state => state.topics[story?.topicId]);
     const author = useSelector(state => state.users[story?.authorId]);
 
@@ -41,24 +41,32 @@ const StoryShow = () => {
     const [iconClassName, setIconClassName] = useState('clapped-false');
     
     useEffect(() => {
-        dispatch(getStory(story?.id));
-        dispatch(clearResponses());
-        dispatch(removeClaps());
-        dispatch(getClaps(story?.id));
-        dispatch(getResponses(story?.id));
-
-    }, [dispatch, story?.id]);
+        if(!story){
+            dispatch(getStories({title: storyTitle}))
+        }else{
+            dispatch(clearResponses());
+            dispatch(removeClaps());
+            dispatch(getClaps(story?.id));
+            dispatch(getResponses(story?.id));
+        }
+    }, [dispatch, story]);
 
     useEffect(() => {
-        dispatch(getClaps(story.id));
-    }, [dispatch, numClaps])
+        if (story){
+            dispatch(getClaps(story.id));
+        }
+    }, [dispatch, numClaps, story])
+
+    useEffect(() => {
+        setStory(Object.values(stories).find( story => story.title === storyTitle));
+    }, [dispatch, stories])
 
     const responses = useSelector(state => state.responses);
     const numResponses = Object.values(responses).length;
 
     const currentUserHasClapped = () => {
         if(currentUserId){
-            const hasClapped = currentUser.clappedStories.includes(story.id);
+            const hasClapped = currentUser.clappedStories.includes(story?.id);
             if(hasClapped){
                 setIconClassName('clapped-true');
                 return true;
