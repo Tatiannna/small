@@ -39,7 +39,7 @@ img {
 .header-left {
     display: flex;
     padding-left: 10px;
-
+    min-width: 40%;
 }
 
 .header-left-item {
@@ -59,4 +59,18 @@ img {
     cursor: default;
 }
 
+.socials {
+    margin-left: 25px;
+    margin-top: 10px;
+}
+
+.github{
+    width: 20px;
+    height: 20px;
+}
+
+.linkedin{
+    width: 20px;
+    height: 20px;
+}
 
