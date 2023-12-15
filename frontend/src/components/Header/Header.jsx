@@ -33,10 +33,14 @@ const Header = () => {
 
                     <div className="header-left">
                         <div className="header-left-item">
-                            <Link to="/"><img src="https://cdn4.iconfinder.com/data/icons/social-media-circle-7/512/Medium_circle-1024.png"></img></Link> 
+                            <Link to="/"><img src="https://cdn4.iconfinder.com/data/icons/social-media-circle-7/512/Medium_circle-1024.png"></img></Link>
                         </div>
                         <div className="header-left-item">
                             <p className='small'>Small</p>
+                        </div>
+                        <div className='socials'>
+                            <Link to="https://github.com/Tatiannna"><img className='github' src="./github.png"></img></Link> 
+                            <Link to="https://www.linkedin.com/in/tatiannna"><img className='linkedin' src="./linkedin.png"></img></Link> 
                         </div>
                     </div>
 
