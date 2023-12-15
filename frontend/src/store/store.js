@@ -6,7 +6,7 @@ import storyReducer from './stories';
 import topicReducer from './topics';
 import responseReducer from './responses';
 import clapsReducer from './claps';
-import logger from 'redux-logger';
+// import logger from 'redux-logger';
 
 const rootReducer = combineReducers({
     session: sessionReducer,
@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
 
 
 const configureStore = (initialState = {}) => {
-    return createStore(rootReducer, initialState, applyMiddleware(thunk, logger));
+    return createStore(rootReducer, initialState, applyMiddleware(thunk));
 };
 
 export default configureStore;

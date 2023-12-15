@@ -38,7 +38,9 @@ const EditStory = () => {
     const [showModal, setShowModal] = useState(!currentUserId);
     const [disabled, setDisabled] = useState(true);
 
-
+    useEffect( () => {
+        setDisabled(topicId && body && title)
+    },[topicId, body, title]);
 
 
     const handleSubmit = (e) => {

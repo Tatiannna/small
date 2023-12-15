@@ -10,7 +10,6 @@ import { clearResponses, getResponses } from '../../store/responses';
 import ResponseModal from '../Responses/ResponseModal';
 import { useState } from 'react';
 import { FaRegMessage } from "react-icons/fa6";
-import { PiHandsClapping } from "react-icons/pi";
 import { deleteStory } from '../../store/stories';
 import { createClap, getClaps, removeClaps } from '../../store/claps';
 import { PiHandsClappingFill } from "react-icons/pi";
@@ -49,7 +48,7 @@ const StoryShow = () => {
             dispatch(getClaps(story?.id));
             dispatch(getResponses(story?.id));
         }
-    }, [dispatch, story]);
+    }, [dispatch, story, storyTitle]);
 
     useEffect(() => {
         if (story){
@@ -59,7 +58,7 @@ const StoryShow = () => {
 
     useEffect(() => {
         setStory(Object.values(stories).find( story => story.title === storyTitle));
-    }, [dispatch, stories])
+    }, [dispatch, stories, storyTitle])
 
     const responses = useSelector(state => state.responses);
     const numResponses = Object.values(responses).length;
@@ -79,9 +78,9 @@ const StoryShow = () => {
 
     useEffect( () => {
         currentUserHasClapped();
-    }, [])
+    }, [currentUserHasClapped])
 
-    const clap = (e) => {
+    const clap = () => {
         
         if(!currentUserId){
             setShowLoginModal('true');
