@@ -30,6 +30,8 @@ const WriteStory = () => {
     const [body, setBody] = useState('');
     const [topicId, setTopicId] = useState('');
     const [disabled, setDisabled] = useState(true);
+    const [errors, setErrors] = useState({});
+
 
 
     useEffect( () => {
@@ -46,8 +48,8 @@ const WriteStory = () => {
             topic_id: topicId,
             author_id: currentUserId
         }
-        dispatch(createStory(story));
-        navigate(`/${username}/${title}`)
+        dispatch(createStory(story)).then(() => navigate(`/${username}/${title}`)).catch( err => setErrors(err));
+        //navigate(`/${username}/${title}`)
     }
 
     return (
@@ -56,14 +58,26 @@ const WriteStory = () => {
             {showModal && (<Modal closeModal={() => setShowModal(false)} formType={'signup'} />)}
             <form onSubmit={handleSubmit}>
                 <div className='story-form-container' onClick={()=> setShowModal(!currentUserId)}>
-                    {!disabled && <button className="publish" disabled>Publish</button>}
-                    {disabled && <button className="publish">Publish</button>}
+                    {/* {!disabled && <button className="publish" disabled>Publish</button>}
+                    {disabled && <button className="publish">Publish</button>} */}
+                    <button className="publish">Publish</button>
+
+                    <div className="div-errors">
+                        {errors && <p className="story-error" >{Object.values(errors)[0]}</p>}
+                        {errors && <p className="story-error" >{Object.values(errors)[1]}</p>}
+
+
+                        {/* {errors['email'] && <p className="error" > {`email ${errors['email']}`}</p>}
+                        {errors['username'] && <p className="error" > {`username ${errors['username']}`}</p>}
+                        {errors['password'] && <p className="error" > {`password ${errors['password']}`}</p>}
+                        {errors['errors'] && <p className="error" > {errors['errors']}</p>} */}
+                    </div>
 
                     <div className="select-story-topic">
                         <select
                             className='select'
                             onChange={e => setTopicId(e.target.value)}>
-                            <option>Select Topic</option>
+                            <option selected disabled>Select Topic</option>
                             {Object.values(topics).map(
                                 mapTopic => 
                                 <option 
