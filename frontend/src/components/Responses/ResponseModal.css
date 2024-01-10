@@ -134,6 +134,11 @@ padding: 3px; */
 /* margin-bottom: 15px; */
 }
 
+.response-error {
+  font-size: 13px;
+  color: red;
+}
+
 
 
 

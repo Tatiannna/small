@@ -15,10 +15,13 @@ const ResponseModal = (props) => {
     const currentUserId = useSelector(state => state.session.currentUserId);
     const currentUser = useSelector(state => state.users[currentUserId]);
     const [showModal, setShowModal] = useState(false);
+    const [errors, setErrors] = useState({});
+
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
 
         let response = {
             body: responseBody,
@@ -26,9 +29,17 @@ const ResponseModal = (props) => {
             story_id: props.story.id
         }
 
-        dispatch(createResponse(response))
+        if (response.body.length > 0 ){
+            dispatch(createResponse(response))
             .then(setResponseBody(''))
-            
+            .then(setErrors({}))
+            .catch( err => setErrors(err))
+        }else{
+            setErrors({'0': 'Response cannot be blank'})
+            console.log(errors);
+        }
+
+        
         response = responses[response.id]
     }
 
@@ -44,6 +55,7 @@ const ResponseModal = (props) => {
                 <div className="write-response-container" onClick={() => setShowModal(!currentUserId)}>
                     <p><span className="write-response-avatar">&#9824; </span> {currentUser?.username}</p>
                     <form onSubmit={handleSubmit}>
+                        {errors && <p className="response-error" >{Object.values(errors)[0]}</p>}
                         <textarea 
                             cols="39" 
                             rows="5"
