@@ -34,31 +34,25 @@ const StoryShow = () => {
     const [showResponseModal, setShowResponseModal] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
 
-
     const claps = useSelector(state => state.claps);
-    const [numClaps, incrementNumClaps] = useState(Object.values(claps).length);
+    const [numClaps, setNumClaps] = useState(Object.values(claps).length);
     const [iconClassName, setIconClassName] = useState('clapped-false');
     
+    useEffect(() => {
+        setStory(Object.values(stories).find( story => story.title === storyTitle));
+    }, [dispatch, stories, storyTitle])
+
     useEffect(() => {
         if(!story){
             dispatch(getStories({title: storyTitle}))
         }else{
             dispatch(clearResponses());
             dispatch(removeClaps());
-            dispatch(getClaps(story?.id));
-            dispatch(getResponses(story?.id));
+            dispatch(getClaps(story.id)).then(setNumClaps(Object.values(claps).length));
+            dispatch(getResponses(story.id));
         }
     }, [dispatch, story, storyTitle]);
 
-    useEffect(() => {
-        if (story){
-            dispatch(getClaps(story.id));
-        }
-    }, [dispatch, numClaps, story])
-
-    useEffect(() => {
-        setStory(Object.values(stories).find( story => story.title === storyTitle));
-    }, [dispatch, stories, storyTitle])
 
     const responses = useSelector(state => state.responses);
     const numResponses = Object.values(responses).length;
@@ -95,7 +89,7 @@ const StoryShow = () => {
                 story_id: story.id
             }
             dispatch(createClap(clap));
-            incrementNumClaps((prevValue) => prevValue + 1);
+            setNumClaps((prevValue) => prevValue + 1);
         }
     }
     
