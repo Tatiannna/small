@@ -54,7 +54,7 @@ const StoryShow = () => {
             dispatch(getResponses(story.id));
             dispatch(getTopic(story.topicId));
         }
-    }, [dispatch, story, storyTitle]);
+    }, [dispatch, story, storyTitle, claps]);
 
 
     const responses = useSelector(state => state.responses);
