@@ -29,14 +29,7 @@ const WriteStory = () => {
     const [detail, setDetail] = useState('');
     const [body, setBody] = useState('');
     const [topicId, setTopicId] = useState('');
-    const [disabled, setDisabled] = useState(true);
     const [errors, setErrors] = useState({});
-
-
-
-    useEffect( () => {
-        setDisabled(topicId && body && title)
-    },[topicId, body, title]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
