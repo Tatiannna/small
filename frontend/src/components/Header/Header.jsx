@@ -1,10 +1,12 @@
+import gitIcon from '../../../assets/github.png';
+import linkedinIcon from '../../../assets/linkedin.png';
 import './Header.css'
 import {useDispatch} from 'react-redux';
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { login, logout } from "../../store/session";
 import Modal from '../Modal/Modal';
-import {Link } from 'react-router-dom'
+import {Link } from 'react-router-dom';
 
 const Header = () => {
 
@@ -39,8 +41,8 @@ const Header = () => {
                             <p className='small'>Small</p>
                         </div>
                         <div className='socials'>
-                            <Link to="https://github.com/Tatiannna"><img className='github' src="./github.png"></img></Link> 
-                            <Link to="https://www.linkedin.com/in/tatiannna"><img className='linkedin' src="./linkedin.png"></img></Link> 
+                            <Link to="https://github.com/Tatiannna"><img className='github' src={gitIcon}></img></Link> 
+                            <Link to="https://www.linkedin.com/in/tatiannna"><img className='linkedin' src={linkedinIcon}></img></Link> 
                         </div>
                     </div>
 
