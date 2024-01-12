@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getStories } from '../../store/stories';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './StoryShow.css';
 import { Link } from 'react-router-dom';
 import { clearResponses, getResponses } from '../../store/responses';
@@ -14,11 +14,13 @@ import { deleteStory } from '../../store/stories';
 import { createClap, getClaps, removeClaps } from '../../store/claps';
 import { PiHandsClappingFill } from "react-icons/pi";
 import Modal from '../Modal/Modal';
+import { getTopic } from '../../store/topics';
 
 const StoryShow = () => {
     
     const {storyTitle} = useParams();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [story, setStory] = useState(null);
     const stories = useSelector(state => state.stories);
@@ -34,31 +36,26 @@ const StoryShow = () => {
     const [showResponseModal, setShowResponseModal] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
 
-
     const claps = useSelector(state => state.claps);
-    const [numClaps, incrementNumClaps] = useState(Object.values(claps).length);
+    const [numClaps, setNumClaps] = useState(Object.values(claps).length);
     const [iconClassName, setIconClassName] = useState('clapped-false');
     
+    useEffect(() => {
+        setStory(Object.values(stories).find( story => story.title === storyTitle));
+    }, [dispatch, stories, storyTitle])
+
     useEffect(() => {
         if(!story){
             dispatch(getStories({title: storyTitle}))
         }else{
             dispatch(clearResponses());
             dispatch(removeClaps());
-            dispatch(getClaps(story?.id));
-            dispatch(getResponses(story?.id));
+            dispatch(getClaps(story.id)).then(setNumClaps(Object.values(claps).length));
+            dispatch(getResponses(story.id));
+            dispatch(getTopic(story.topicId));
         }
     }, [dispatch, story, storyTitle]);
 
-    useEffect(() => {
-        if (story){
-            dispatch(getClaps(story.id));
-        }
-    }, [dispatch, numClaps, story])
-
-    useEffect(() => {
-        setStory(Object.values(stories).find( story => story.title === storyTitle));
-    }, [dispatch, stories, storyTitle])
 
     const responses = useSelector(state => state.responses);
     const numResponses = Object.values(responses).length;
@@ -95,8 +92,13 @@ const StoryShow = () => {
                 story_id: story.id
             }
             dispatch(createClap(clap));
-            incrementNumClaps((prevValue) => prevValue + 1);
+            setNumClaps((prevValue) => prevValue + 1);
         }
+    }
+
+    const handleDelete = () => {
+        dispatch(deleteStory(story?.id));
+        navigate(`/user/${author?.username}`)
     }
     
     return(
@@ -139,7 +141,7 @@ const StoryShow = () => {
                         {showPreviewMenu && isCurrentUsersStory &&
                             <div className="story-menu-modal">
                                 <Link to={`/story/${storyTitle}/edit`} state={story}><p className="story-menu-edit">Edit</p></Link>
-                                <p className='story-menu-delete' onClick={() => dispatch(deleteStory(story?.id))}>Delete</p>
+                                <p className='story-menu-delete' onClick={handleDelete}>Delete</p>
                             </div>
                         }
                         {showPreviewMenu && !isCurrentUsersStory && 
