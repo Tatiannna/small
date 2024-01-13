@@ -135,7 +135,7 @@ const StoryShow = () => {
                                 {<PiHandsClappingFill />}
                             </span>
                             <span>
-                                {numClaps > 0 && numClaps}
+/                                {numClaps}
                             </span>
                             {currentUserId && <span className="preview-menu" onClick={() => setShowPreviewMenu(!showPreviewMenu)}>...</span>}
                         </p>
