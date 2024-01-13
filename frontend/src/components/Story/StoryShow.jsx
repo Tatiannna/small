@@ -15,6 +15,7 @@ import { createClap, getClaps, removeClaps } from '../../store/claps';
 import { PiHandsClappingFill } from "react-icons/pi";
 import Modal from '../Modal/Modal';
 import { getTopic } from '../../store/topics';
+import { getUser } from '../../store/users';
 
 const StoryShow = () => {
     
@@ -53,6 +54,7 @@ const StoryShow = () => {
             dispatch(getClaps(story.id)).then(setNumClaps(Object.values(claps).length));
             dispatch(getResponses(story.id));
             dispatch(getTopic(story.topicId));
+            dispatch(getUser(story.authorId))
         }
     }, [dispatch, story, storyTitle]);
 
