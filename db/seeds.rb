@@ -804,7 +804,7 @@ ApplicationRecord.transaction do
     ]
 
     puts "Creating responses..."
-    200.times do
+    500.times do
       response = {
         user_id: rand(1..100),
         body: responses[rand(0...29)],
