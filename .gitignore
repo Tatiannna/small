@@ -65,3 +65,5 @@ yarn-debug.log*
 
 
 !/public
+
+.DS_Store
