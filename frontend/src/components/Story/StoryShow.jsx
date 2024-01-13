@@ -41,6 +41,7 @@ const StoryShow = () => {
     
     useEffect(() => {
         setStory(Object.values(stories).find( story => story.title === storyTitle));
+        
     }, [dispatch, stories, storyTitle])
 
     useEffect(() => {
@@ -48,6 +49,7 @@ const StoryShow = () => {
             dispatch(getStories({title: storyTitle}))
         }else{
             dispatch(clearResponses());
+            // dispatch(removeClaps());
             dispatch(getClaps(story.id));
             dispatch(getResponses(story.id));
             dispatch(getTopic(story.topicId));
@@ -55,11 +57,13 @@ const StoryShow = () => {
         }
     }, [dispatch, story, storyTitle]);
 
-    const claps = useSelector(state => state.claps);
     const responses = useSelector(state => state.responses);
     const numResponses = Object.values(responses).length;
-    const [numClaps, setNumClaps] = useState(Object.values(claps).length);
 
+    const claps = useSelector(state => state.claps);
+    const numClaps = Object.values(claps).length
+
+    // const [numClaps, setNumClaps] = useState(Object.values(claps).length);
 
     const currentUserHasClapped = () => {
         if(currentUserId){
@@ -93,7 +97,8 @@ const StoryShow = () => {
                 story_id: story.id
             }
             dispatch(createClap(clap));
-            setNumClaps((prevValue) => prevValue + 1);
+            dispatch(getClaps(story.id));
+            // setNumClaps((prevValue) => prevValue + 1);
         }
     }
 
