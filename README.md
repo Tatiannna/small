@@ -26,11 +26,11 @@ Small is a [Medium](https://medium.com/) clone. Medium is recognized for hosting
 - JBuilder
 - BCrypt
 
-### Feature discussion: Claps
+### Feature Discussion: Claps
 Similar to "Likes" on most apps, Medium users can show their support a story by adding "Claps". After implementing the Clap feature intuitvely as "likes" (click the clap icon to add a Clap, and click the icon again to remove the Clap), I realized that Medium's Clap feature is very different from likes. Repeated taps to add a Clap to a Story does not remove a Clap - it adds to the Clap count. A user can repeatedly applaud a story. After the initial implementation, the logic had to be re-written. 
 
 
-### The StoryShow component:
+### The StoryShow Component:
 StoryShow is where a user's publication is showcased and all of its constituents come together. Along with all of the features of the publication itself (title, subtitle, body), this component also has links to its author's profile, Comment count and modal, Clap counts, etc. Of all components, it makes the heaviest use of React's useState and Redux's useSelector, useDispatch hooks.
 
 ```
