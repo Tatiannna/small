@@ -76,7 +76,8 @@ const clapsReducer = (state = {}, action) => {
     let newState = {...state}
     switch(action.type){
         case RECEIVE_CLAPS:
-            return {...newState, ...action.claps}
+            newState = {};
+            return {...action.claps}
         case RECEIVE_CLAP:
             newState[action.clap.id] = action.clap;
             return newState;

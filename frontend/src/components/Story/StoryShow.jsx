@@ -11,7 +11,7 @@ import ResponseModal from '../Responses/ResponseModal';
 import { useState } from 'react';
 import { FaRegMessage } from "react-icons/fa6";
 import { deleteStory } from '../../store/stories';
-import { createClap, getClaps, removeClaps } from '../../store/claps';
+import { createClap, getClaps } from '../../store/claps';
 import { PiHandsClappingFill } from "react-icons/pi";
 import Modal from '../Modal/Modal';
 import { getTopic } from '../../store/topics';
@@ -37,8 +37,6 @@ const StoryShow = () => {
     const [showResponseModal, setShowResponseModal] = useState(false);
     const [showLoginModal, setShowLoginModal] = useState(false);
 
-    const claps = useSelector(state => state.claps);
-    const [numClaps, setNumClaps] = useState(Object.values(claps).length);
     const [iconClassName, setIconClassName] = useState('clapped-false');
     
     useEffect(() => {
@@ -50,17 +48,18 @@ const StoryShow = () => {
             dispatch(getStories({title: storyTitle}))
         }else{
             dispatch(clearResponses());
-            dispatch(removeClaps());
-            dispatch(getClaps(story.id)).then(setNumClaps(Object.values(claps).length));
+            dispatch(getClaps(story.id));
             dispatch(getResponses(story.id));
             dispatch(getTopic(story.topicId));
-            dispatch(getUser(story.authorId))
+            dispatch(getUser(story.authorId));
         }
     }, [dispatch, story, storyTitle]);
 
-
+    const claps = useSelector(state => state.claps);
     const responses = useSelector(state => state.responses);
     const numResponses = Object.values(responses).length;
+    const [numClaps, setNumClaps] = useState(Object.values(claps).length);
+
 
     const currentUserHasClapped = () => {
         if(currentUserId){
