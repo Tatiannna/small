@@ -1,6 +1,6 @@
 # Small
 
-Small is a Medium clone. Medium is recognized for hosting high quality, insightful publications covering a wide range of interesting topics. Users can read, save, create, and interact with publications. In the week of development, Small implements the following Medium features
+Small is a [Medium](https://medium.com/) clone. Medium is recognized for hosting high quality, insightful publications covering a wide range of interesting topics. Users can read, save, create, and interact with publications. In the week of development, Small implements the following Medium features
 
 ### Features
 
@@ -26,53 +26,54 @@ Small is a Medium clone. Medium is recognized for hosting high quality, insightf
 - JBuilder
 - BCrypt
 
+### Feature discussion: Claps
+Similar to "Likes" on most apps, Medium users can show their support a story by adding "Claps". After implementing the Clap feature intuitvely as "likes" (click the clap icon to add a Clap, and click the icon again to remove the Clap), I realized that Medium's Clap feature is very different from likes. Repeated taps to add a Clap to a Story does not remove a Clap - it adds to the Clap count. A user can repeatedly applaud a story. After the initial implementation, the logic had to be re-written. 
+
+
+### The ShoryShow component:
+StoryShow is where a user's publication is showcased and all of its constituents come together. Along with all of the features of the publication itself (title, subtitle, body), this component also has links to its author's profile, Comment count and modal, Clap counts, etc. Of all components, it makes the heaviest use of React's useState and Redux's useSelector, useDispatch hooks.
 
 ```
-    def self.find_by_credentials(email, password)
-        
-        @user = User.find_by(email: email)
-        
-        if @user && @user.authenticate(password)
-            @user
-        else
-            nil
-        end
-    end
+const {storyTitle} = useParams();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
+    const [story, setStory] = useState(null);
+    const stories = useSelector(state => state.stories);
+    const topic = useSelector(state => state.topics[story?.topicId]);
+    const author = useSelector(state => state.users[story?.authorId]);
 
-    def reset_session_token!
-        
-        self.session_token = generate_unique_session_token
-        save!
-        self.session_token
-    end
+    const users = useSelector(state => state.users);
+    const currentUserId = useSelector(state => state.session.currentUserId);
+    const currentUser = users[currentUserId];
+    const isCurrentUsersStory = (currentUserId == story?.authorId);
+
+    const [showPreviewMenu, setShowPreviewMenu] = useState(false);
+    const [showResponseModal, setShowResponseModal] = useState(false);
+    const [showLoginModal, setShowLoginModal] = useState(false);
+
+    const [iconClassName, setIconClassName] = useState('clapped-false');
     
-
-    def ensure_session_token
+    useEffect(() => {
+        setStory(Object.values(stories).find( story => story.title === storyTitle));
         
-        self.session_token ||= generate_unique_session_token
-    end
+    }, [dispatch, stories, storyTitle])
 
+    useEffect(() => {
+        if(!story){
+            dispatch(getStories({title: storyTitle}))
+        }else{
+            dispatch(clearResponses());
+            dispatch(getClaps(story.id));
+            dispatch(getResponses(story.id));
+            dispatch(getTopic(story.topicId));
+            dispatch(getUser(story.authorId));
+        }
+    }, [dispatch, story, storyTitle]);
 
-    private
+    const responses = useSelector(state => state.responses);
+    const numResponses = Object.values(responses).length;
 
-    def generate_unique_session_token
-        
-        loop do
-            token = SecureRandom::urlsafe_base64
-            return token if !User.exists?(session_token: token)
-        end
-    end
+    const claps = useSelector(state => state.claps);
+    const numClaps = Object.values(claps).length
 ```
-
-
-Features of a great production readme:
-Brief explanation of what the app is and does
-Link to live site
-Discussion of technologies used
-Delve deep into ~2 features that show off your technical abilities. Discuss both the challenges faced and your brilliant solutions.
-Code snippets to highlight your best code (markdown code snippets, NOT screenshots)
-
-
-
-
