@@ -1,12 +1,19 @@
 import './StayCurious.css';
 import Modal from '../Modal/Modal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 
 const StayCurious = () => {
 
+    const currentUserId = useSelector(state => state.session.currentUserId)
     const [showModal, setShowModal] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(currentUserId);
 
+    useEffect(() => {
+        setIsLoggedIn(currentUserId);
+    },[currentUserId])
+    
     return (
         <>
             {showModal && (<Modal closeModal={() => setShowModal(false)} formType='signup' />)}
@@ -14,7 +21,7 @@ const StayCurious = () => {
                 <h1>Stay Curious.</h1>
                 <h3>Discover Stories, thinking, and
                     expertise from writers on any topic.</h3>
-                <button className='start-reading pointer' onClick={()=>setShowModal(true)}>Start reading</button>  
+                {!isLoggedIn && <button className='start-reading pointer' onClick={()=>setShowModal(true)}>Start reading</button>}
             </div>
         </>
     );
