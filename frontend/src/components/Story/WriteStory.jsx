@@ -20,7 +20,6 @@ const WriteStory = () => {
     const username = useSelector(state => state.users[currentUserId]?.username);
     const [showModal, setShowModal] = useState(!currentUserId);
 
-
     useEffect(() => {
         dispatch(getTopics());
     }, [dispatch])
@@ -53,7 +52,7 @@ const WriteStory = () => {
                 <div className='story-form-container' onClick={()=> setShowModal(!currentUserId)}>
                     {/* {!disabled && <button className="publish" disabled>Publish</button>}
                     {disabled && <button className="publish">Publish</button>} */}
-                    <button className="publish">Publish</button>
+                    <button className="publish pointer">Publish</button>
 
                     <div className="div-errors">
                         {errors && <p className="story-error" >{Object.values(errors)[0]}</p>}

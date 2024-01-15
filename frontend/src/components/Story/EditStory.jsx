@@ -36,11 +36,13 @@ const EditStory = () => {
     const [body, setBody] = useState(story?.body);
     const [topicId, setTopicId] = useState(story?.topicId);
     const [showModal, setShowModal] = useState(!currentUserId);
-    const [disabled, setDisabled] = useState(true);
+    // const [disabled, setDisabled] = useState(true);
+    const [errors, setErrors] = useState({});
 
-    useEffect( () => {
-        setDisabled(topicId && body && title)
-    },[topicId, body, title]);
+
+    // useEffect( () => {
+    //     setDisabled(topicId && body && title)
+    // },[topicId, body, title]);
 
 
     const handleSubmit = (e) => {
@@ -54,8 +56,8 @@ const EditStory = () => {
             topic_id: topicId,
             author_id: currentUserId
         }
-        dispatch(updateStory(editedStory));
-        navigate(`/${username}/${title}`);
+        dispatch(updateStory(editedStory)).then(() => navigate(`/${username}/${title}`)).catch( err => setErrors(err));
+        //navigate(`/${username}/${title}`);
     }
 
     return (
@@ -64,8 +66,19 @@ const EditStory = () => {
             {showModal && (<Modal closeModal={() => setShowModal(false)} formType={'signup'} />)}
             <form onSubmit={handleSubmit}>
                 <div className='story-form-container' onClick={()=> setShowModal(!currentUserId)}>
-                    {!disabled && <button className="publish" disabled>Publish</button>}
-                    {disabled && <button className="publish">Publish</button>}
+                    {/* {!disabled && <button className="publish" disabled>Publish</button>}
+                    {disabled && <button className="publish">Publish</button>} */}
+                    <button className="publish pointer">Publish</button>
+
+                    <div className="div-errors">
+                        {errors && <p className="story-error" >{Object.values(errors)[0]}</p>}
+                        {errors && <p className="story-error" >{Object.values(errors)[1]}</p>}
+
+                        {/* {errors['email'] && <p className="error" > {`email ${errors['email']}`}</p>}
+                        {errors['username'] && <p className="error" > {`username ${errors['username']}`}</p>}
+                        {errors['password'] && <p className="error" > {`password ${errors['password']}`}</p>}
+                        {errors['errors'] && <p className="error" > {errors['errors']}</p>} */}
+                    </div>
 
                     <div className="select-story-topic">
                         <select
