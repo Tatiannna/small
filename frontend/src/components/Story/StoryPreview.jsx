@@ -62,19 +62,19 @@ const StoryPreview = (props) => {
                 <Link to={`/tag/${topic?.name}`}>
                     <span className="preview-topic">{topic?.name}</span>
                 </Link>
-                {currentUserId && <span className="story-show-menu" onClick={() => setShowPreviewMenu(!showPreviewMenu)}>...</span>}
+                {currentUserId && <span className="story-show-menu pointer" onClick={() => setShowPreviewMenu(!showPreviewMenu)}>...</span>}
 
                 {/* {showPreviewMenu && isCurrentUsersStory && <StoryMenu story={story}/>} */}
 
                 {showPreviewMenu && isCurrentUsersStory &&
                     <div className="story-menu-modal">
-                        <Link to={`/story/${storyTitle}/edit`} state={story}><p className="story-menu-edit">Edit</p></Link>
-                        <p className='story-menu-delete' onClick={() => dispatch(deleteStory(props.story.id))}>Delete</p>
+                        <Link to={`/story/${storyTitle}/edit`} state={story}><p className="story-menu-edit pointer">Edit</p></Link>
+                        <p className='story-menu-delete pointer' onClick={() => dispatch(deleteStory(props.story.id))}>Delete</p>
                     </div>}
 
                 {showPreviewMenu && !isCurrentUsersStory && 
                     <div className="story-menu-modal">
-                        <p>Report</p>
+                        <p className='pointer'>Report</p>
                     </div>
                 }
             </p>

@@ -63,7 +63,7 @@ const ResponseItem = (props) => {
                     <p className="response-author">
                         <span className="write-response-avatar">&#9824; </span>
                         <Link to={`/user/${responseAuthor?.username}`}><p>{responseAuthor?.username}</p> </Link>
-                        {currentUserId && <span className="response-menu" onClick={() => setShowResponseMenu(!showResponseMenu)}>...</span>}
+                        {currentUserId && <span className="response-menu pointer" onClick={() => setShowResponseMenu(!showResponseMenu)}>...</span>}
                     </p>
                     <p className="response-date">{date(response?.createdAt)}</p>
                     <p className="response-body">{response?.body}</p>

@@ -129,30 +129,30 @@ const StoryShow = () => {
 
                         <p>
                             <span 
-                                className="responses" 
+                                className="responses pointer" 
                                 onClick={()=> setShowResponseModal(!showResponseModal)}>
-                                <FaRegMessage /> {numResponses > 0 && numResponses}
+                                <FaRegMessage  /> {numResponses > 0 && numResponses}
                             </span>
                             <span
-                                className={iconClassName}
+                                className={`${iconClassName} pointer`}
                                 onClick={clap}>
-                                {<PiHandsClappingFill />}
+                                <PiHandsClappingFill />
                             </span>
-                            <span>
+                            <span className='clap-count'>
                                 {numClaps > 0 && numClaps}
                             </span>
-                            {currentUserId && <span className="preview-menu" onClick={() => setShowPreviewMenu(!showPreviewMenu)}>...</span>}
+                            {currentUserId && <span className="preview-menu pointer" onClick={() => setShowPreviewMenu(!showPreviewMenu)}>...</span>}
                         </p>
 
                         {showPreviewMenu && isCurrentUsersStory &&
                             <div className="story-menu-modal">
-                                <Link to={`/story/${storyTitle}/edit`} state={story}><p className="story-menu-edit">Edit</p></Link>
-                                <p className='story-menu-delete' onClick={handleDelete}>Delete</p>
+                                <Link to={`/story/${storyTitle}/edit`} state={story}><p className="story-menu-edit pointer">Edit</p></Link>
+                                <p className='story-menu-delete pointer' onClick={handleDelete}>Delete</p>
                             </div>
                         }
                         {showPreviewMenu && !isCurrentUsersStory && 
                             <div className="story-menu-modal">
-                                <p>Report</p>
+                                <p className='pointer'>Report</p>
                             </div>
                         }
                     </div>

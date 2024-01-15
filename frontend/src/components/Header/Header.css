@@ -52,11 +52,15 @@ img {
 }
 
 .login {
-    cursor: default;
+    cursor: pointer;
 }
 
 .small{
-    cursor: default;
+    cursor: pointer;
+}
+
+.pointer {
+    cursor: pointer;
 }
 
 .socials {

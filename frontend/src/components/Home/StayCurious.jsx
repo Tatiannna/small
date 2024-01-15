@@ -14,7 +14,7 @@ const StayCurious = () => {
                 <h1>Stay Curious.</h1>
                 <h3>Discover Stories, thinking, and
                     expertise from writers on any topic.</h3>
-                <button className='start-reading' onClick={()=>setShowModal(true)}>Start reading</button>  
+                <button className='start-reading pointer' onClick={()=>setShowModal(true)}>Start reading</button>  
             </div>
         </>
     );

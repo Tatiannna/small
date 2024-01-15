@@ -51,13 +51,13 @@ const Header = () => {
                         { currentUserId ? (
                             <>
                                 <div className='header-right-item'>
-                                    <Link to='/new-story'><p> Write</p></Link>
+                                    <Link to='/new-story'><p className='pointer'> Write</p></Link>
                                 </div>
                                 <div className='header-right-item'>
                                     <Link to={`/user/${username}`}><p>Profile</p></Link>
                                 </div>
                                 <div className='header-right-item'>
-                                    <button onClick={() => dispatch(logout())}>Logout</button>
+                                    <button className='pointer' onClick={() => dispatch(logout())}>Logout</button>
                                 </div>
                             </>
                             ) : (
@@ -66,10 +66,10 @@ const Header = () => {
                                     <p className='login' onClick={handleClick}>Login</p>
                                 </div>
                                 <div className='header-right-item'>
-                                    <button value={"signUp"} onClick={handleClick} >Get Started</button>
+                                    <button value={"signUp"} className='pointer' onClick={handleClick} >Get Started</button>
                                 </div>
                                 <div className='header-right-item'>
-                                    <button className="demo-button" onClick={() => dispatch(login({email: "demo@user.io", password: "password"}))}> Demo User Login</button>
+                                    <button className="demo-button pointer" onClick={() => dispatch(login({email: "demo@user.io", password: "password"}))}> Demo User Login</button>
                                 </div>
                             </>
                         )}
