@@ -48,7 +48,7 @@ const ResponseModal = (props) => {
             {showModal && (<Modal closeModal={() => setShowModal(false)} formType={'login'} />)}
             <div className="response-modal">
                 <h3>Responses({Object.values(responses).length})
-                    <span id="x" onClick={() => props.closeModal()}> &#215; 
+                    <span className='pointer' id="x" onClick={() => props.closeModal()}> &#215; 
                     </span>
                 </h3>
                 
