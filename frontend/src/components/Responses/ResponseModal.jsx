@@ -63,10 +63,10 @@ const ResponseModal = (props) => {
                             value={responseBody}
                             onChange={e => setResponseBody(e.target.value)}>
                         </textarea>
-                        <button className="submit-response-button">Respond</button>
+                        <button className="submit-response-button pointer">Respond</button>
                     </form>
                 </div>
-                <div className="all-responses-container">
+                <div className="all-responses-container ">
                     {Object.values(responses).map(response => <ResponseItem key={responses.id} response={response}/>)}
                 </div>
                 <div className='response-bottom'></div>

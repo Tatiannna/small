@@ -79,22 +79,22 @@ const ResponseItem = (props) => {
                             value={responseBody}
                             onChange={e => setResponseBody(e.target.value)}>
                         </textarea>
-                            <button className="edit-response-button">Update</button>
-                            <button onClick={() => setShowEditForm(false)} type="button" className="cancel-edit-button">Cancel</button>
+                            <button className="edit-response-button pointer">Update</button>
+                            <button onClick={() => setShowEditForm(false)} type="button" className="cancel-edit-button pointer">Cancel</button>
                     </form>
                 </div>
             }
 
             {showResponseMenu && isUsersResponse &&
                 <div className="response-menu-modal">
-                    <p className="response-menu-edit"onClick={() => setShowEditForm(true)}>Edit</p>
-                    <p className="response-menu-delete"onClick={() => dispatch(deleteResponse(response))}>Delete</p>
+                    <p className="response-menu-edit pointer" onClick={() => setShowEditForm(true)}>Edit</p>
+                    <p className="response-menu-delete pointer" onClick={() => dispatch(deleteResponse(response))}>Delete</p>
                 </div>
             }
 
             {showResponseMenu && !isUsersResponse &&
-                <div className="response-menu-modal">
-                    <p className="response-menu-report">Report</p>               
+                <div className="response-menu-modal pointer">
+                    <p className="response-menu-report pointer">Report</p>               
                 </div>
             }
         </div>
