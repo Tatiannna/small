@@ -30,7 +30,7 @@ const Modal = (props) => {
         <div className="modal-overlay">
           <div className="modal">
             <div className='x-container'>
-              <p id="x" onClick={() => props.closeModal()}> &#215; </p>
+              <p className='pointer' id="x" onClick={() => props.closeModal()}> &#215; </p>
             </div>
 
             { formType === "login" ? <p> Welcome back. </p> : <p> Join Small</p>}
@@ -52,7 +52,7 @@ const Modal = (props) => {
                       onChange={e => setUsername(e.target.value) } 
                     />}
                   <input className='modal-input' type="password" placeholder="Password" onChange={e => setPassword(e.target.value)} />
-                  <button>Continue</button>
+                  <button className='pointer'>Continue</button>
               </div>
             </form>
             <div className='switchforms'>
@@ -60,13 +60,13 @@ const Modal = (props) => {
               {formType === "signup" && 
               <p className='login-form-subtitle'>
                 Already have an account? 
-                <span onClick={() => setFormType("login")}> Sign in</span>
+                <span className='pointer' onClick={() => setFormType("login")}> Sign in</span>
               </p> }
 
               {formType === "login" && 
               <p className='login-form-subtitle'>
                 No account? 
-                <span onClick={() =>setFormType('signup')}> Create One</span>
+                <span className='pointer' onClick={() =>setFormType('signup')}> Create One</span>
               </p> }
 
             </div>
