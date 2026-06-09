@@ -38,7 +38,7 @@ const Header = () => {
                             <Link to="/"><img src="https://cdn4.iconfinder.com/data/icons/social-media-circle-7/512/Medium_circle-1024.png"></img></Link>
                         </div>
                         <div className="header-left-item">
-                            <Link to="/"><p className='small'>Small</p></Link>
+                            <Link to="/"><p className='small'>Scribble</p></Link>
                         </div>
                         <div className='socials'>
                             <Link to="https://github.com/Tatiannna"><img className='github' src={gitIcon}></img></Link> 
