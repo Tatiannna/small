@@ -1,10 +1,10 @@
-# Small
+# Scribble
 
-Small is a [Medium](https://medium.com/) clone. Medium is recognized for hosting high quality, insightful publications covering a wide range of interesting topics. Users can read, save, create, and interact with publications. In the week of development, Small implements the following Medium features
+Scribble is a [Medium](https://medium.com/) clone. Medium is recognized for hosting high quality, insightful publications covering a wide range of interesting topics. Users can read, save, create, and interact with publications. In the week of development, Scribble implements the following Medium features
 
 ### Features
 
-**1. Hosting - [See Small Live!](https://small-2kuv.onrender.com/)**
+**1. Hosting - [See Scribble Live!](https://Scribble-2kuv.onrender.com/)**
 
 **2. New account creation, Login**
 
